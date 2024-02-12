@@ -1,0 +1,150 @@
+/* Admin Sidebar */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.wrapper {
+    display: flex;
+}
+
+#sidebar {
+    width: 260px;
+    min-width: 260px;
+    height: calc(90vh - 40px);
+    background-color: #d6eadf;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Add position: fixed to fix the sidebar position */
+    top: 8%; 
+    left: 0; /* Set left to 0 to pin the sidebar to the very left */
+}
+
+.toggle-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    padding: 1rem 1.5rem;
+}
+
+.toggle-btn i {
+    font-size: 1.5rem;
+    color: #FFF;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+    text-align: center;
+}
+
+.sidebar-logo a {
+    color: #A3716E;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+/* Adjust the position of icons to the side */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+}
+
+
+.sidebar-link box-icon {
+    font-size: 18px; /* Adjust the size as needed */
+    margin-right: 40px; /* Add some spacing between icon and text */
+    vertical-align: middle; /* Align the icon vertically */
+}
+
+a.sidebar-link {
+    padding: .925rem 1.625rem;
+    color: #A3716E;
+    display: block;
+    font-size: 1.09rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.5rem;
+    margin-right: .75rem;
+}
+
+a.sidebar-link:hover {
+    background-color: #bdd9ed;
+    border-left: 3px solid #ddb23b;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+.sidebar-dropdown .sidebar-link {
+    font-size: 0.85rem; /* Adjust the font size as needed */
+    margin-left: 50px;
+}
+
+.sidebar-dropdown {
+    background-color: #d6eadf;
+    padding: 0;
+    min-width: 15rem;
+    display: none;
+}
+
+.sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
+.sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+
+.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}
+
+/* end of admin sidebar */
+
+.container-dashboard {
+     background: #fffffd;
+}

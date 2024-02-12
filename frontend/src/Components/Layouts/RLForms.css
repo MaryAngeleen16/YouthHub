@@ -1,0 +1,264 @@
+
+
+  .container-login {
+    position: fixed; /* or absolute, depending on your layout */
+    top: 7%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(56deg, rgba(176,225,255,1) 0%, rgba(251,233,255,1) 50%, rgba(255,251,246,1) 100%); */
+    background: url('../../../public/images/bg-reg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.container-login .content {
+    width: 58%;
+    height: 100%;
+    /* background: yellowgreen; */
+    background: transparent !important;
+    padding: 80px;
+    color: #A3716E;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.container-login .logo{
+    padding-top: 10%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container-login .text-sci h2 {
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 850px;
+}
+
+.text-sci h2 span {
+    font-size: 25px;
+}
+
+.text-sci p {
+    font-size: 20px;
+    margin: 20px 0;
+    position: relative;
+    top: -800px; /* Adjust as needed */
+}
+
+/* .container-login .social-icons a i {
+    font-size: 22px;
+    color: #e4e4e4;
+    margin-right: 10px;
+    transition: .5s ease;
+    padding-top: 800px;
+}
+
+.social-icons a:hover i {
+    transform: scale (1.2);
+} */
+.logreg-box {
+    display: flex;
+    justify-content: flex-end; /* Align the box to the right */
+}
+
+.container-login .logreg-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+}
+
+.logreg-box .form-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #A3716E;;
+}
+
+.form-box h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    height: 50px;
+    border-bottom: 2px solid transparent;
+    margin: 30px 0;
+}
+
+.form-box .input-box{
+    position: relative;
+    width: 340px;
+    height: 50px;
+    border-bottom: 2px solid #A3716E;
+    margin:30px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 10;
+    transform: translateY(-50%);
+    font-size: 16px;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s ease;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    top: 13px;
+    right: 5px;
+    font-size: 30px;
+}
+
+
+.form-box .remember-forgot{
+    font-size: 14.5px;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: #A3716E;
+    margin-right: 3px;
+}
+
+.remember-forgot a{
+    color:#A3716E;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #F3A9B0;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #e4e4e4;
+    font-weight: 500;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+
+/* register page */
+.container-register {
+    position: fixed; /* or absolute, depending on your layout */
+    top: 7%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(56deg, rgba(176,225,255,1) 0%, rgba(251,233,255,1) 50%, rgba(255,251,246,1) 100%); */
+    background: url('../../../public/images/bg-reg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.container-register .content {
+    width: 58%;
+    height: 100%;
+    /* background: yellowgreen; */
+    background: transparent !important;
+    padding: 80px;
+    color: #A3716E;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.container-register .logo{
+    padding-top: 10%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container-register .text-sci h2 {
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 850px;
+}
+
+.text-sci h2 span {
+    font-size: 25px;
+}
+
+.text-sci p {
+    font-size: 20px;
+    margin: 20px 0;
+    position: relative;
+    top: -800px; /* Adjust as needed */
+}
+
+.container-register .logreg-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+}
+
+.logreg-box .form-boxregister{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #A3716E;;
+}
+
+.avatar {
+    display: inline-block;
+    margin-bottom: 0;
+    height: 3rem;
+    width: 3rem;
+    -webkit-border-radius: 60%;
+    -moz-border-radius: 60%;
+    border-radius: 60%;
+    font-family: "Montserrat", sans-serif;
+    color: #000; /* Font color set to black */
+  }
+
+  .avatar img {
+    width: 80%;
+    height: 80%;
+    border-radius: 30px;
+    border: 15px solid rgba(#f6f2ff, 0.7);
+    object-fit: cover;
+    image-rendering: auto;
+  }
