@@ -10,7 +10,7 @@
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 li {
@@ -34,7 +34,7 @@ body {
     width: 260px;
     min-width: 260px;
     height: calc(90vh - 40px);
-    background-color: #d6eadf;
+    /* background-color: #d6eadf; */
     display: flex;
     flex-direction: column;
     position: fixed; /* Add position: fixed to fix the sidebar position */
@@ -74,6 +74,7 @@ body {
 .sidebar-link {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 

@@ -132,14 +132,14 @@ const CategoryDataTable = () => {
         </div>
         <div className="col-md-9" style={{ float: 'left', paddingLeft: '30px' }}> 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 style={{ fontWeight: "bold", padding: "10px", paddingBottom: "10px", 
+            <h2 style={{ fontWeight: "bold", paddingTop: "15px",
             margingBottom: "80px" }}>List of Categories</h2>
             <Link to="/category/create" className="btn btn-primary" 
             style={{ 
             fontWeight: "bold", 
-            padding: "10px",
-            marginLeft: "75%",
-          
+            padding: "5px",
+            marginLeft: "50%",
+            maxWidth: "180px"
              }}>
               Create Category
             </Link>

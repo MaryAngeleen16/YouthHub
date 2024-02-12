@@ -11,7 +11,7 @@ function Sidebar() {
     return (
         <div className={`wrapper ${isExpanded ? 'expand' : ''}`}>
             <aside id="sidebar" className='fixed-left-sidebar'>
-                <div className="d-flex">
+                <div className="d-flex" style={{marginTop: '15px', float: 'center'}}>
                     <button className="toggle-btn" onClick={toggleSidebar}>
                         <i className="lni lni-grid-alt"></i>
                     </button>
@@ -95,12 +95,12 @@ function Sidebar() {
                     </li>
                     {/* More sidebar items */}
                 </ul>
-                <div className="sidebar-footer">
+                {/* <div className="sidebar-footer">
                     <a href="#" className="sidebar-link">
                         <box-icon name='exit' ></box-icon>
                         <span>Logout</span>
                     </a>
-                </div>
+                </div> */}
             </aside>
         </div>
     );

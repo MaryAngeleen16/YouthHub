@@ -11,3 +11,14 @@
 {
     color: #FEFBF6!important;
 }
+
+.footer-space
+{
+margin-top: 100px;
+text-align: center;
+ padding: 20px;
+ position: fixed;
+bottom: 0;
+width: 100%;
+   
+}

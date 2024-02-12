@@ -40,6 +40,23 @@ const VideoDataTable = () => {
       });
   };
 
+
+  //BOOTSTRAP CSS
+  useEffect(() => {
+    const bootstrapStyles = `
+      @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    `;
+
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = bootstrapStyles;
+
+    document.head.appendChild(styleElement);
+
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+  
   const setDataTable = () => {
     const data = {
       columns: [
@@ -112,22 +129,28 @@ const VideoDataTable = () => {
   return (
     <div className="container mt-6">
       <div className="row">
-        <div className="col-md-3">
+        <div className="col-md-3" style={{ float: 'left' }}>
           <Sidebar />
         </div>
-        <div className="col-md-9" style={{ float: 'left', paddingLeft: '30px' }}>
+        <div className="col-md-9">
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 style={{
+          <div style={{ float: 'left' }}>
+
+          <h2 style={{
               fontWeight: "bold",
               padding: "10px",
               paddingBottom: "10px",
               margingBottom: "80px"
             }}>List of Videos</h2>
-            <Link to="/video/create" className="btn btn-primary"
+          </div>
+       
+            <Link to="/video/create" className="btn btn-primary" 
               style={{
                 fontWeight: "bold",
                 padding: "10px",
-                marginLeft: "73%",
+                marginLeft: "50%",
+                maxWidth: "200px"
+
               }}>
               Upload Video
             </Link>

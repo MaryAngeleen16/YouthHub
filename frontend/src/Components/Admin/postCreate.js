@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../utils/helpers';
 import { toast } from 'react-toastify';
+import './crud.css';
+import Sidebar from './Sidebar';
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -102,10 +104,29 @@ const CreatePost = () => {
     }
   };
 
+  //BOOTSTRAP CSS
+  useEffect(() => {
+    const bootstrapStyles = `
+      @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    `;
+
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = bootstrapStyles;
+
+    document.head.appendChild(styleElement);
+
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+
   return (
     <div className="container mt-5">
       <div className="row">
-        <div className="col-md-9 offset-md-1 text-crud" style={{paddingBottom:'50px'}}>
+      <div className="col-md-3">
+          <Sidebar /> 
+        </div>
+        <div className="col-md-9" style={{paddingBottom:'50px'}}>
           <h2 className='title-crud'>Create Post</h2>
           <form onSubmit={submitForm}>
             <div className="mb-3">
@@ -173,7 +194,7 @@ const CreatePost = () => {
                 <img src={imagesPreview[key]} key={key} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
               ))}
             </div>
-            <button type="submit" className="btn btn-crud">
+            <button type="submit" className="btn btn-crud btn-design">
               Create Post
             </button>
           </form>

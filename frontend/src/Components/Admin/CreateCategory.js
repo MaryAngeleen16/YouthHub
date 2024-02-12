@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
  import Sidebar from './Sidebar'; 
-// import './CRUD.css';
+import './crud.css';
 import SBar from './SBar';
 
 const CreateCategory = () => {
@@ -44,6 +44,8 @@ const CreateCategory = () => {
       });
   };
 
+
+  //BOOTSTRAP CSS
   useEffect(() => {
     const bootstrapStyles = `
       @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
@@ -94,7 +96,7 @@ const CreateCategory = () => {
                 value={description}
               ></textarea>
             </div>
-            <button className="btn btn-crud ml-auto" onClick={submitForm}>
+            <button className="btn btn-crud ml-auto btn-design" onClick={submitForm}>
               Submit
             </button>
           </form>

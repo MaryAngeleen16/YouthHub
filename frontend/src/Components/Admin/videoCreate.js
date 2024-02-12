@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../utils/helpers';
 import { toast } from 'react-toastify';
-
+import Sidebar from './Sidebar'; 
+import './crud.css';
 const VideoCreate = () => {
   const navigate = useNavigate();
   const [videoData, setVideoData] = useState({
@@ -42,6 +43,31 @@ const VideoCreate = () => {
         console.error('Failed to fetch categories:', error);
       });
   }, []);
+
+
+
+
+
+    //BOOTSTRAP CSS
+    useEffect(() => {
+      const bootstrapStyles = `
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+      `;
+  
+      const styleElement = document.createElement('style');
+      styleElement.innerHTML = bootstrapStyles;
+  
+      document.head.appendChild(styleElement);
+  
+      return () => {
+        document.head.removeChild(styleElement);
+      };
+    }, []);
+
+
+
+
+
 
   const configs = {
     headers: {
@@ -86,7 +112,10 @@ const VideoCreate = () => {
   return (
     <div className="container mt-5">
       <div className="row">
-        <div className="col-md-9 offset-md-1 text-crud" style={{paddingBottom:'50px'}}>
+      <div className="col-md-3">
+          <Sidebar /> 
+        </div>
+        <div className="col-md-9 text-crud" style={{paddingBottom:'50px'}}>
           <h2 className='title-crud'>Upload Video</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -150,8 +179,8 @@ const VideoCreate = () => {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" className="btn btn-crud">
-              Upload Video
+            <button type="submit" className="btn btn-crud btn-design">
+              Submit
             </button>
           </form>
         </div>

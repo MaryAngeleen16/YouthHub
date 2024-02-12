@@ -143,10 +143,14 @@ const PostDataTable = () => {
           <div className="col-md-9">
             <div className="d-flex justify-content-between align-items-center mb-4">
               <div style={{ float: 'left' }}>
-                <h2 style={{ fontWeight: 'bold', padding: '10px', paddingBottom: '10px', marginBottom: '80px' }}>List of Posts</h2>
+                <h2 style={{ fontWeight: 'bold', 
+                padding: '10px', 
+                paddingBottom: '10px', 
+                marginBottom: '80px' }}>List of Posts</h2>
               </div>
               <Link to="/post/create" className="btn btn-primary mb-3" 
-              style={{ fontWeight: 'bold', padding: '10px', marginRight: '10%', maxWidth: '200px' }}>
+              style={{ fontWeight: 'bold', padding: '10px', 
+              marginLeft: '10%', maxWidth: '200px' }}>
                 Create Post
               </Link>
             </div>
