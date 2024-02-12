@@ -1,110 +1,116 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Loader from '../Layouts/Loader'
-import MetaData from '../Layouts/Metadata'
-import { getUser, } from '../../utils/helpers';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import MetaData from '../Layouts/Metadata';
+import { getUser } from '../../utils/helpers';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = () => {
-    const [loading, setLoading] = useState(true)
-    const [user, setUser] = useState('')
-
+    // const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState({});
 
     const getProfile = async () => {
         const config = {
             headers: {
-                // 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${getToken()}`
             }
-        }
+        };
         try {
-            const { data } = await axios.get(`http://localhost:4001/api/me`, config)
-            console.log(data)
-            setUser(data.user)
-            setLoading(false)
+            const { data } = await axios.get(`http://localhost:4001/api/me`, config);
+            setUser(data.user);
+            // setLoading(false);
         } catch (error) {
-            console.log(error)
-            toast.error("invalid user or password", {
-                position: toast.POSITION.BOTTOM_RIGHT
-            })
+            console.log(error);
+            toast.error("Invalid user or password", {
+                position: 'top-right'
+            });
+            // setLoading(false);
         }
+    };
 
-    }
-    // const getUserToken = async () => {
-    //     const userToken = getToken()
-    //     console.log(userToken)
-    //     setToken(userToken)
-    // }
     useEffect(() => {
-        // getUserToken()
-        getProfile()
+        getProfile();
+    }, []);
 
-    }, [])
     return (
-        <Fragment>
-            {loading ? (
-                <Loader />
-            ) : (
-                <Fragment>
-                    <MetaData title={'Your Profile'} />
-
-                    <div className="background-page">
-                        <div className="profile"
-                        style={{ border: '3px solid #8e5f47',
-                        borderRadius: '15px'}}>
-                            {/* <img src="./coffee.png" alt="Coffee Logo" className="mt-1 ml-5" /> */}
-                            <h2 className="mt-1 ml-5">Profile</h2>
-
-                            <div className="mt-5 user-info row">
-                                {/* Avatar Column */}
-                                <div className="col-12 col-md-6">
-                                    <figure className="avatar avatar-profile">
-                                        <img className="rounded img-fluid" src={user.avatar.url} alt={user.name} />
+        <div className="container light-style flex-grow-1 container-p-y">
+            <h4 className="font-weight-bold py-3 mb-4">
+                Account settings
+            </h4>
+            <div className="card overflow-hidden">
+                <div className="row no-gutters row-bordered row-border-light">
+                    <div className="col-md-3 pt-0">
+                        <div className="list-group list-group-flush account-settings-links">
+                            <a className="list-group-item list-group-item-action active" style={{ paddingTop: '20px' }} data-toggle="list"
+                                href="#account-general">GENERAL</a>
+                            <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
+                                href="#account-change-password">Change password</a>
+                            <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
+                                href="#account-info">Info</a>
+                            <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
+                                href="#account-social-links">Social links</a>
+                            <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
+                                href="#account-connections">Connections</a>
+                            <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
+                                href="#account-notifications">Notifications</a>
+                        </div>
+                    </div>
+                    <div className="col-md-9">
+                        <div className="tab-content">
+                            <div className="tab-pane fade active show" id="account-general">
+                                <div className="card-body media align-items-center">
+                                    <figure className="avatar avatar-profile" style={{ width: '100px', height: '100px' }} >
+                                        {user.avatar && user.avatar.url ? (
+                                            <img className="rounded img-fluid" src={user.avatar.url} alt={user.name} />
+                                        ) : null}
                                     </figure>
+                                    <div className="media-body ml-4">
+                                        <label className="btn-sm">
+                                            &#8203;
+                                            <input type="file" className="account-settings-fileinput" style={{ paddingTop: '10px' }} />
+                                        </label> &nbsp;
+                                        <button type="button" className="btn-sm btn-default">Reset</button>
+                                        <div className="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                    </div>
                                 </div>
-
-                                {/* User Details Column */}
-                                <div className="col-12 col-md-5">
-                                    <h4>Full Name</h4>
-                                    <p>{user.name}</p>
-
-                                    <h4>Email Address</h4>
-                                    <p>{user.email}</p>
-
-                                    <h4>Joined On</h4>
-                                    <p>{String(user.createdAt).substring(0, 10)}</p>
-
-                                    <div className="button-container">
-                                        <div className="button">
-                                            {user.role !== 'admin' && (
-                                                <Link to="/orders/me" className="btn btn-danger btn-block mt-0 btn-pill">
-                                                    My Orders
-                                                </Link>
-                                            )}
+                                <hr className="border-light m-0" />
+                                <div className="card-body">
+                                    {/* <div className="form-group">
+                                        <label className="form-label">Username</label>
+                                        <input type="text" className="form-control form-control-sm mb-1" value={user.name} />
+                                    </div> */}
+                                    <div className="form-group">
+                                        <label className="form-label">Name</label>
+                                        <input type="text" className="form-control form-control-sm" value={user.name} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">E-mail</label>
+                                        <input type="text" className="form-control form-control-sm mb-1" value={user.email} />
+                                        <div className="alert alert-warning mt-3">
+                                            Your email is not confirmed. Please check your inbox.<br />
+                                            <a href="javascript:void(0)">Resend confirmation</a>
                                         </div>
-                                        <div className="button">
-                                            <Link to="/me/update" id="edit_profile" className="btn btn-primary btn-block">
-                                                Edit Profile
-                                            </Link>
-                                        </div>
-                                        <div className="button">
-                                            <Link to="/password/update" className="btn btn-primary btn-block">
-                                                Change Password
-                                            </Link>
-                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="form-label">Joined On</label>
+                                        <input type="text" className="form-control form-control-sm" value={String(user.createdAt).substring(0, 10)} />
                                     </div>
                                 </div>
                             </div>
+                            {/* Other tab panes go here */}
                         </div>
                     </div>
-                </Fragment>
-            )}
-        </Fragment>
+                </div>
+            </div>
+            <div className="text-right mt-3">
+                <button type="button" className="btn-sm btn-primary">Save changes</button>&nbsp;
+                <button type="button" className="btn-sm btn-default">Cancel</button>
+            </div>
+        </div>
     );
-};
+}
 
 export default Profile;
