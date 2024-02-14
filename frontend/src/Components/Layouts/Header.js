@@ -21,6 +21,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 
+import PregnancyPostPage from '../PregnancyPostPage';
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -76,25 +77,30 @@ const Header = () => {
           Youth Empowerment
         </Typography>
 
+
+        <Link to="/Pregnancy" style={{ textDecoration: 'none', color: 'inherit' }}>
         <Button
           color="inherit"
           onClick={handleClick}
           aria-controls="tutorials-menu"
           aria-haspopup="true"
+        
         >
+           
           Pregnancy
         </Button>
-        <Menu
+        </Link>
+        {/* <Menu
           id="tutorials-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {/* Add your dropdown menu items related to Tutorials here */}
+         
           <MenuItem onClick={handleClose}>Tutorial 1</MenuItem>
           <MenuItem onClick={handleClose}>Tutorial 2</MenuItem>
           <MenuItem onClick={handleClose}>Tutorial 3</MenuItem>
-        </Menu>
+        </Menu> */}
         <Button color="inherit">Sexual Education</Button>
         <Box>
           {userAuthenticated ? (

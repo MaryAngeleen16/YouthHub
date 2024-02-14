@@ -23,11 +23,13 @@ import ProtectedRoute from './Components/Route/ProtectedRoute';
 import PostList from './Components/Admin/PostList';
 import CreatePost from './Components/Admin/postCreate';
 import UpdatePost from './Components/Admin/UpdatePost';
-import PostPage from './Components/PostPage';
+import PostsPage from './Components/PostsPage';
 
 import VideoCreate from './Components/Admin/videoCreate';
 import VideoList from './Components/Admin/VideoList';
 import UpdateVideo from './Components/Admin/UpdateVideo';
+
+import PregnancyPostPage from './Components/PregnancyPostPage.js';
 function App() {
   return (
     <div>
@@ -50,7 +52,9 @@ function App() {
           <Route path="/post/list" element={<PostList />} />
           <Route path="/post/create" element={<CreatePost />} />
           <Route path="/post/update/:id" element={<UpdatePost />} />
-          <Route path="/PostPage" element={<PostPage />} exact />
+          <Route path="/PostsPage" element={<PostsPage />} exact />
+
+          <Route path="/Pregnancy" element={<PregnancyPostPage />} exact />
 
           <Route path="/dashboard" element={
             <ProtectedRoute isAdmin={true}>

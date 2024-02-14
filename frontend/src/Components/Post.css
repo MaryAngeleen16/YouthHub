@@ -1,0 +1,84 @@
+.post-content {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 3%;
+  }
+  
+  .posts-image {
+    width:500px; /* Adjust as needed */
+    height: 600px; /* Maintain aspect ratio */
+    margin-right: 20px; /* Adjust spacing between image and text */
+    border-radius: 24px;
+    padding: 50px;
+
+}
+  
+  .post-details {
+    flex-grow: 1; /* Allow the details to take up remaining space */
+  }
+  
+  .card-title-des {
+    margin: 0; /* Remove default margin */
+  }
+  
+  .button-container {
+    margin-top: 300px; /* Adjust as needed */
+    float: right;
+    margin-right: 5%;
+
+  }
+  
+  .json-button {
+    border-radius: 5px;
+    background-color: #7F669D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 15% !important;
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 36px;
+  }
+  .json-button:hover
+  {
+    background-color: #FFC7C7 !important;
+    color: #7F669D !important;
+  }
+  
+  .card-body.card-des {
+    padding: 0; /* Remove padding from card body */
+  }
+  
+  .posts-title
+{
+    text-transform: capitalize;
+    font-weight: 900 !important;
+    font-size: 48px;
+    margin-top: 0;
+    margin-bottom: 5%;
+    position: sticky;
+}
+
+.posts-desc
+{
+    font-weight: 300 !important;
+    font-size: 36px;
+    margin-top: -30%;
+    margin-bottom: 15% ;
+    position: sticky;
+
+}
+
+.posts-container
+{
+    margin-bottom: 20%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.posts-header
+{
+    text-transform: uppercase;
+    font-weight: 900 !important;
+    font-size: 50px;
+}

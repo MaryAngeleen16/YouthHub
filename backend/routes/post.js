@@ -24,4 +24,6 @@ router.delete('/admin/delete/post/:id',  deletePost);
 router.post('/admin/post/new', isAuthenticatedUser, authorizeRoles("admin"), upload.array('images'), newPost);
 router.get('/admin/post', isAuthenticatedUser, authorizeRoles("admin"), getAdminPost);
 
+
+
 module.exports = router;

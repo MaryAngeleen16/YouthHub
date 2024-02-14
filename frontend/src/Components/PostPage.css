@@ -75,13 +75,14 @@
     color: #8e5f47;
 }
 
-.prodcard-JSON {
+/* .prodcard-JSON {
     border: 2px solid #b38269;
     height: 500px;
     width: 255px;
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), 
+    box-shadow 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-
+ */
 
 .prodcard-JSON:hover {
     transform: scale(1.06); /* Adjust the scaling factor as needed for the pop effect */
@@ -163,3 +164,31 @@
     background-color: #e7bd3e;
     color: #8e5f47;
 }
+
+
+.row-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px -50px; /* Adjust margin for spacing */
+  }
+  
+  
+  .post-card-col {
+    flex: 1 0 33.33%; /* Set minimum width to 33.33% for 3 cards */
+    margin: 5px; /* Adjust margin for spacing */
+  }
+  
+  
+  @media only screen and (max-width: 768px) {
+    .post-card-col {
+      flex: 1 0 100%; /* Adjust minimum width for 2 cards per row */
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .post-card-col {
+      flex: 1 0 25%; /* Set full width for a single card */
+    }
+  }
+  
+ 
