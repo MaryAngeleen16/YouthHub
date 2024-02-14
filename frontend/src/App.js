@@ -29,6 +29,8 @@ import VideoCreate from './Components/Admin/videoCreate';
 import VideoList from './Components/Admin/VideoList';
 import UpdateVideo from './Components/Admin/UpdateVideo';
 
+import UserManagement from './Components/Admin/userManagement';
+
 import PregnancyPostPage from './Components/PregnancyPostPage.js';
 function App() {
   return (
@@ -74,10 +76,18 @@ function App() {
           <Route path="/video/update/:id" element={<UpdateVideo />} />
           <Route path="/" element={<Home />} />
           <Route
-            path="/admin/users"
+            path="/admin/dashboard"
             element={
               <ProtectedRoute isAdmin={true}>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute isAdmin={true}>
+                <UserManagement />
               </ProtectedRoute>
             }
           />

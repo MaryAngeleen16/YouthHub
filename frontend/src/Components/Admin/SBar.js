@@ -41,7 +41,7 @@ const Sidebar = () => {
             data-toggle="collapse"
             data-target="#categoryDropdown"
           >
-            CATEGORY
+            CATEGORY dragon
           </button>
           <div id="categoryDropdown" className={`collapse ${isCategoryOpen ? 'show' : ''}`}>
             <a href="/category/create" className="list-group-item list-group-item-action sidebar-dashboard">

@@ -16,7 +16,7 @@ function Sidebar() {
                         <i className="lni lni-grid-alt"></i>
                     </button>
                     <div className="sidebar-logo">
-                        <a href="#">Dashboard</a>
+                        <a href="/">Dashboard</a>
                     </div>
                 </div>
                 <ul className="sidebar-nav">
@@ -86,7 +86,7 @@ function Sidebar() {
                         </a>
                         <ul id="auth" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li className="sidebar-item">
-                                <a href="#" className="sidebar-link">Users List</a>
+                                <a href="/admin/users" className="sidebar-link">Users List</a>
                             </li>
                             <li className="sidebar-item">
                                 <a href="#" className="sidebar-link">Create New User</a>

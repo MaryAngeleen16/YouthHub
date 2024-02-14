@@ -61,9 +61,9 @@ const Profile = () => {
                     <div className="col-md-3 pt-0">
                         <div className="list-group list-group-flush account-settings-links">
                             <a className="list-group-item list-group-item-action active" style={{ paddingTop: '20px' }} data-toggle="list"
-                                href="#account-general">GENERAL</a>
+                                href="/me">GENERAL</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
-                                href="#account-change-password">Change password</a>
+                                href="/password/update">Change password</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
                                 href="#account-info">Info</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
