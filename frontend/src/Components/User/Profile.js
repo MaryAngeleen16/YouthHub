@@ -31,6 +31,22 @@ const Profile = () => {
         }
     };
 
+    //BOOTSTRAP CSS
+  useEffect(() => {
+    const bootstrapStyles = `
+      @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    `;
+
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = bootstrapStyles;
+
+    document.head.appendChild(styleElement);
+
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+
     useEffect(() => {
         getProfile();
     }, []);
