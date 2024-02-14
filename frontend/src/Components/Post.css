@@ -29,17 +29,18 @@
   }
   
   .json-button {
-    border-radius: 5px;
-    background-color: #7F669D;
-    color: white;
-    padding: 10px 20px;
+    border-radius: 9px !important;
+    background-color: #7F669D !important;
+    color: white !important;
+    padding: 30px 60px; /* Increase padding to make the button bigger */
     border: none;
-    width: 100px !important;
-    height: 100px !important;
-    font-size: 36px;
-    margin-top: auto; /* Push buttons to the bottom of the container */
-    margin-bottom: 20px; /* Add space between buttons and bottom of container */
+    width: auto !important; /* Remove fixed width */
+    height: auto !important; /* Remove fixed height */
+    font-size: 36px !important; /* Increase font size to make the text larger */
+    margin-top: auto;
+    margin-bottom: 20px;
 }
+
 
   .json-button:hover
   {
@@ -87,7 +88,7 @@
     font-size: 50px;
 
 }
-.container {
+.posts-maincontainer {
     display: flex;
     flex-direction: column;
     align-items: flex-end;

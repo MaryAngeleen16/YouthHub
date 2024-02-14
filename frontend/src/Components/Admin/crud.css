@@ -1,9 +1,12 @@
 .btn-design
 {
     background-color: #BA94D1 !important;
+    color: white !important;
+    font-weight: 500 !important;
 }
 
-.m9-des
+.btn-design:hover
 {
-    margin-left: -50% !important;
+    background-color: #FFC7C7 !important;
+    color: #7F669D !important;
 }

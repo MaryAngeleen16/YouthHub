@@ -48,7 +48,7 @@ const PostCard = ({ post }) => {
     }, []);
 
     return (
-        <div className="container mt-4 posts-container">
+        <div className="container mt-4 posts-maincontainer">
             <h1 className="posts-header">ALL POSTS</h1>
             <div className="row">
                 {loading ? (
