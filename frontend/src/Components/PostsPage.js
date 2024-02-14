@@ -70,8 +70,8 @@ const PostCard = ({ post }) => {
                                             <h6 className="card-title card-title-des
                                               posts-title">{post.name}</h6>
                                              <h8 className="card-title card-title-des posts-desc">
-  {post.description.split(' ').slice(0, 30).join(' ')}
-  {post.description.split(' ').length > 30 ? '...' : ''}
+  {post.description.split(' ').slice(0, 20).join(' ')}
+  {post.description.split(' ').length > 20 ? '...' : ''}
 </h8>
 
                                             <div className="button-container">

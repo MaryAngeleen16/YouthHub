@@ -132,7 +132,7 @@ const VideoDataTable = () => {
         <div className="col-md-3" style={{ float: 'left' }}>
           <Sidebar />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-9 m9-des">
           <div className="d-flex justify-content-between align-items-center mb-4">
           <div style={{ float: 'left' }}>
 

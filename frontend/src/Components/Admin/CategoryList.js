@@ -127,10 +127,10 @@ const CategoryDataTable = () => {
   return (
     <div className="container mt-6">
       <div className="row">
-        <div className="col-md-3" style={{ float: 'left' }}>
+        <div className="col-md-3" >
           <Sidebar />
         </div>
-        <div className="col-md-9" style={{ float: 'left', paddingLeft: '30px' }}> 
+        <div className="col-md-9 m9-des"> 
           <div className="d-flex justify-content-between align-items-center mb-4">
             <h2 style={{ fontWeight: "bold", paddingTop: "15px",
             margingBottom: "80px" }}>List of Categories</h2>

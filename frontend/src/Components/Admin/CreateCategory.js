@@ -62,7 +62,7 @@ const CreateCategory = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-6">
       <div className="row">
         <div className="col-md-3">
           <Sidebar /> 

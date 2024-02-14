@@ -5,7 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 // import Sidebar from './Sidebar';
-
+import Sidebar from './Sidebar'; 
+import './crud.css';
 const UpdateCategory = () => {
     const navigate = useNavigate();
   const { id } = useParams(); // Access the 'id' parameter from the route
@@ -60,50 +61,27 @@ const UpdateCategory = () => {
       });
   };
 
-//   return (
-//     <div className="container mt-5">
-//       <form>
-//         <div className="mb-3">
-//           <label htmlFor="name" className="form-label">
-//             Name
-//           </label>
-//           <input
-//             type="text"
-//             className="form-control"
-//             id="name"
-//             name="name"
-//             value={name}
-//             onChange={onChange}
-//           />
-//         </div>
-//         <div className="mb-3">
-//           <label htmlFor="description" className="form-label">
-//             Description
-//           </label>
-//           <textarea
-//             className="form-control"
-//             id="description"
-//             name="description"
-//             value={description}
-//             onChange={onChange}
-//           ></textarea>
-//         </div>
-//         <button className="btn btn-primary" onClick={submitForm}>
-//           Update
-//         </button>
-//       </form>
-//       <ToastContainer />
-//     </div>
-//   );
-// };
+   //BOOTSTRAP CSS
+   useEffect(() => {
+    const bootstrapStyles = `
+      @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    `;
 
-// export default UpdateCategory;
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = bootstrapStyles;
+
+    document.head.appendChild(styleElement);
+
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
 
 return (
-  <div className="container mt-5">
+  <div className="container mt-6">
     <div className="row">
       <div className="col-md-3">
-       {/* <Sidebar/> */}
+       <Sidebar/> 
       
       </div>
       <div className="col-md-9 text-crud" style={{ paddingBottom: '50px' }}>
@@ -135,7 +113,7 @@ return (
               onChange={onChange}
             ></textarea>
           </div>
-          <button type="button" className="btn btn-crud" onClick={submitForm}>
+          <button type="button" className="btn btn-crud ml-auto btn-design" onClick={submitForm}>
             Update
           </button>
         </form>

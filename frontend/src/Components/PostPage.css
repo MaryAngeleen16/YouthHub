@@ -151,6 +151,8 @@
     font-family: 'Open Sans', sans-serif;
     display: flex;
     justify-content: center;
+    position: fixed;
+    bottom: 100px !important; 
 }
 
 .button-container {
