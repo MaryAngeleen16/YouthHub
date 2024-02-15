@@ -1,0 +1,117 @@
+.post-content {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 7%;
+  
+}
+
+.posts-image {
+  width: 75%; /* Adjust image width */
+  height: 250px; /* Maintain aspect ratio */
+  border-radius: 6px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 10px;
+
+}
+
+.post-details {
+  width: 100%; /* Adjust width */
+  margin-bottom: -50px;
+}
+
+.button-container-ye {
+  text-align: right; /* Align button to the right */
+  margin-top: 30px; /* Adjust spacing */
+  margin-right: 20px;
+}
+
+.card-title-des {
+  margin: 0; /* Remove default margin */
+}
+
+
+.ye-button {
+  background-color: #BA94D1 !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+.ye-button:hover
+{
+  background-color: #FFC7C7 !important;
+  color: #7F669D !important;
+}
+
+.card-body.card-des {
+  padding: 0; /* Remove padding from card body */
+  max-width: 250px;
+  max-height: 300px;
+
+
+}
+
+.posts-title {
+  text-transform: capitalize;
+  font-weight: 900 !important;
+  font-size: 18px;
+  margin-top: -50px;
+  margin-bottom: 100px;
+  padding-right: 25px !important;
+  position: sticky;
+  width: 300px;
+}
+
+.posts-desc {
+  font-weight: 300 !important;
+  font-size: 16px;
+  margin-top: -20%;
+  margin-bottom: 50px !important;
+  position: sticky;
+  word-wrap: break-word;
+  padding-right: 10px;
+}
+
+.maxwidthh
+{
+width: 600px;
+align-self: center;
+margin-top: 30px;
+border: 3px solid #F3CCF3 !important; 
+border-radius: 6px;
+
+}
+
+.center-row {
+  display: flex;
+  justify-content: center !important;
+  margin-left: -100px !important;
+  margin-right: -100px !important;
+
+}
+
+.ye-row
+{
+  display: flex;
+
+  margin: 0;
+}
+.posts-maincontainer
+{
+  margin-bottom: 10%;
+}
+
+.posts-maincontainer .row-posts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-gap: -50px; /* Adjust gap between columns */
+}
+
+.posts-header
+{
+  font-weight: 900;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 52px;
+  color: #FFB0B0;
+}

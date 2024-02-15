@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
  import Sidebar from './Sidebar'; 
 import './crud.css';
-import SBar from './SBar';
 
 const CreateCategory = () => {
   const navigate = useNavigate();

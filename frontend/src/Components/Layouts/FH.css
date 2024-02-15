@@ -1,6 +1,3 @@
-.bg{
-    background-color: #BA94D1 !important;
-}
 
 .text-ye
 {
@@ -35,12 +32,12 @@ width: 100%;
     margin: 0 80px; /* Adjust spacing between items */
   }
   
-  .nav-link {
+  .header-link{
     text-decoration: none;
-    color: #A3716E; /* Change link color as needed */
+    color: #A3716E; 
     font-weight: bold;
   }
   
-  .nav-link:hover {
-    color: #F3A9B0; /* Change link color on hover */
+  .header-link:hover {
+    color: white; 
   }

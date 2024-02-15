@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { getUser,setUser, logout } from '../../utils/helpers';
 import './FH.css';
+import './Header.css'
+import PregnancyPostPage from '../PregnancyPostPage';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -64,7 +66,7 @@ const Header = () => {
 
   return (
     <div>
-      <AppBar position="static" className="bg">
+      <AppBar position="static" className="gradient-header">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className="text-ye" style={{ textAlign: 'left' }} href="/">
             Youth Empowerment
@@ -124,21 +126,21 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item"><b>
-            <a className="nav-link" href="/">Home</a>
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li className="nav-item color-nav"><b>
+            <a className="nav-link header-link" href="/">Home</a>
           </b></li>
-          <li className="nav-item"><b>
-            <a className="nav-link" href="/collections">Trending Posts</a>
+          <li className="nav-item color-nav"><b>
+            <a className="nav-link header-link" href="/postspage">All Posts</a>
           </b></li>
-          <li className="nav-item"><b>
-            <a className="nav-link" href="/Pregnancy">Pregnancy</a>
+          <li className="nav-item color-nav"><b>
+            <a className="nav-link  header-link" href="/pregnancy">Pregnancy</a>
           </b></li>
-          <li className="nav-item"><b>
-            <a className="nav-link" href="/">Sexual Education</a>
+          <li className="nav-item color-nav"><b>
+            <a className="nav-link header-link" href="/">Sexual Education</a>
           </b></li>
-          <li className="nav-item"><b>
-            <a className="nav-link" href="/">Youth Events</a>
+          <li className="nav-item color-nav"><b>
+            <a className="nav-link header-link" href="/">Youth Events</a>
           </b></li>
         </ul>
       </div>
