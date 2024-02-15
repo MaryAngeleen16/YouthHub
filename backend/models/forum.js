@@ -2,16 +2,24 @@ const mongoose = require('mongoose');
 
 
 const forumSchema = new mongoose.Schema({
-    title: {
-        type: String,
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: 'Category'
     },
     content: {
         type: String,
         required: true,
     },
     image: {
-        type: String,
+        public_id: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
+            required: true,
+        },
     },
     userComments: [{
         user: {
@@ -44,7 +52,7 @@ const forumSchema = new mongoose.Schema({
         }],
         createdAt: {
             type: Date,
-            default: Date.now()
+            default: Date.now(),
         },
         updatedAt: {
             type: Date,
