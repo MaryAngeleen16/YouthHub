@@ -22,3 +22,25 @@ bottom: 0;
 width: 100%;
    
 }
+
+
+.navbar-nav {
+    display: flex;
+    justify-content: center; /* Centers the items horizontally */
+    list-style-type: none; /* Removes default list styles */
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin: 0 80px; /* Adjust spacing between items */
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #A3716E; /* Change link color as needed */
+    font-weight: bold;
+  }
+  
+  .nav-link:hover {
+    color: #F3A9B0; /* Change link color on hover */
+  }
