@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { getUser,setUser, logout } from '../../utils/helpers';
+import { getUser, setUser, logout } from '../../utils/helpers';
 // import './FH.css';
 import './Header.css'
 import PregnancyPostPage from '../PregnancyPostPage';
@@ -82,9 +82,14 @@ const Header = () => {
                 </IconButton>
               </Tooltip>
             ) : (
-              <Link to="/login" className="btn ml-4" id="login_btn">
-                <Button className='login-text'>Login</Button>
-              </Link>
+              <>
+                <Link to="/register" className="ml-4" id="signup_link">
+                  <span className='signup-text' style={{ fontSize: '0.8em', marginRight: '1em', color: '#A3716E' }}>SIGN UP</span>
+                </Link>
+                <Link to="/login" className="btn ml-4" id="login_btn">
+                  <Button className='login-text'>Login</Button>
+                </Link>
+              </>
             )}
             <Menu
               sx={{ mt: '45px' }}
@@ -125,7 +130,7 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
-    </div>
+    </div >
   );
 };
 

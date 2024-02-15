@@ -22,11 +22,13 @@ width: 100%;
 
 
 .navbar-nav {
-    display: flex;
-    justify-content: center; /* Centers the items horizontally */
-    list-style-type: none; /* Removes default list styles */
-    padding: 0;
-  }
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0; /* Add padding to the top and bottom */
+  margin: 1;
+  background-color: #ffffff;
+}
   
   .nav-item {
     margin: 0 80px; /* Adjust spacing between items */
@@ -46,7 +48,7 @@ width: 100%;
 {
     border: 3px solid  #F38783;
     border-radius: 50px;
-    padding: 15px;
+    padding: 6px;
     text-transform: uppercase;
 }
 
