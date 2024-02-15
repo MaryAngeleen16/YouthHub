@@ -12,17 +12,3 @@ background: linear-gradient(273.49deg, #FDF8F8 0.54%, #F8D4BC 22.62%, #F38783 98
 background: linear-gradient(93.63deg, #FDF8F8 1.29%, #F8D4BC 9.07%, #F38783 82.38%);
 
 }
-
-.color-nav
-{
-    border: 3px solid  #F38783;
-    border-radius: 50px;
-    padding: 15px;
-    text-transform: uppercase;
-}
-
-.color-nav:hover
-{
-    background-color: #F38783;
-    color:white !important;
-}

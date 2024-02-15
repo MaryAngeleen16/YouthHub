@@ -41,3 +41,17 @@ width: 100%;
   .header-link:hover {
     color: white; 
   }
+
+  .color-nav
+{
+    border: 3px solid  #F38783;
+    border-radius: 50px;
+    padding: 15px;
+    text-transform: uppercase;
+}
+
+.color-nav:hover
+{
+    background-color: #F38783;
+    color:white !important;
+}

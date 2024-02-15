@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { getUser,setUser, logout } from '../../utils/helpers';
-import './FH.css';
+// import './FH.css';
 import './Header.css'
 import PregnancyPostPage from '../PregnancyPostPage';
 
@@ -125,25 +125,6 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
-          <li className="nav-item color-nav"><b>
-            <a className="nav-link header-link" href="/">Home</a>
-          </b></li>
-          <li className="nav-item color-nav"><b>
-            <a className="nav-link header-link" href="/postspage">All Posts</a>
-          </b></li>
-          <li className="nav-item color-nav"><b>
-            <a className="nav-link  header-link" href="/pregnancy">Pregnancy</a>
-          </b></li>
-          <li className="nav-item color-nav"><b>
-            <a className="nav-link header-link" href="/">Sexual Education</a>
-          </b></li>
-          <li className="nav-item color-nav"><b>
-            <a className="nav-link header-link" href="/">Youth Events</a>
-          </b></li>
-        </ul>
-      </div>
     </div>
   );
 };
