@@ -1,71 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import Header from './adminHeader';
 import axios from 'axios';
-import { getToken } from '../../utils/helpers'; 
+import { getToken } from '../../utils/helpers';
+import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
+import '../Layouts/testdash.css';
 
 const Dashboard = () => {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [userRegistrationDates, setUserRegistrationDates] = useState({});
+    const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${getToken()}`
-                    }
-                };
-
-                const { data } = await axios.get(`http://localhost:4001/api/admin/users`, config);
-                setUsers(data.users);
-                setLoading(false);
-
-                // Extract user registration dates
-                const registrationDates = data.users.map(user => user.createdAt.split('T')[0]);
-                const registrationDatesCount = registrationDates.reduce((acc, date) => {
-                    acc[date] = (acc[date] || 0) + 1;
-                    return acc;
-                }, {});
-                setUserRegistrationDates(registrationDatesCount);
-
-                console.log(data.users);
-            } catch (error) {
-                console.error(error);
-                // Handle the error as needed
-            }
-        };
-
-        getUsers();
-    }, []);
+    const OpenSidebar = () => {
+        setOpenSidebarToggle(!openSidebarToggle);
+    };
 
     return (
-        <div className="container-dashboard">
-            <div className="d-flex" id="wrapper">
-                <Sidebar />
-                <div id="page-content-wrapper">
-                    <div className="container-dashboard px-4">
-                        <div className="col-xl-4 col-sm-6 mb-3">
-                            <div className="card text-white bg-info o-hidden h-100 dashboard-product">
-                                {/* <div className="card-body">
-                                    <div className="text-center card-font-size">Users<br /> <b>{users.length}</b></div>
-                                </div> */}
-
-                                {/* <Link className="card-footer text-white clearfix small z-1" to="/admin/users">
-                                    <span className="float-left">View Details</span>
-                                    <span className="float-right">
-                                        <i className="fa fa-angle-right"></i>
-                                    </span>
-                                </Link> */}
-                            </div>
-                        </div>
+        <div className='grid-container'>
+            <Header OpenSidebar={OpenSidebar} />
+            <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+            <div className='main-cards'>
+                <div className='card first'>
+                    <div className='card-inner'>
+                        <h3>AREAS</h3>
+                        <BsFillArchiveFill className='card_icon' />
                     </div>
+                    <h1>300</h1>
+                </div>
+                <div className='card second'>
+                    <div className='card-inner'>
+                        <h3>CATEGORIES</h3>
+                        <BsFillGrid3X3GapFill className='card_icon' />
+                    </div>
+                    <h1>12</h1>
+                </div>
+                <div className='card third'>
+                    <div className='card-inner'>
+                        <h3>USERS</h3>
+                        <BsPeopleFill className='card_icon' />
+                    </div>
+                    <h1>33</h1>
+                </div>
+                <div className='card fourth'>
+                    <div className='card-inner'>
+                        <h3>ALERTS</h3>
+                        <BsFillBellFill className='card_icon' />
+                    </div>
+                    <h1>42</h1>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Dashboard;

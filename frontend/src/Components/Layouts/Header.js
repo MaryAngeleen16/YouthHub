@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { getUser, setUser, logout } from '../../utils/helpers';
-// import './FH.css';
-import './Header.css'
-import PregnancyPostPage from '../PregnancyPostPage';
+import './FH.css';
+import './Header.css';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [avatarPreview, setAvatarPreview] = useState(null); // Added avatarPreview state
+  const [avatarPreview, setAvatarPreview] = useState(null);
   const user = getUser();
   const userAuthenticated = !!user;
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current location
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -61,9 +60,18 @@ const Header = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  // Assuming `settings` contains an array of user settings
   const settings = ['Profile', 'Settings'];
 
+    // Define the paths where you don't want the Header to appear
+    const excludedPaths = ['/dashboard', '/category/create', '/categories/list'];
+
+    // Check if the current location is one of the excluded paths
+    const shouldRenderHeader = !excludedPaths.includes(location.pathname);
+  
+    // Render the Header only if it's not one of the excluded paths
+    if (!shouldRenderHeader) {
+      return null;
+    }
   return (
     <div>
       <AppBar position="static" className="gradient-header">
@@ -77,7 +85,7 @@ const Header = () => {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu}>
                   {user.avatar ? (
-                    <Avatar src={avatarPreview || user.avatar.url} alt={user.name} /> // Updated Avatar src
+                    <Avatar src={avatarPreview || user.avatar.url} alt={user.name} />
                   ) : null}
                 </IconButton>
               </Tooltip>

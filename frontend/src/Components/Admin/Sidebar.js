@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
+import { getUser, logout } from '../../utils/helpers';
 import '../Layouts/dashboard.css'; // Import your CSS file
+import '../Layouts/testdash.css';
 
 function Sidebar() {
+    const user = getUser();
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
     };
+    const handleClickUser = () => {
+        // Add logic here to handle user click action, such as redirecting to user profile page
+        console.log('User clicked');
+    };
+
+    const handleLogout = () => {
+        logout();
+        // Add logic to redirect to logout route or homepage
+    };
 
     return (
         <div className={`wrapper ${isExpanded ? 'expand' : ''}`}>
             <aside id="sidebar" className='fixed-left-sidebar'>
-                <div className="d-flex" style={{marginTop: '15px', float: 'center'}}>
+                <div className="d-flex" style={{ marginTop: '15px', float: 'center' }}>
                     <button className="toggle-btn" onClick={toggleSidebar}>
                         <i className="lni lni-grid-alt"></i>
                     </button>
                     <div className="sidebar-logo">
-                        <a href="/">Dashboard</a>
+                        <a href="/dashboard">Dashboard</a>
                     </div>
                 </div>
                 <ul className="sidebar-nav">
+                    <li className=''>
+                        <a href="/" className="sidebar-link">
+                            <box-icon name='category'></box-icon>
+                            <span>Home</span>
+                        </a>
+                    </li>
                     <li className="sidebar-item">
                         <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#categories" aria-expanded="false" aria-controls="categories">
                             <box-icon name='category'></box-icon>
@@ -93,14 +112,16 @@ function Sidebar() {
                             </li>
                         </ul>
                     </li>
-                    {/* More sidebar items */}
                 </ul>
-                {/* <div className="sidebar-footer">
+                <div className="sidebar-footer">
+                    <a href="/me" className="sidebar-link" onClick={handleClickUser}>
+                        <span>Welcome, {user.name}</span>!
+                    </a>
                     <a href="#" className="sidebar-link">
                         <box-icon name='exit' ></box-icon>
                         <span>Logout</span>
                     </a>
-                </div> */}
+                </div>
             </aside>
         </div>
     );

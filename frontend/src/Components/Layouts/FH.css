@@ -20,14 +20,14 @@ width: 100%;
    
 }
 
-
 .navbar-nav {
   display: flex;
   justify-content: center;
   list-style-type: none;
   padding: 0; /* Add padding to the top and bottom */
-  margin: 1;
-  background-color: #ffffff;
+  margin:0; 
+  color: white !important;
+  background-color: #ffffff !important;
 }
   
   .nav-item {
@@ -37,6 +37,7 @@ width: 100%;
   .header-link{
     text-decoration: none;
     color: #A3716E; 
+    font-size: 15px;
     font-weight: bold;
   }
   
