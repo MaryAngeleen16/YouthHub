@@ -2,11 +2,23 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Define setUser function to update the user state
+let setUserFunction = null;
+
+// Function to set the setUser function
+export const setUser = (func) => {
+    setUserFunction = func;
+}
+
 export const authenticate = (data, next) => {
     if (window !== 'undefined') {
         // console.log('authenticate', response)
         sessionStorage.setItem('token', JSON.stringify(data.token));
         sessionStorage.setItem('user', JSON.stringify(data.user));
+        if (setUserFunction) {
+            setUser(data.user);
+        }
+        
     }
     next();
 };

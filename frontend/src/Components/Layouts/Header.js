@@ -11,13 +11,13 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { getUser, logout } from '../../utils/helpers';
+import { getUser,setUser, logout } from '../../utils/helpers';
 import './FH.css';
-import PregnancyPostPage from '../PregnancyPostPage';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null); // Added avatarPreview state
   const user = getUser();
   const userAuthenticated = !!user;
   const navigate = useNavigate();
@@ -43,6 +43,22 @@ const Header = () => {
     navigate('/');
   };
 
+  const onChange = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarPreview(reader.result);
+        setUser(prevState => ({
+          ...prevState,
+          avatar: { url: reader.result }
+        }));
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   // Assuming `settings` contains an array of user settings
   const settings = ['Profile', 'Settings'];
 
@@ -54,18 +70,12 @@ const Header = () => {
             Youth Empowerment
           </Typography>
 
-          {/* <Link to="/Pregnancy" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Button color="inherit" onClick={handleClick} aria-controls="tutorials-menu" aria-haspopup="true">
-              Pregnancy
-            </Button>
-          </Link> */}
-          {/* <Button color="inherit">Sexual Education</Button> */}
           <Box>
             {userAuthenticated ? (
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu}>
                   {user.avatar ? (
-                    <Avatar src={user.avatar.url} alt={user.name} />
+                    <Avatar src={avatarPreview || user.avatar.url} alt={user.name} /> // Updated Avatar src
                   ) : null}
                 </IconButton>
               </Tooltip>
