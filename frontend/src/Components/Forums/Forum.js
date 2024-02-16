@@ -12,6 +12,7 @@ import { createTheme } from '@mui/material/styles';
 import AllTopics from './AllTopics';
 import NewTopic from './NewTopic';
 import { getToken } from '../../utils/helpers';
+import Categories from './Categories';
 
 const theme = createTheme({
     palette: {
@@ -109,34 +110,38 @@ const Forum = () => {
                                     />
                                 </Box>
                             </Box>
-                            <Container maxWidth='xl' sx={{ my: 3, mt: 5 }}>
-                                <Box component={'div'} sx={{ display: 'flex', px: 3 }}>
-                                    <Typography variant='body1' sx={{ fontWeight: 400, mr: 1 }} color={'#666666'}>Sort by: </Typography>
-                                    <Select
-                                        variant='standard'
-                                        label="Age"
-                                        size='small'
-                                        defaultValue={10}
-                                        sx={{ fontSize: 16, height: 26, border: 'none', borderBottom: 'none', mr: 'auto' }}
-                                    >
-                                        <MenuItem value={30}>Recent Activity</MenuItem>
-                                        <MenuItem value={10}>Newest to oldest</MenuItem>
-                                        <MenuItem value={20}>Oldest to newest</MenuItem>
-                                    </Select>
-                                    <Button variant='outlined' sx={{
-                                        borderColor: '#F6B6A5',
-                                        textTransform: 'capitalize',
-                                        color: '#F6B6A5',
-                                        '&:hover': {
-                                            borderColor: '#F6B6A5',
-                                            color: '#F6B6A5'
-                                        },
-                                    }} onClick={handleClickOpen}
-                                    >Create New Topic</Button>
-                                </Box>
-                            </Container>
+                            {value !== '1' ?
+                                < Container maxWidth='xl' sx={{ my: 3, mt: 5 }}>
+                                    <Box component={'div'} sx={{ display: 'flex', px: 3 }}>
+                                        <Typography variant='body1' sx={{ fontWeight: 400, mr: 1 }} color={'#666666'}>Sort by: </Typography>
+                                        <Select
+                                            variant='standard'
+                                            label="Age"
+                                            size='small'
+                                            defaultValue={10}
+                                            sx={{ fontSize: 16, height: 26, border: 'none', borderBottom: 'none', mr: 'auto' }}
+                                        >
+                                            <MenuItem value={30}>Recent Activity</MenuItem>
+                                            <MenuItem value={10}>Newest to oldest</MenuItem>
+                                            <MenuItem value={20}>Oldest to newest</MenuItem>
+                                        </Select>
+                                        <Button variant='contained' sx={{
+                                            // borderColor: '#F6B6A5',
+                                            // textTransform: 'capitalize',
+                                            // color: '#F6B6A5',
+                                            // '&:hover': {
+                                            //     borderColor: '#F6B6A5',
+                                            //     color: '#F6B6A5'
+                                            // },
+                                        }} onClick={handleClickOpen}
+                                        >Create New Topic</Button>
+                                    </Box>
+                                </Container> : ''
+                            }
                             <Divider />
-                            <TabPanel value="1">Categories</TabPanel>
+                            <TabPanel value="1">
+                                <Categories />
+                            </TabPanel>
                             <TabPanel value="2" sx={{ pt: 1 }}>
                                 <AllTopics key={success} />
                             </TabPanel>
@@ -144,7 +149,7 @@ const Forum = () => {
                         </TabContext>
                     </Box>
                 </Container>
-            </ThemeProvider>
+            </ThemeProvider >
         </>
     )
 }

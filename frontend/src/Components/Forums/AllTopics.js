@@ -42,10 +42,13 @@ const AllTopics = () => {
             <Box component={'div'}>
 
             </Box>
-            <Divider></Divider>
             <Box>
                 {forumTopics.map(topic => {
-                    return <List key={topic._id} sx={{ width: '100%', bgcolor: 'background.paper', px: 1 }}>
+                    return <List key={topic._id} sx={{
+                        width: '100%',
+                        // bgcolor: 'background.paper',
+                        px: 1
+                    }}>
                         <ListItem sx={{ width: '100%' }}>
                             <ListItemText primary={
                                 <Typography variant='h5' sx={{ mb: 0.5 }}>{topic.title}</Typography>

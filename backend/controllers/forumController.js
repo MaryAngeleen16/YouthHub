@@ -396,3 +396,42 @@ exports.deleteRepliedComment = async (req, res, next) => {
 
     }
 }
+
+exports.getByCategory = async (req, res, next) => {
+    const categorizeForums = await Forum.aggregate([
+        {
+            $lookup: {
+                from: 'categories', // Use the actual name of your categories collection
+                localField: 'category',
+                foreignField: '_id',
+                as: 'category'
+            }
+        },
+        {
+            $unwind: '$category'
+        },
+        {
+            $group: {
+                _id: '$category._id',
+                name: { $first: '$category.name' },
+                description: { $first: '$category.description' },
+                forums: { $push: '$$ROOT' }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                categoryId: '$_id',
+                name: 1,
+                description: 1,
+                forums: 1
+            }
+        }
+    ]);
+
+    res.status(200).json({
+        success: true,
+        categorizeForums: categorizeForums
+    })
+
+}

@@ -13,11 +13,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import { getToken } from '../../utils/helpers';
 
-const top100Films = [
-    { name: 'The Shawshank Redemption', year: 1994 },
-    { name: 'The Godfather', year: 1972 },
-
-];
+const defaultImg = 'https://static.vecteezy.com/system/resources/thumbnails/019/859/918/small/computer-and-electronic-device-icon-isolated-on-transparent-background-png.png'
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -34,9 +30,7 @@ const VisuallyHiddenInput = styled('input')({
 const NewTopic = ({ handleClose, open, handleChange, newTopic, setNewTopic, setSuccess }) => {
 
     const [categories, setCategories] = useState([]);
-    const [imgPreview, setimgPreview] = useState(
-        'https://static.vecteezy.com/system/resources/thumbnails/019/859/918/small/computer-and-electronic-device-icon-isolated-on-transparent-background-png.png'
-    )
+    const [imgPreview, setimgPreview] = useState(defaultImg)
 
     const getAllCategories = async () => {
 
@@ -87,6 +81,7 @@ const NewTopic = ({ handleClose, open, handleChange, newTopic, setNewTopic, setS
                 image: '',
             })
             setSuccess(true);
+            setimgPreview(defaultImg)
             handleClose();
             alert('Succefully created')
             setSuccess(false);
