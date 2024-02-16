@@ -8,7 +8,7 @@ router.post('/forum/create-topic', upload.single('image'), isAuthenticatedUser, 
 router.get('/forum/all-topics', isAuthenticatedUser, forumController.getForums);
 router.get('/forum/single-topic/:id', isAuthenticatedUser, forumController.getSingleTopic);
 router.put('/forum/edit-forum/:id', isAuthenticatedUser, upload.single('image'), forumController.editForumTopic);
-router.get('/forums/categorize/', isAuthenticatedUser, forumController.getByCategory)
+router.get('/forums/categorize/', isAuthenticatedUser, forumController.categorizeTopics)
 router.delete('/forum/delete/:id', isAuthenticatedUser, forumController.deleteTopic)
 
 router.post('/forum/make-comment/:id', isAuthenticatedUser, forumController.makeComment)

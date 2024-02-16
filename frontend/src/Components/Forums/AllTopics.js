@@ -12,7 +12,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import axios from 'axios'
 import { getToken } from '../../utils/helpers';
 
-const AllTopics = () => {
+const AllTopics = ({ setTopic, setValue }) => {
 
     const config = {
         headers: {
@@ -37,6 +37,11 @@ const AllTopics = () => {
         getAllTopics();
     }, []);
 
+    const handleTopic = (id) => {
+        setTopic(id)
+        setValue('5')
+    }
+
     return (
         <>
             <Box component={'div'}>
@@ -51,10 +56,24 @@ const AllTopics = () => {
                     }}>
                         <ListItem sx={{ width: '100%' }}>
                             <ListItemText primary={
-                                <Typography variant='h5' sx={{ mb: 0.5 }}>{topic.title}</Typography>
+                                <Typography
+                                    onClick={() => handleTopic(topic._id)}
+                                    variant='h5'
+                                    sx={{
+                                        mb: 0.5, cursor: 'pointer',
+                                        "&:hover": {
+                                            color: '#666666'
+                                        },
+                                    }}>{topic.title}
+                                </Typography>
                             } secondary={
-                                <Typography sx={{ px: 0.3, color: '#666666', fontWeight: 400 }}>
-                                    {topic.user.name} · {topic.category.name}
+                                <Typography sx={{ px: 0.3, fontWeight: 300 }}>
+                                    {topic.user.name} · <Typography variant='span' sx={{
+                                        cursor: 'pointer',
+                                        "&:hover": {
+                                            color: '#666666'
+                                        },
+                                    }}>{topic.category.name}</Typography>
                                 </Typography>
                             } />
                             <Box display={'flex'} alignItems={'center'} flex={'row'} mr={10}>

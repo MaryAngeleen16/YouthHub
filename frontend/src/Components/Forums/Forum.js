@@ -13,6 +13,8 @@ import AllTopics from './AllTopics';
 import NewTopic from './NewTopic';
 import { getToken } from '../../utils/helpers';
 import Categories from './Categories';
+import CategoryTopics from './CategoryTopics';
+import SingleTopic from './SingleTopic';
 
 const theme = createTheme({
     palette: {
@@ -35,6 +37,9 @@ const theme = createTheme({
 const Forum = () => {
 
     const [value, setValue] = React.useState('2');
+    const [category, setCategory] = useState('asd');
+    const [topic, setTopic] = useState('');
+
     const [open, setOpen] = React.useState(false);
     const [success, setSuccess] = useState(false);
     const [newTopic, setNewTopic] = useState({
@@ -101,6 +106,7 @@ const Forum = () => {
                                     <Tab label="Categories" value="1" sx={{ fontWeight: 400, textTransform: 'capitalize', fontSize: 16 }} />
                                     <Tab label="All Topics" value="2" sx={{ fontWeight: 400, textTransform: 'capitalize', fontSize: 16 }} />
                                     <Tab label="My Topics" value="3" sx={{ fontWeight: 400, textTransform: 'capitalize', fontSize: 16 }} />
+                                    {/* <Tab label="" hidden value="4" /> */}
                                 </TabList>
                                 <Box sx={{ display: 'flex', alignItems: 'center', border: 1, borderColor: '#F6B6A5', height: 35 }} my={'auto'} pl={1.5}>
                                     <SearchIcon sx={{ color: 'action.active', mr: 0, my: 0.5 }} />
@@ -110,7 +116,7 @@ const Forum = () => {
                                     />
                                 </Box>
                             </Box>
-                            {value !== '1' ?
+                            {value !== '1' && value !== '4' && value !== '5' ?
                                 < Container maxWidth='xl' sx={{ my: 3, mt: 5 }}>
                                     <Box component={'div'} sx={{ display: 'flex', px: 3 }}>
                                         <Typography variant='body1' sx={{ fontWeight: 400, mr: 1 }} color={'#666666'}>Sort by: </Typography>
@@ -140,12 +146,18 @@ const Forum = () => {
                             }
                             <Divider />
                             <TabPanel value="1">
-                                <Categories />
+                                <Categories setValue={setValue} setCategory={setCategory} />
                             </TabPanel>
                             <TabPanel value="2" sx={{ pt: 1 }}>
-                                <AllTopics key={success} />
+                                <AllTopics key={success} setTopic={setTopic} setValue={setValue} />
                             </TabPanel>
                             <TabPanel value="3">My Topics</TabPanel>
+                            <TabPanel value="4">
+                                <CategoryTopics category={category} />
+                            </TabPanel>
+                            <TabPanel value="5">
+                                <SingleTopic topic={topic} />
+                            </TabPanel>
                         </TabContext>
                     </Box>
                 </Container>

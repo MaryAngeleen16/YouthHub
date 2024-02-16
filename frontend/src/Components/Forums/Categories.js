@@ -9,7 +9,7 @@ import { getToken } from '../../utils/helpers';
 import TopicIcon from '@mui/icons-material/Topic';
 import axios from 'axios';
 
-const Categories = () => {
+const Categories = ({ setValue, setCategory }) => {
 
     const [categories, setCategories] = useState([]);
 
@@ -41,12 +41,18 @@ const Categories = () => {
 
     }, []);
 
+    const goToCategory = (id) => {
+        setValue('4');
+        setCategory(id);
+    }
+
     return (
         <Container maxWidth='xl' sx={{ display: 'flex', justifyContent: 'start', justifyContent: 'start' }}>
             <List sx={{ width: '95%', }}>
                 {categories && categories.map((category) => (
                     <ListItem
-                        key={category._id}
+                        onClick={() => goToCategory(category.categoryId)}
+                        key={category.categoryId}
                         secondaryAction={
                             <>
                                 <TopicIcon fontSize='large' />

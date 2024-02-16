@@ -5,7 +5,15 @@ exports.getForums = async (req, res, next) => {
 
     try {
 
-        const forumTopics = await Forum.find({})
+        let filters = {};
+        console.log(req.query)
+        if (req.query.category) {
+            filters = {
+                category: req.query.category
+            }
+        }
+
+        const forumTopics = await Forum.find(filters)
             .populate('category')
             .populate('user');
 
@@ -108,7 +116,20 @@ exports.getSingleTopic = async (req, res, next) => {
         const { id } = req.params;
 
         const forumTopic = await Forum.findById(id)
-            .populate('category');
+            .populate('category')
+            .populate('user')
+            .populate({
+                path: 'userComments.user',
+                ref: 'User'
+            })
+            .populate({
+                path: 'userComments.replies.user',
+                ref: 'User'
+            })
+
+        const relatedTopics = await Forum.find({
+            category: forumTopic.category._id
+        })
 
         if (!forumTopic) {
             return res.status(404).json({
@@ -120,6 +141,7 @@ exports.getSingleTopic = async (req, res, next) => {
         res.status(200).json({
             success: true,
             forumTopic: forumTopic,
+            relatedTopics: relatedTopics,
         })
 
     } catch (err) {
@@ -397,7 +419,7 @@ exports.deleteRepliedComment = async (req, res, next) => {
     }
 }
 
-exports.getByCategory = async (req, res, next) => {
+exports.categorizeTopics = async (req, res, next) => {
     const categorizeForums = await Forum.aggregate([
         {
             $lookup: {
@@ -435,3 +457,28 @@ exports.getByCategory = async (req, res, next) => {
     })
 
 }
+
+// exports.getTopicsByCategory = async (req, res, next) => {
+
+//     try {
+
+//         const forumTopics = await Forum.find({
+//             category: req.params.id
+//         })
+
+//         res.status(200).json({
+//             success: true,
+//             forumTopics: forumTopics
+//         })
+
+//     } catch (err) {
+
+//         console.log(err)
+//         return res.status(500).json({
+//             success: false,
+//             message: 'Error occured'
+//         })
+
+//     }
+
+// }
