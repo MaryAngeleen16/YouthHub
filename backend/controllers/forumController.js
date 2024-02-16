@@ -6,7 +6,8 @@ exports.getForums = async (req, res, next) => {
     try {
 
         const forumTopics = await Forum.find({})
-            .populate('category');
+            .populate('category')
+            .populate('user');
 
         if (!forumTopics?.length > 0) {
             return res.status(400).json({
@@ -36,9 +37,9 @@ exports.createTopic = async (req, res, next) => {
 
     try {
 
-        if (req.file) {
+        if (req.body.image) {
 
-            const imagePath = req.file.path
+            const imagePath = req.body.image
 
             const result = await cloudinary.v2.uploader.upload(`${imagePath}`, {
                 folder: 'forums-youthhub',
@@ -52,6 +53,7 @@ exports.createTopic = async (req, res, next) => {
             }
         }
 
+        req.body.user = req.user._id;
         const forumTopic = await Forum.create(req.body);
 
         if (!forumTopic) {
@@ -74,6 +76,27 @@ exports.createTopic = async (req, res, next) => {
             message: 'Error occured'
         })
 
+    }
+
+}
+
+exports.deleteTopic = async (req, res, next) => {
+    try {
+        const { id } = req.params
+
+        const forumTopic = await Forum.findByIdAndDelete(id);
+
+        res.status(200).json({
+            success: true,
+            message: 'Forum topic deleted successfully'
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: 'Error occured'
+        })
     }
 
 }

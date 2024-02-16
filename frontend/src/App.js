@@ -32,6 +32,7 @@ import UpdateVideo from './Components/Admin/UpdateVideo';
 import UserManagement from './Components/Admin/userManagement';
 
 import PregnancyPostPage from './Components/PregnancyPostPage.js';
+import Forum from './Components/Forums/Forum.js';
 function App() {
   return (
     <div>
@@ -70,6 +71,7 @@ function App() {
             </ProtectedRoute>
           } end />
 
+          <Route path='/forums' element={<Forum />} />
 
           <Route path="/video/create" element={<VideoCreate />} />
           <Route path="/video/list" element={<VideoList />} />

@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 
 const forumSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
     category: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -10,6 +14,11 @@ const forumSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true,
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     },
     image: {
         public_id: {
