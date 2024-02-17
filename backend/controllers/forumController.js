@@ -283,7 +283,7 @@ exports.deleteComment = async (req, res, next) => {
 
     try {
 
-        const { commentId, forumTopicId } = req.body;
+        const { commentId, forumTopicId } = req.query;
 
         const forumTopic = await Forum.findById(forumTopicId)
 
@@ -388,7 +388,7 @@ exports.deleteRepliedComment = async (req, res, next) => {
 
     try {
 
-        const { commentId, forumTopicId, replyId } = req.body;
+        const { commentId, forumTopicId, replyId } = req.query;
 
         const forumTopic = await Forum.findById(forumTopicId)
 

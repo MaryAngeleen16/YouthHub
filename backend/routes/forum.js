@@ -13,7 +13,7 @@ router.delete('/forum/delete/:id', isAuthenticatedUser, forumController.deleteTo
 
 router.post('/forum/make-comment/:id', isAuthenticatedUser, forumController.makeComment)
 router.put('/forum/edit-comment/', isAuthenticatedUser, forumController.editComment)
-router.delete('/forum/delete-comment/', isAuthenticatedUser, forumController.deleteComment)
+router.delete('/forum/delete-comment', isAuthenticatedUser, forumController.deleteComment)
 
 router.post('/forum/reply-to-comment', isAuthenticatedUser, forumController.replyToComment)
 router.put('/forum/edit-replied-comment', isAuthenticatedUser, forumController.editRepliedComment)
