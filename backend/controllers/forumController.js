@@ -6,20 +6,32 @@ exports.getForums = async (req, res, next) => {
     try {
 
         let filters = {};
-        console.log(req.query)
+
         if (req.query.category) {
             filters.category = req.query.category
         }
-        console.log(req.query)
+
         if (req.query.user) {
             filters.user = req.query.user
         }
 
-        console.log(filters)
+        let sortOption = {}
+        if (req.query.sortType) {
+            if (req.query.sortType === 'ra') {
+                sortOption.updatedAt = -1;
+            } else if (req.query.sortType === 'nto') {
+                sortOption.createdAt = -1;
+            } else if (req.query.sortType === 'otn') {
+                sortOption.createdAt = 1;
+            }
+        }
+
+        console.log(sortOption)
 
         const forumTopics = await Forum.find(filters)
             .populate('category')
-            .populate('user');
+            .populate('user')
+            .sort(sortOption)
 
         if (!forumTopics?.length > 0) {
             return res.status(400).json({
@@ -133,6 +145,10 @@ exports.getSingleTopic = async (req, res, next) => {
 
         const relatedTopics = await Forum.find({
             category: forumTopic.category._id
+        }).where({
+            _id: {
+                $ne: id
+            }
         })
 
         if (!forumTopic) {

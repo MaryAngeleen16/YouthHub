@@ -25,10 +25,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { getToken, getUser } from '../../utils/helpers';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 
-const SingleTopic = ({ topic }) => {
+const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
 
+    const [loading, setLoading] = useState();
     const [placement, setPlacement] = React.useState();
     const [forumTopic, setForumTopic] = useState({});
     const [relatedTopics, setRelatedTopics] = useState([]);
@@ -44,7 +46,11 @@ const SingleTopic = ({ topic }) => {
     const [replyId, setReplyId] = useState(null)
     const [proccessType, setProcessType] = useState('');
 
-    const getForumTopic = async () => {
+    const getForumTopic = async (id = null) => {
+        setLoading(true)
+        if (id) {
+            topic = id;
+        }
 
         const config = {
             headers: {
@@ -55,7 +61,7 @@ const SingleTopic = ({ topic }) => {
         try {
 
             const { data } = await axios.get(`${process.env.REACT_APP_API}/forum/single-topic/${topic}`, config)
-
+            setLoading(false)
             // console.log(data);
             setForumTopic(data.forumTopic)
             setRelatedTopics(data.relatedTopics)
@@ -63,10 +69,12 @@ const SingleTopic = ({ topic }) => {
         } catch (err) {
             console.log(err)
             alert("Error occured")
+            setLoading(false)
         }
     }
 
     const handleProcess = async () => {
+        setLoading(true)
         const config = {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -109,6 +117,7 @@ const SingleTopic = ({ topic }) => {
                 response = await axios.post(`${process.env.REACT_APP_API}/forum/make-comment/${forumTopic._id}`, { comment }, config)
 
             }
+            setLoading(false)
 
             console.log(response.data)
             getForumTopic()
@@ -118,7 +127,12 @@ const SingleTopic = ({ topic }) => {
             setProcessType('')
             setCommentId(null)
         } catch (err) {
+            setLoading(false)
             setComment('')
+            setReplyId(null)
+            disSelect()
+            setProcessType('')
+            setCommentId(null)
             console.log(err)
             alert("Error occured")
         }
@@ -212,8 +226,9 @@ const SingleTopic = ({ topic }) => {
     }, [trigger]);
 
     const deleteTopLevelComment = async (id) => {
-        if (window.confirm('Are you sure you want to delete this item?')) {
 
+        if (window.confirm('Are you sure you want to delete this item?')) {
+            setLoading(true)
             const config = {
                 headers: {
                     'Authorization': `Bearer ${getToken()}`
@@ -223,7 +238,7 @@ const SingleTopic = ({ topic }) => {
             try {
 
                 const { data } = await axios.delete(`${process.env.REACT_APP_API}/forum/delete-comment?forumTopicId=${forumTopic._id}&commentId=${id}`, config)
-
+                setLoading(false)
                 console.log(data)
                 getForumTopic()
                 setComment('')
@@ -233,7 +248,13 @@ const SingleTopic = ({ topic }) => {
                 setCommentId(null)
 
             } catch (err) {
+                setLoading(false)
                 setComment('')
+                setComment('')
+                setReplyId(null)
+                disSelect()
+                setProcessType('')
+                setCommentId(null)
                 console.log(err)
                 alert("Error occured")
             }
@@ -243,8 +264,9 @@ const SingleTopic = ({ topic }) => {
     }
 
     const deleteReplyLevelComment = async (commentId, replyId) => {
-        if (window.confirm('Are you sure you want to delete this item?')) {
 
+        if (window.confirm('Are you sure you want to delete this item?')) {
+            setLoading(true)
             const config = {
                 headers: {
                     'Authorization': `Bearer ${getToken()}`
@@ -254,7 +276,7 @@ const SingleTopic = ({ topic }) => {
             try {
 
                 const { data } = await axios.delete(`${process.env.REACT_APP_API}/forum/delete-replied-comments?forumTopicId=${forumTopic._id}&commentId=${commentId}&replyId=${replyId}`, config)
-
+                setLoading(false)
                 console.log(data)
                 getForumTopic()
                 setComment('')
@@ -264,6 +286,12 @@ const SingleTopic = ({ topic }) => {
                 setCommentId(null)
 
             } catch (err) {
+                setLoading(false)
+                setComment('')
+                setReplyId(null)
+                disSelect()
+                setProcessType('')
+                setCommentId(null)
                 setComment('')
                 console.log(err)
                 alert("Error occured")
@@ -273,8 +301,19 @@ const SingleTopic = ({ topic }) => {
         }
     }
 
+    const gotoSingleTopic = (id) => {
+        setTopic(id)
+        getForumTopic(id)
+    }
+
+    const goToCategory = (id) => {
+        setValue('4');
+        setCategory(id);
+    }
+
     return (
         <>
+            <BackDropLoading open={loading} />
             <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Card sx={{ bgcolor: 'transparent', boxShadow: 'none' }}>
                     <CardHeader
@@ -289,13 +328,15 @@ const SingleTopic = ({ topic }) => {
                     <CardContent sx={{ px: 2.5 }}>
 
                         <Typography variant='h4'> {forumTopic.title} </Typography>
-                        <Typography variant='p' fontSize={20} sx={{
-                            cursor: 'pointer',
-                            "&:hover": {
-                                color: "#666666",
-                                cursor: "pointer",
-                            },
-                        }}>in {forumTopic.category?.name}</Typography>
+                        <Typography
+                            onClick={() => goToCategory(forumTopic.category._id)}
+                            variant='p' fontSize={20} sx={{
+                                cursor: 'pointer',
+                                "&:hover": {
+                                    color: "#666666",
+                                    cursor: "pointer",
+                                },
+                            }}>in {forumTopic.category?.name}</Typography>
 
                         <div ref={compRef}></div>
                         <Typography variant="body2" color="text.secondary" fontSize={18} mt={3} maxWidth={800}>
@@ -400,13 +441,15 @@ const SingleTopic = ({ topic }) => {
                     {relatedTopics?.map(topic => {
                         return (
                             <>
-                                <Typography sx={{
-                                    my: 1, cursor: 'pointer',
-                                    "&:hover": {
-                                        color: "#666666",
-                                        cursor: "pointer",
-                                    },
-                                }}>{topic.title}</Typography>
+                                <Typography
+                                    onClick={() => gotoSingleTopic(topic._id)}
+                                    sx={{
+                                        my: 1, cursor: 'pointer',
+                                        "&:hover": {
+                                            color: "#666666",
+                                            cursor: "pointer",
+                                        },
+                                    }}>{topic.title}</Typography>
                                 <Divider />
                             </>
                         )

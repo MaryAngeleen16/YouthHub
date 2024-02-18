@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Box, Divider, Typography } from '@mui/material'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -11,8 +11,11 @@ import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import axios from 'axios'
 import { getToken } from '../../utils/helpers';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
-const AllTopics = ({ setTopic, setValue }) => {
+const AllTopics = memo(({ setTopic, setValue, sortType, setCategory }) => {
+
+    const [loading, setLoading] = useState();
 
     const config = {
         headers: {
@@ -23,27 +26,36 @@ const AllTopics = ({ setTopic, setValue }) => {
     const [forumTopics, setForumTopics] = useState([]);
 
     const getAllTopics = async () => {
+        setLoading(true)
         try {
-            const { data } = await axios.get(`${process.env.REACT_APP_API}/forum/all-topics`, config);
-
+            const { data } = await axios.get(`${process.env.REACT_APP_API}/forum/all-topics?sortType=${sortType}`, config);
+            setLoading(false)
             setForumTopics(data.forumTopics);
 
         } catch (err) {
+            setLoading(false)
+            alert("Error occured")
             console.log(err);
         }
     }
 
     useEffect(() => {
         getAllTopics();
-    }, []);
+    }, [sortType]);
 
     const handleTopic = (id) => {
         setTopic(id)
         setValue('5')
     }
 
+    const gotoCategory = (id) => {
+        setCategory(id)
+        setValue('4')
+    }
+
     return (
         <>
+            <BackDropLoading open={loading} />
             <Box component={'div'}>
 
             </Box>
@@ -68,7 +80,7 @@ const AllTopics = ({ setTopic, setValue }) => {
                                 </Typography>
                             } secondary={
                                 <Typography sx={{ px: 0.3, fontWeight: 300 }}>
-                                    {topic.user.name} · <Typography variant='span' sx={{
+                                    {topic.user.name} · <Typography variant='span' onClick={() => gotoCategory(topic.category._id)} sx={{
                                         cursor: 'pointer',
                                         "&:hover": {
                                             color: '#666666'
@@ -79,13 +91,19 @@ const AllTopics = ({ setTopic, setValue }) => {
                             <Box display={'flex'} alignItems={'center'} flex={'row'} mr={10}>
                                 <ChatBubbleOutlineIcon sx={{ mr: 1.5, color: '#666666' }} fontSize='medium' />
                                 <ListItemText sx={{ fontSize: 100 }}>
-                                    <Typography fontSize={'20px'} sx={{ mt: -0.6 }}>{topic.userComments.length > 0 ? topic.userComments.length : 0}</Typography>
+                                    <Typography fontSize={'20px'} sx={{ mt: -0.6 }}>{getTotalComments(topic?.userComments)}</Typography>
+                                </ListItemText>
+                            </Box>
+                            <Box display={'flex'} alignItems={'center'} flex={'row'} mr={3}>
+                                <Typography fontSize={'16px'} sx={{ mt: -0.6, mr: 1, color: '#666666' }}>Recent Activity: </Typography>
+                                <ListItemText sx={{ fontSize: 100 }}>
+                                    <Typography fontSize={'16px'} sx={{ mt: -0.6 }}>{new Date(topic.updatedAt).toLocaleDateString('en-PH', { month: 'long', day: '2-digit', year: 'numeric' })}</Typography>
                                 </ListItemText>
                             </Box>
                             <Box display={'flex'} alignItems={'center'} flex={'row'}>
-                                <Typography fontSize={'18px'} sx={{ mt: -0.6, mr: 1, color: '#666666' }}>Recent Activity: </Typography>
+                                <Typography fontSize={'16px'} sx={{ mt: -0.6, mr: 1, color: '#666666' }}>Published Date: </Typography>
                                 <ListItemText sx={{ fontSize: 100 }}>
-                                    <Typography fontSize={'18px'} sx={{ mt: -0.6 }}>{new Date(topic.updatedAt).toLocaleDateString('en-PH', { month: 'long', day: '2-digit', year: 'numeric' })}</Typography>
+                                    <Typography fontSize={'16px'} sx={{ mt: -0.6 }}>{new Date(topic.createdAt).toLocaleDateString('en-PH', { month: 'long', day: '2-digit', year: 'numeric' })}</Typography>
                                 </ListItemText>
                             </Box>
                         </ListItem>
@@ -95,6 +113,20 @@ const AllTopics = ({ setTopic, setValue }) => {
             </Box>
         </>
     )
+})
+
+const getTotalComments = (comments) => {
+    let totalComments = 0;
+    if (Array.isArray(comments)) {
+        totalComments = comments.length;
+        comments.forEach(comment => {
+            if (Array.isArray(comment.replies)) {
+                totalComments += comment.replies.length;
+            }
+        });
+    }
+    return totalComments;
 }
+
 
 export default AllTopics

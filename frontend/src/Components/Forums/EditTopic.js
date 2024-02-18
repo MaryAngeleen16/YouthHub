@@ -19,6 +19,7 @@ import { getToken } from '../../utils/helpers';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -34,6 +35,7 @@ const VisuallyHiddenInput = styled('input')({
 
 
 const EditTopic = () => {
+    const [loading, setLoading] = useState();
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
@@ -53,7 +55,7 @@ const EditTopic = () => {
     const { id } = useParams()
 
     const getAllCategories = async () => {
-
+        setLoading(true)
         const config = {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -66,13 +68,17 @@ const EditTopic = () => {
 
             setCategories(data.categories)
 
+            setLoading(false)
+
         } catch (err) {
+            setLoading(false)
             console.log(err);
+            alert("Error occured")
         }
     }
 
     const getForumTopic = async () => {
-
+        setLoading(true)
         const config = {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -82,7 +88,7 @@ const EditTopic = () => {
         try {
 
             const { data } = await axios.get(`${process.env.REACT_APP_API}/forum/single-topic/${id}`, config)
-            console.log(data)
+            setLoading(false)
             setEditTopic({
                 title: data.forumTopic.title,
                 category: data.forumTopic.category._id,
@@ -93,12 +99,14 @@ const EditTopic = () => {
             setimgPreview(data.forumTopic.image.url);
 
         } catch (err) {
+            setLoading(false)
             console.log(err)
             alert("Error occured")
         }
     }
 
     const updateTopic = async () => {
+        setLoading(true)
         const config = {
             headers: {
                 'Content-type': 'multipart/form-data',
@@ -109,12 +117,13 @@ const EditTopic = () => {
         try {
 
             const { data } = await axios.put(`${process.env.REACT_APP_API}/forum/edit-forum/${id}`, editTopic, config)
-
+            setLoading(false)
             alert('Succefully updated')
             navigate('/forums')
 
         } catch (err) {
             console.log(err);
+            setLoading(false)
             alert('Error occured')
             navigate('/forums')
         }
@@ -122,7 +131,7 @@ const EditTopic = () => {
 
     const onChange = e => {
         if (e.target.name === 'image') {
-
+            setLoading(true)
             const reader = new FileReader();
 
             reader.onload = () => {
@@ -132,6 +141,7 @@ const EditTopic = () => {
                 }
             }
             reader.readAsDataURL(e.target.files[0])
+            setLoading(false)
 
         } else {
             setEditTopic({ ...editTopic, [e.target.name]: e.target.value })
@@ -146,83 +156,86 @@ const EditTopic = () => {
 
 
     return (
-        <Container sx={{ mt: 5, mb: 15 }}>
-            <Card sx={{ maxWidth: 500, mx: 'auto', }}>
-                <CardHeader
-                    title={
-                        <Typography variant='h5'>Update Topic</Typography>
-                    }
-                />
-                <CardContent>
-                    <Autocomplete
-                        fullWidth
-                        sx={{ mt: 2 }}
-                        options={categories}
-                        value={seletedCategory}
-                        getOptionLabel={(option) => option.name}
-                        isOptionEqualToValue={(option, value) => option._id === value._id}
-                        onChange={(e, value) => {
-                            if (value == null) {
-                                value = { _id: '' }
+        <>
+            <BackDropLoading open={loading} />
+            <Container sx={{ mt: 5, mb: 15 }}>
+                <Card sx={{ maxWidth: 500, mx: 'auto', }}>
+                    <CardHeader
+                        title={
+                            <Typography variant='h5'>Update Topic</Typography>
+                        }
+                    />
+                    <CardContent>
+                        <Autocomplete
+                            fullWidth
+                            sx={{ mt: 2 }}
+                            options={categories}
+                            value={seletedCategory}
+                            getOptionLabel={(option) => option.name}
+                            isOptionEqualToValue={(option, value) => option._id === value._id}
+                            onChange={(e, value) => {
+                                if (value == null) {
+                                    value = { _id: '' }
+                                }
+                                onChange({ target: { value: value._id, name: 'category' } })
                             }
-                            onChange({ target: { value: value._id, name: 'category' } })
-                        }
-                        }
-                        renderInput={(params) => <TextField {...params} label="Category" name='category'
+                            }
+                            renderInput={(params) => <TextField {...params} label="Category" name='category'
 
-                        />}
-                    />
-                    <TextField
-                        autoFocus
-                        sx={{ mt: 3 }}
-                        margin="dense"
-                        id="title"
-                        name="title"
-                        onChange={onChange}
-                        value={editTopic.title}
-                        label="Title"
-                        type="text"
-                        fullWidth
-                        size='medium'
-                        variant="outlined"
-                    />
-                    <TextField
-                        sx={{ mt: 3 }}
-                        autoFocus
-                        margin="dense"
-                        id="content"
-                        name="content"
-                        onChange={onChange}
-                        value={editTopic.content}
-                        label="Content/Question/Topic"
-                        type="text"
-                        size='medium'
-                        fullWidth
-                        multiline
-                        rows={4}
-                        variant="outlined"
-                    />
-                    <Box sx={{ border: 1, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <img src={imgPreview} width={300} style={{ paddingTop: 30 }} />
-                        <Button
-                            sx={{ my: 3 }}
-                            component="label"
-                            role={undefined}
-                            variant="contained"
-                            tabIndex={-1}
-                            startIcon={<CloudUploadIcon />}
-                        >
-                            Browse
-                            <VisuallyHiddenInput type="file" name='image' onChange={onChange} />
-                        </Button>
-                    </Box>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <Button onClick={() => navigate('/forums')}>Cancel</Button>
-                    <Button type="submit" onClick={updateTopic}>Update Topic</Button>
-                </CardActions>
-            </Card>
-        </Container>
+                            />}
+                        />
+                        <TextField
+                            autoFocus
+                            sx={{ mt: 3 }}
+                            margin="dense"
+                            id="title"
+                            name="title"
+                            onChange={onChange}
+                            value={editTopic.title}
+                            label="Title"
+                            type="text"
+                            fullWidth
+                            size='medium'
+                            variant="outlined"
+                        />
+                        <TextField
+                            sx={{ mt: 3 }}
+                            autoFocus
+                            margin="dense"
+                            id="content"
+                            name="content"
+                            onChange={onChange}
+                            value={editTopic.content}
+                            label="Content/Question/Topic"
+                            type="text"
+                            size='medium'
+                            fullWidth
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                        />
+                        <Box sx={{ border: 1, mt: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <img src={imgPreview} width={300} style={{ paddingTop: 30 }} />
+                            <Button
+                                sx={{ my: 3 }}
+                                component="label"
+                                role={undefined}
+                                variant="contained"
+                                tabIndex={-1}
+                                startIcon={<CloudUploadIcon />}
+                            >
+                                Browse
+                                <VisuallyHiddenInput type="file" name='image' onChange={onChange} />
+                            </Button>
+                        </Box>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                        <Button onClick={() => navigate('/forums')}>Cancel</Button>
+                        <Button type="submit" onClick={updateTopic}>Update Topic</Button>
+                    </CardActions>
+                </Card>
+            </Container>
+        </>
     )
 }
 

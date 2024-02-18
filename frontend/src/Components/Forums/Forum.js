@@ -50,6 +50,8 @@ const Forum = () => {
         image: '',
     })
 
+    const [sortType, setSortType] = useState('ra')
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -127,12 +129,14 @@ const Forum = () => {
                                                     variant='standard'
                                                     label="Age"
                                                     size='small'
-                                                    defaultValue={10}
+                                                    value={sortType}
+                                                    defaultValue={sortType}
                                                     sx={{ fontSize: 16, height: 26, border: 'none', borderBottom: 'none', mr: 'auto' }}
+                                                    onChange={e => setSortType(e.target.value)}
                                                 >
-                                                    <MenuItem value={30}>Recent Activity</MenuItem>
-                                                    <MenuItem value={10}>Newest to oldest</MenuItem>
-                                                    <MenuItem value={20}>Oldest to newest</MenuItem>
+                                                    <MenuItem value={'ra'}>Recent Activity</MenuItem>
+                                                    <MenuItem value={'nto'}>Newest to oldest</MenuItem>
+                                                    <MenuItem value={'otn'}>Oldest to newest</MenuItem>
                                                 </Select>
                                             </>
                                             : ""
@@ -156,16 +160,16 @@ const Forum = () => {
                                 <Categories setValue={setValue} setCategory={setCategory} />
                             </TabPanel>
                             <TabPanel value="2" sx={{ pt: 1 }}>
-                                <AllTopics key={success} setTopic={setTopic} setValue={setValue} />
+                                <AllTopics key={success} setTopic={setTopic} setValue={setValue} sortType={sortType} setCategory={setCategory} />
                             </TabPanel>
                             <TabPanel value="3">
                                 <MyTopics key={success} setValue={setValue} setTopic={setTopic} />
                             </TabPanel>
                             <TabPanel value="4">
-                                <CategoryTopics category={category} setTopic={setTopic} />
+                                <CategoryTopics category={category} setTopic={setTopic} setValue={setValue} />
                             </TabPanel>
                             <TabPanel value="5">
-                                <SingleTopic topic={topic} />
+                                <SingleTopic topic={topic} setValue={setValue} setTopic={setTopic} setCategory={setCategory} />
                             </TabPanel>
                         </TabContext>
                     </Box>

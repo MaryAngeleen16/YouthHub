@@ -7,10 +7,12 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Delete, Message, Visibility } from '@mui/icons-material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 const MyTopics = memo(({ setTopic, setValue }) => {
 
     const [topics, setTopics] = useState();
+    const [loading, setLoading] = useState();
 
     const navigate = useNavigate()
 
@@ -108,6 +110,8 @@ const MyTopics = memo(({ setTopic, setValue }) => {
 
     const getMyTopics = async () => {
 
+        setLoading(true)
+
         const config = {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -116,7 +120,7 @@ const MyTopics = memo(({ setTopic, setValue }) => {
 
         try {
             const { data } = await axios.get(`${process.env.REACT_APP_API}/forum/all-topics?user=${getUser()._id}`, config);
-
+            setLoading(false)
             let tableData = []
 
             data.forumTopics.forEach(topic => {
@@ -133,6 +137,8 @@ const MyTopics = memo(({ setTopic, setValue }) => {
             setTopics(tableData);
 
         } catch (err) {
+            setLoading(false)
+            alert("Error occured")
             console.log(err);
         }
 
@@ -206,18 +212,21 @@ const MyTopics = memo(({ setTopic, setValue }) => {
         setTopic(id)
         setValue('5')
     }
-
+    console.log(loading)
     return (
-        <Container maxWidth='xl'>
-            <ThemeProvider theme={getMuiTheme()}>
-                <MUIDataTable
-                    title={"My Topics"}
-                    data={topics}
-                    columns={columns}
-                    options={options}
-                />
-            </ThemeProvider>
-        </Container>
+        <>
+            <BackDropLoading open={loading} />
+            <Container maxWidth='xl'>
+                <ThemeProvider theme={getMuiTheme()}>
+                    <MUIDataTable
+                        title={"My Topics"}
+                        data={topics}
+                        columns={columns}
+                        options={options}
+                    />
+                </ThemeProvider>
+            </Container>
+        </>
     )
 })
 
