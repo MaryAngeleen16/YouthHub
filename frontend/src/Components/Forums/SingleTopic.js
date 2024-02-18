@@ -205,7 +205,7 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
 
     useEffect(() => {
         getForumTopic()
-    }, [])
+    }, [topic])
 
     useEffect(() => {
         const handleScroll = () => {

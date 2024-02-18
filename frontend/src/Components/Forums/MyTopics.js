@@ -24,7 +24,6 @@ const MyTopics = memo(({ setTopic, setValue }) => {
                 filter: true,
                 sort: true,
                 customBodyRender: (value, tableMeta, updateValue) => {
-                    console.log(value)
                     return <img src={value?.url} style={{ width: 75, height: 75 }} />
                 }
             },
@@ -208,11 +207,11 @@ const MyTopics = memo(({ setTopic, setValue }) => {
     }
 
     const gotoSingleTopic = (id) => {
-        console.log(id)
+        // console.log(id)
         setTopic(id)
         setValue('5')
     }
-    console.log(loading)
+    // console.log(loading)
     return (
         <>
             <BackDropLoading open={loading} />
