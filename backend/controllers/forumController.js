@@ -8,10 +8,14 @@ exports.getForums = async (req, res, next) => {
         let filters = {};
         console.log(req.query)
         if (req.query.category) {
-            filters = {
-                category: req.query.category
-            }
+            filters.category = req.query.category
         }
+        console.log(req.query)
+        if (req.query.user) {
+            filters.user = req.query.user
+        }
+
+        console.log(filters)
 
         const forumTopics = await Forum.find(filters)
             .populate('category')
@@ -156,8 +160,8 @@ exports.getSingleTopic = async (req, res, next) => {
 }
 
 exports.editForumTopic = async (req, res, next) => {
+
     try {
-        console.log(req.body)
         let forumTopic = await Forum.findById(req.params.id);
 
         if (!forumTopic) {
@@ -167,13 +171,13 @@ exports.editForumTopic = async (req, res, next) => {
             })
         }
 
-        if (req.file) {
-
-            if (forumTopic.image) {
+        if (req.body.image !== '') {
+            console.log('dumaan')
+            if (forumTopic.image.public_id) {
                 await cloudinary.uploader.destroy(forumTopic.image.public_id);
             }
 
-            const imagePath = req.file.path
+            const imagePath = req.body.image
 
             const result = await cloudinary.v2.uploader.upload(`${imagePath}`, {
                 folder: 'forums-youthhub',
@@ -185,6 +189,8 @@ exports.editForumTopic = async (req, res, next) => {
                 public_id: result.public_id,
                 url: result.secure_url
             }
+        } else {
+            delete req.body.image
         }
 
         forumTopic = await Forum.findByIdAndUpdate(req.params.id, req.body);

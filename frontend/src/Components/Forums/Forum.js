@@ -15,6 +15,7 @@ import { getToken } from '../../utils/helpers';
 import Categories from './Categories';
 import CategoryTopics from './CategoryTopics';
 import SingleTopic from './SingleTopic';
+import MyTopics from './MyTopics';
 
 const theme = createTheme({
     palette: {
@@ -36,7 +37,7 @@ const theme = createTheme({
 
 const Forum = () => {
 
-    const [value, setValue] = React.useState('2');
+    const [value, setValue] = useState('3');
     const [category, setCategory] = useState('asd');
     const [topic, setTopic] = useState('');
 
@@ -119,18 +120,24 @@ const Forum = () => {
                             {value !== '1' && value !== '4' && value !== '5' ?
                                 < Container maxWidth='xl' sx={{ my: 3, mt: 5 }}>
                                     <Box component={'div'} sx={{ display: 'flex', px: 3 }}>
-                                        <Typography variant='body1' sx={{ fontWeight: 400, mr: 1 }} color={'#666666'}>Sort by: </Typography>
-                                        <Select
-                                            variant='standard'
-                                            label="Age"
-                                            size='small'
-                                            defaultValue={10}
-                                            sx={{ fontSize: 16, height: 26, border: 'none', borderBottom: 'none', mr: 'auto' }}
-                                        >
-                                            <MenuItem value={30}>Recent Activity</MenuItem>
-                                            <MenuItem value={10}>Newest to oldest</MenuItem>
-                                            <MenuItem value={20}>Oldest to newest</MenuItem>
-                                        </Select>
+                                        {value !== '3' ?
+                                            <>
+                                                <Typography variant='body1' sx={{ fontWeight: 400, mr: 1 }} color={'#666666'}>Sort by: </Typography>
+                                                <Select
+                                                    variant='standard'
+                                                    label="Age"
+                                                    size='small'
+                                                    defaultValue={10}
+                                                    sx={{ fontSize: 16, height: 26, border: 'none', borderBottom: 'none', mr: 'auto' }}
+                                                >
+                                                    <MenuItem value={30}>Recent Activity</MenuItem>
+                                                    <MenuItem value={10}>Newest to oldest</MenuItem>
+                                                    <MenuItem value={20}>Oldest to newest</MenuItem>
+                                                </Select>
+                                            </>
+                                            : ""
+                                        }
+
                                         <Button variant='contained' sx={{
                                             // borderColor: '#F6B6A5',
                                             // textTransform: 'capitalize',
@@ -151,9 +158,11 @@ const Forum = () => {
                             <TabPanel value="2" sx={{ pt: 1 }}>
                                 <AllTopics key={success} setTopic={setTopic} setValue={setValue} />
                             </TabPanel>
-                            <TabPanel value="3">My Topics</TabPanel>
+                            <TabPanel value="3">
+                                <MyTopics key={success} setValue={setValue} setTopic={setTopic} />
+                            </TabPanel>
                             <TabPanel value="4">
-                                <CategoryTopics category={category} />
+                                <CategoryTopics category={category} setTopic={setTopic} />
                             </TabPanel>
                             <TabPanel value="5">
                                 <SingleTopic topic={topic} />

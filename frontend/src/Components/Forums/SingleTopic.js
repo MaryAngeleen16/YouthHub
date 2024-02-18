@@ -369,18 +369,22 @@ const SingleTopic = ({ topic }) => {
                                                 <Typography fontSize={18} color="text.secondary" maxWidth={800}>{repliedComment.user?.name}</Typography>
                                                 <Typography fontSize={20} maxWidth={800} id={`edit-${repliedComment._id}`}>{repliedComment.comment}</Typography>
                                             </Box>
-                                            {commentId && commentId === comment._id && proccessType === 'edit-reply' && repliedComment._id === replyId ?
-                                                <IconButton sx={{ mt: 2, ml: 2 }} onClick={() => disSelect()} size='small'>
-                                                    <CloseIcon fontSize='medium' />
-                                                </IconButton>
-                                                :
-                                                <IconButton sx={{ mt: 2, ml: 2 }} onClick={() => handleEditReply(repliedComment._id, comment._id)} size='small'>
-                                                    <ModeEditIcon fontSize='medium' />
-                                                </IconButton>
+                                            {repliedComment.user._id === getUser()._id ?
+                                                <>
+                                                    {commentId && commentId === comment._id && proccessType === 'edit-reply' && repliedComment._id === replyId ?
+                                                        <IconButton sx={{ mt: 2, ml: 2 }} onClick={() => disSelect()} size='small'>
+                                                            <CloseIcon fontSize='medium' />
+                                                        </IconButton>
+                                                        :
+                                                        <IconButton sx={{ mt: 2, ml: 2 }} onClick={() => handleEditReply(repliedComment._id, comment._id)} size='small'>
+                                                            <ModeEditIcon fontSize='medium' />
+                                                        </IconButton>
+                                                    }
+                                                    <IconButton sx={{ mt: 2 }} onClick={() => deleteReplyLevelComment(comment._id, repliedComment._id)}>
+                                                        <DeleteIcon fontSize='medium' />
+                                                    </IconButton>
+                                                </> : ""
                                             }
-                                            <IconButton sx={{ mt: 2 }} onClick={() => deleteReplyLevelComment(comment._id, repliedComment._id)}>
-                                                <DeleteIcon fontSize='medium' />
-                                            </IconButton>
                                         </Box>
                                     )
                                 })
