@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getUser, logout } from '../../utils/helpers';
-import '../Layouts/dashboard.css'; // Import your CSS file
-import '../Layouts/testdash.css';
+import '../Layouts/dashcontent.css'; // Import your CSS file
+
 
 function Sidebar() {
     const user = getUser();

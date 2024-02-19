@@ -5,7 +5,8 @@ import Header from './adminHeader';
 import axios from 'axios';
 import { getToken } from '../../utils/helpers';
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
-import '../Layouts/testdash.css';
+import '../Layouts/dashcontent.css';
+
 
 const Dashboard = () => {
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
