@@ -63,7 +63,9 @@ const Header = () => {
   const settings = ['Profile', 'Settings'];
 
     // Define the paths where you don't want the Header to appear
-    const excludedPaths = ['/dashboard', '/category/create', '/categories/list'];
+    const excludedPaths = ['/dashboard', '/category/create', '/category/list',
+                          '/post/list','/post/create','/video/list',
+                          'video/create','admin/users'];
 
     // Check if the current location is one of the excluded paths
     const shouldRenderHeader = !excludedPaths.includes(location.pathname);
