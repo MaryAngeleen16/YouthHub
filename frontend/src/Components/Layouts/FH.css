@@ -25,9 +25,9 @@ width: 100%;
   justify-content: center;
   list-style-type: none;
   padding: 0; /* Add padding to the top and bottom */
-  margin:0; 
+  margin:1px; 
   color: white !important;
-  background-color: #ffffff !important;
+  background-color: #fff9eb !important;
 }
   
   .nav-item {
