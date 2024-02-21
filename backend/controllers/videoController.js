@@ -7,21 +7,21 @@ const cloudinary = require('cloudinary')
 
 // 	let videoLinks = [];
 // 	let videos = []
-	
+
 // 	if (req.files.length > 0) {
 // 		req.files.forEach(video => {
 // 			videos.push(video.path)
 // 		})
 // 	}
 exports.newVideo = async (req, res, next) => {
-    let videoLinks = [];
-    let videos = [];
-  
-    if (req.files && req.files.length > 0) { // Add a check for req.files
-      req.files.forEach((video) => {
-        videos.push(video.path);
-      });
-    }
+	let videoLinks = [];
+	let videos = [];
+
+	if (req.files && req.files.length > 0) { // Add a check for req.files
+		req.files.forEach((video) => {
+			videos.push(video.path);
+		});
+	}
 
 	if (req.file) {
 		videos.push(req.file.path);
@@ -37,6 +37,7 @@ exports.newVideo = async (req, res, next) => {
 
 	for (let i = 0; i < videos.length; i++) {
 		let videoDataUri = videos[i]
+		console.log(videoDataUri)
 		try {
 			const result = await cloudinary.v2.uploader.upload(`${videoDataUri}`, {
 				folder: 'videos-youthhub',
@@ -109,7 +110,7 @@ exports.getSingleVideo = async (req, res, next) => {
 		video
 	})
 }
- 
+
 exports.getAdminVideos = async (req, res, next) => {
 
 	const videos = await Video.find();
@@ -120,66 +121,111 @@ exports.getAdminVideos = async (req, res, next) => {
 	})
 }
 exports.updateVideo = async (req, res, next) => {
-    try {
-        console.log(req.body);
-        let video = await Video.findById(req.params.id);
+	// console.log(req.files)
+	console.log(req.file)
+	try {
+		// console.log(req.files);s
+		let video = await Video.findById(req.params.id);
 
-        if (!video) {
-            return res.status(404).json({
-                success: false,
-                message: 'Video not found'
-            });
-        }
+		if (!video) {
+			return res.status(404).json({
+				success: false,
+				message: 'Video not found'
+			});
+		}
 
-        if (req.body.videos) {
-            let videos = [];
+		let videos = [];
+		let videoLinks = [];
 
-            if (typeof req.body.videos === 'string') {
-                videos.push(req.body.videos);
-            } else {
-                videos = req.body.videos;
-            }
+		if (req.files && req.files.length > 0) { // Add a check for req.files
+			req.files.forEach((video) => {
+				videos.push(video.path);
+			});
+		}
 
-            if (videos && videos.length > 0) {
-                for (let i = 0; i < video.videos.length; i++) {
-                    const result = await cloudinary.uploader.destroy(video.videos[i].public_id);
-                }
-            }
+		if (req.file) {
+			videos.push(req.file.path);
+		}
 
-            let videoLinks = [];
+		if (req.body.videos) {
+			if (typeof req.body.videos === 'string') {
+				videos.push(req.body.videos)
+			} else {
+				videos = req.body.videos
+			}
+		}
 
-            for (let i = 0; i < videos.length; i++) {
-                const result = await cloudinary.uploader.upload(videos[i], {
-                    folder: 'baghub/videos',
-                    resource_type: 'video'
-                });
+		console.log(videos)
+		for (let i = 0; i < videos.length; i++) {
+			let videoDataUri = videos[i]
+			console.log(videoDataUri)
+			try {
+				const result = await cloudinary.v2.uploader.upload(`${videoDataUri}`, {
+					folder: 'videos-youthhub',
+					resource_type: 'video'
+				});
 
-                videoLinks.push({
-                    public_id: result.public_id,
-                    url: result.secure_url
-                });
-            }
+				videoLinks.push({
+					public_id: result.public_id,
+					url: result.secure_url
+				})
 
-            req.body.videos = videoLinks;
-        }
+			} catch (error) {
+				console.log(error)
+			}
 
-        video = await Video.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: false
-        });
+		}
+		req.body.videos = videoLinks
+		// if (req.body.videos) {
+		//     let videos = [];
 
-        return res.status(200).json({
-            success: true,
-            video
-        });
-    } catch (error) {
-        console.error('Error updating video:', error);
-        return res.status(500).json({
-            success: false,
-            message: 'Internal Server Error'
-        });
-    }
+		//     if (typeof req.body.videos === 'string') {
+		//         videos.push(req.body.videos);
+		//     } else {
+		//         videos = req.body.videos;
+		//     }
+
+		//     if (videos && videos.length > 0) {
+		//         for (let i = 0; i < video.videos.length; i++) {
+		//             const result = await cloudinary.uploader.destroy(video.videos[i].public_id);
+		//         }
+		//     }
+
+		//     let videoLinks = [];
+
+		//     for (let i = 0; i < videos.length; i++) {
+		// 		// console.log(videos[i])
+		//         const result = await cloudinary.uploader.upload(videos[i], {
+		//             folder: 'baghub/videos',
+		//             resource_type: 'auto'
+		//         });
+
+		//         videoLinks.push({
+		//             public_id: result.public_id,
+		//             url: result.secure_url
+		//         });
+		//     }
+
+		//     req.body.videos = videoLinks;
+		// }
+
+		video = await Video.findByIdAndUpdate(req.params.id, req.body, {
+			new: true,
+			runValidators: true,
+			useFindAndModify: false
+		});
+
+		return res.status(200).json({
+			success: true,
+			video
+		});
+	} catch (error) {
+		console.error('Error updating video:', error);
+		return res.status(500).json({
+			success: false,
+			message: 'Internal Server Error'
+		});
+	}
 };
 
 exports.getSingleVideo = async (req, res, next) => {
@@ -199,16 +245,16 @@ exports.getSingleVideo = async (req, res, next) => {
 
 exports.getVideoById = async (req, res) => {
 	try {
-	  const { id } = req.params;
-  
-	  const video = await Video.findById(id);
-  
-	  if (!video) {
-		return res.status(404).json({ message: 'Video not found' });
-	  }
-  
-	  return res.json(video);
+		const { id } = req.params;
+
+		const video = await Video.findById(id);
+
+		if (!video) {
+			return res.status(404).json({ message: 'Video not found' });
+		}
+
+		return res.json(video);
 	} catch (error) {
-	  return res.status(500).json({ error: 'Internal server error' });
+		return res.status(500).json({ error: 'Internal server error' });
 	}
-  };
+};

@@ -39,7 +39,8 @@ const UpdateVideo = () => {
             reader.onload = () => {
                 if (reader.readyState === 2) {
                     setVideosPreview(oldArray => [...oldArray, reader.result])
-                    setVideos(oldArray => [...oldArray, reader.result])
+                    // setVideos(oldArray => [...oldArray, reader.result])
+                    setVideos(e.target.files[0])
                 }
             }
             reader.readAsDataURL(file)
@@ -61,6 +62,12 @@ const UpdateVideo = () => {
     };
 
     const updateVideo = async (id, videoData) => {
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        }
         try {
             const { data } = await axios.put(`http://localhost:4001/api/admin/update/video/${id}`, videoData, config);
             setIsUpdated(data.success);
@@ -102,36 +109,39 @@ const UpdateVideo = () => {
     }, [error, isUpdated, id]);
 
     const submitHandler = (e) => {
+        console.log(videos)
+
         e.preventDefault();
         const formData = new FormData();
-        formData.set('name', name);
-        formData.set('description', description);
-        formData.set('category', category);
-
-        if (e.target.videos.value) {
-            videos.forEach(video => {
-                formData.append('videos', video)
-            })
-        }
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('category', category);
+        // console.log(e.target.videos.files)
+        formData.append('video', videos)
+        // if (videos) {
+        //     videos.forEach(video => {
+        //         formData.append('videos', video)
+        //     })
+        // }
         updateVideo(video._id, formData);
     }
 
 
     //BOOTSTRAP CSS
-useEffect(() => {
-    const bootstrapStyles = `
+    useEffect(() => {
+        const bootstrapStyles = `
       @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
     `;
 
-    const styleElement = document.createElement('style');
-    styleElement.innerHTML = bootstrapStyles;
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = bootstrapStyles;
 
-    document.head.appendChild(styleElement);
+        document.head.appendChild(styleElement);
 
-    return () => {
-      document.head.removeChild(styleElement);
-    };
-  }, []);
+        return () => {
+            document.head.removeChild(styleElement);
+        };
+    }, []);
 
     return (
         <div className="container mt-5">
