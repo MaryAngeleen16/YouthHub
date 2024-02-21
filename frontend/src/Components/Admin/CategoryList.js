@@ -132,7 +132,7 @@ const CategoryDataTable = () => {
         </div>
         <div className="col-md-9 m9-des"> 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 style={{ fontWeight: "bold", paddingTop: "15px",
+            <h2 style={{ fontWeight: "bold", paddingTop: "160px", marginRight: "30",
             margingBottom: "80px" }}>List of Categories</h2>
             <Link to="/category/create" className="btn btn-primary" 
             style={{ 
