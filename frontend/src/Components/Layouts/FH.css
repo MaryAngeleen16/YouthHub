@@ -1,60 +1,104 @@
-
-.text-ye
-{
-    color: #FEFBF6 !important;
+.text-ye {
+  color: #FEFBF6 !important;
 }
 
-.login-text
-{
-    color: #FEFBF6!important;
+.login-text {
+  color: #FEFBF6!important;
 }
 
-.footer-space
-{
-margin-top: 100px;
-text-align: center;
- padding: 20px;
- position: fixed;
-bottom: 0;
-width: 100%;
+.footer-space {
+  margin-top: 100px;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .navbar-nav {
   display: flex;
   justify-content: center;
   list-style-type: none;
-  padding: 0; /* Add padding to the top and bottom */
+  padding: 0;
   color: rgb(235, 232, 207) !important;
   margin-top: 5px; 
   margin-bottom: 5px; 
 }
-  
-  .nav-item {
-    margin: 0 90px; /* Adjust spacing between items */
-  }
-  
-  .header-link{
-    text-decoration: none;
-    color: #A3716E; 
-    font-size: 15px;
-    font-weight: bold;
-  }
-  
-  .header-link:hover {
-    color: white; 
-  }
 
-  .color-nav
-{
-    border: 3px solid  #F38783;
-    border-radius: 50px;
-    padding: 6px;
-    text-transform: uppercase;
+.nav-item {
+  margin: 0 90px; 
 }
 
-.color-nav:hover
-{
-    background-color: #F38783;
-    color:white !important;
+.header-link {
+  text-decoration: none;
+  color: #A3716E; 
+  font-size: 15px;
+  font-weight: bold;
 }
 
+.header-link:hover {
+  color: white; 
+}
+
+.color-nav {
+  border: 3px solid  #F38783;
+  border-radius: 50px;
+  padding: 6px;
+  text-transform: uppercase;
+}
+
+.color-nav:hover {
+  background-color: #F38783;
+  color:white !important;
+}
+
+/* New CSS */
+
+
+.nav-item {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-link {
+  color: #F38783;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #ff7171;
+  min-width: 200px;
+  z-index: 1;
+}
+
+.dropdown-item {
+  padding: 10px;
+  padding-left: 0;
+  padding-right: 40px;
+}
+
+.dropdown-item a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.open .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fa8c8c;
+  min-width: 100px;
+  z-index: 1;
+  border-radius: 30px; 
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
