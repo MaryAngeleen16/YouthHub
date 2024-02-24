@@ -34,6 +34,7 @@ import UserManagement from './Components/Admin/userManagement';
 import PregnancyPostPage from './Components/PregnancyPostPage.js';
 import Forum from './Components/Forums/Forum.js';
 import EditTopic from './Components/Forums/EditTopic.js';
+import VideosPage from './Components/VideosPage.js';
 function App() {
   return (
     <div>
@@ -57,6 +58,8 @@ function App() {
           <Route path="/post/create" element={<CreatePost />} />
           <Route path="/post/update/:id" element={<UpdatePost />} />
           <Route path="/PostsPage" element={<PostsPage />} exact />
+          <Route path="/VideosPage" element={<VideosPage />} exact />
+
 
           <Route path="/Pregnancy" element={<PregnancyPostPage />} exact />
 

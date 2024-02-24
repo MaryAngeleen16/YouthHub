@@ -27,7 +27,7 @@ width: 100%;
   padding: 0; /* Add padding to the top and bottom */
   margin:1px; 
   color: white !important;
-  background-color: #fff9eb !important;
+  margin-top: 2%;
 }
   
   .nav-item {
