@@ -1,6 +1,6 @@
 body {
     background: #f5f5f5;
-    margin-top: 0;
+    margin-top: 0px;
 }
 
 .ui-w-80 {
@@ -50,7 +50,7 @@ label.btn {
     /* Add any additional styling you want for the card-profile class */
 }
 
-
+/*
 .row-bordered {
     overflow: hidden;
 }
@@ -62,6 +62,7 @@ label.btn {
     height    : 1px;
     opacity   : 0;
 }
+*/
 
 .account-settings-links .list-group-item.active {
     font-weight: bold !important;
@@ -110,4 +111,4 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 .light-style .account-settings-links .list-group-item {
     padding     : 0.85rem 1.5rem;
     border-color: rgba(24, 28, 33, 0.03) !important;
-}
+} 

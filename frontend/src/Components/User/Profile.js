@@ -5,7 +5,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
-import '../Profile.css';
 
 const Profile = () => {
     const [name, setName] = useState('');
@@ -42,7 +41,7 @@ const Profile = () => {
         };
 
         getProfile();
-    }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+    }, []);
 
     const updateProfile = async (userData) => {
         const config = {
@@ -86,7 +85,7 @@ const Profile = () => {
         }
     };
 
-    //validation of update profile
+    // Submit form handler
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -102,7 +101,7 @@ const Profile = () => {
         formData.set('name', name);
         formData.set('email', email);
         if (avatar) {
-            formData.set('avatar', avatar);
+            formData.set('avatar', avatar); // Include avatar data in FormData
         }
 
         try {
@@ -119,7 +118,6 @@ const Profile = () => {
         }
     };
 
-
     const onChange = (e) => {
         const reader = new FileReader();
 
@@ -133,7 +131,7 @@ const Profile = () => {
         reader.readAsDataURL(e.target.files[0]);
     };
 
-    //BOOTSTRAP CSS
+    // Bootstrap CSS
     useEffect(() => {
         const bootstrapStyles = `
       @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
@@ -203,7 +201,7 @@ const Profile = () => {
                                             </div>
 
                                             <div className="form-group mb-4">
-                                                <label htmlFor="email_field"style={{ fontWeight: 'bold' }}>Email</label>
+                                                <label htmlFor="email_field" style={{ fontWeight: 'bold' }}>Email</label>
                                                 <input
                                                     type="email"
                                                     id="email_field"
@@ -214,7 +212,7 @@ const Profile = () => {
                                                 />
                                             </div>
                                             <div className="form-group mb-4">
-                                                <label className="form-label"style={{ fontWeight: 'bold' }}>Joined On</label>
+                                                <label className="form-label" style={{ fontWeight: 'bold' }}>Joined On</label>
                                                 <input
                                                     type="text"
                                                     className="form-control form-control-sm"
@@ -229,6 +227,16 @@ const Profile = () => {
                                                 >
                                                     Update
                                                 </button> */}
+                                            <div className="text-right mt-3">
+                                                <button
+                                                    type="submit"
+                                                    className="btn-sm btn-primary"
+                                                    disabled={loading ? true : false}
+                                                >
+                                                    Save changes
+                                                </button>&nbsp;&nbsp;
+                                                <button type="button" className="btn-sm btn-default">Cancel</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -236,10 +244,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-                <div className="text-right mt-3">
-                    <button type="submit" className="btn-sm btn-primary">Save changes</button>&nbsp;
-                    <button type="button" className="btn-sm btn-default">Cancel</button>
-                </div>
+
             </div>
         </Fragment>
     );
