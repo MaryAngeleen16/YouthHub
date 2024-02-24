@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { getToken } from '../../utils/helpers';
+import '../Profile.css';
 
 const UpdatePassword = () => {
     const [user, setUser] = useState({});

@@ -186,7 +186,7 @@ a.sidebar-link:hover {
   /* Header  */
   .header {
     grid-area: header;
-    height: 60px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -200,58 +200,47 @@ a.sidebar-link:hover {
   /* End Header  */
   
   /* Main  */  
-  .main-container {
-    grid-area: main;
-    overflow-y: auto;
-    padding: 20px 20px;
-    color: rgba(255, 255, 255, 0.95);
-  }
-  
-  .main-title {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .main-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 3fr;
-    gap: 20px;
-    margin: 0;
-    justify-content: flex-start;
-  }
-  
-  .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 1px 15px;
-    border-radius: 5px;
-  }
-  .card:first-child {
-    background-color: #2962ff;
-  }
-  
-  .card:nth-child(2) {
-    background-color: #ff6d00;
-  }
-  
-  .card:nth-child(3) {
-    background-color: #2e7d32;
-  }
-  
-  .card:nth-child(4) {
-    background-color: #d50000;
-  }
-  
-  .card-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .card-inner > .card_icon {
-    font-size: 25px;
-  }
+  .unique-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 3fr;
+  gap: 20px;
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.unique-card-container .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1px 15px;
+  border-radius: 5px;
+}
+
+.unique-card-container .card:first-child {
+  background-color: #2962ff;
+}
+
+.unique-card-container .card:nth-child(2) {
+  background-color: #ff6d00;
+}
+
+.unique-card-container .card:nth-child(3) {
+  background-color: #2e7d32;
+}
+
+.unique-card-container .card:nth-child(4) {
+  background-color: #d50000;
+}
+
+.unique-card-container .card-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.unique-card-container .card-inner > .card_icon {
+  font-size: 25px;
+}
   
   .charts {
     display: grid;

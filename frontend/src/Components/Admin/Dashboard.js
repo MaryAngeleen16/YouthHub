@@ -5,9 +5,9 @@ import Header from './adminHeader';
 import { getToken } from '../../utils/helpers';
 import axios from 'axios';
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
-import Chart from "react-apexcharts"; 
+import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
-import FemaleTeenagersChart from './FemaleTeenLoc'; 
+import FemaleTeenagersChart from './FemaleTeenLoc';
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -58,7 +58,7 @@ const Dashboard = () => {
                     <h3>DASHBOARD</h3>
                 </div>
 
-                <div className='main-cards'>
+                <div className='unique-card-container'>
                     <div className='card'>
                         <div className='card-inner'>
                             <h3>USERS</h3>
@@ -87,35 +87,36 @@ const Dashboard = () => {
                         </div>
                         <h1>0</h1>
                     </div>
-                    <div className="card"> {/* Wrap the new card in a div with the appropriate class */}
-                        <div className="card-body d-flex flex-column align-items-center">
-                            <h5 className="card-title" style={{ color: "#b38269" }}>User Registration by Day</h5>
-                            {console.log('Rendering User Registration Chart:', Object.keys(userRegistrationDates), Object.values(userRegistrationDates))}
-                            <Chart
-                                options={{
-                                    chart: {
-                                        id: "user-registration-chart"
-                                    },
-                                    xaxis: {
-                                        categories: Object.keys(userRegistrationDates)
-                                    }
-                                }}
-                                series={[
-                                    {
-                                        name: "users-registered",
-                                        data: Object.values(userRegistrationDates)
-                                    }
-                                ]}
-                                type="bar"
-                                width="500"
-                            />
-                        </div>
+                    <div className="card">
+                    <div className="card-body d-flex flex-column align-items-center">
+                        <h5 className="card-title" style={{ color: "#b38269" }}>User Registration by Day</h5>
+                        <Chart
+                            options={{
+                                chart: {
+                                    id: "user-registration-chart"
+                                },
+                                xaxis: {
+                                    categories: Object.keys(userRegistrationDates)
+                                }
+                            }}
+                            series={[
+                                {
+                                    name: "users-registered",
+                                    data: Object.values(userRegistrationDates)
+                                }
+                            ]}
+                            type="bar"
+                            width="500"
+                        />
                     </div>
-                    <div className="card"> {/* Render the FemaleTeenagersChart component */}
-                        <div className="card-body align-items-center">
-                            <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
-                            <FemaleTeenagersChart />
-                        </div>
+                </div>
+                </div>
+
+                
+                <div className="card">
+                    <div className="card-body d-flex flex-column align-items-center">
+                        <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
+                        <FemaleTeenagersChart />
                     </div>
                 </div>
             </main>

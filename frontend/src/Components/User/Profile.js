@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
+import '../Profile.css';
 
 const Profile = () => {
     const [name, setName] = useState('');

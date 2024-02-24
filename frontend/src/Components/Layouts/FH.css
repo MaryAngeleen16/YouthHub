@@ -17,7 +17,6 @@ text-align: center;
  position: fixed;
 bottom: 0;
 width: 100%;
-   
 }
 
 .navbar-nav {
@@ -25,13 +24,13 @@ width: 100%;
   justify-content: center;
   list-style-type: none;
   padding: 0; /* Add padding to the top and bottom */
-  margin:1px; 
-  color: white !important;
-  margin-top: 2%;
+  color: rgb(235, 232, 207) !important;
+  margin-top: 5px; 
+  margin-bottom: 5px; 
 }
   
   .nav-item {
-    margin: 0 80px; /* Adjust spacing between items */
+    margin: 0 90px; /* Adjust spacing between items */
   }
   
   .header-link{
