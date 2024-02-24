@@ -15,7 +15,7 @@ const Navbar = () => {
             <a className="nav-link header-link" href="/">Feed</a>
           </b>
           <ul className="dropdown-menu">
-            <li className="dropdown-item"><a href="#">All Post</a></li>
+            <li className="dropdown-item"><a href="/PostsPage">All Post</a></li>
             <li className="dropdown-item"><a href="/pregnancy">Pregnancy</a></li>
             <li className="dropdown-item"><a href="#">Sexual Education</a></li>
             <li className="dropdown-item"><a href="#">Contraceptive</a></li>
@@ -25,7 +25,7 @@ const Navbar = () => {
         
         <li className="nav-item color-nav">
           <b>
-            <a className="nav-link header-link" href="/">Videos</a>
+            <a className="nav-link header-link" href="/VideosPage">Videos</a>
           </b>
         </li>
         <li className="nav-item color-nav">
