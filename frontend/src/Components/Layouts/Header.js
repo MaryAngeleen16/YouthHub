@@ -62,26 +62,27 @@ const Header = () => {
 
   const settings = ['Profile', 'Settings'];
 
-    // Define the paths where you don't want the Header to appear
-    const excludedPaths = ['/dashboard', '/category/create', '/category/list',
-                          '/post/list/','/post/create/','/video/list',
-                          '/video/create','/admin/users'];
+  // Define the paths where you don't want the Header to appear
+  const excludedPaths = ['/dashboard', '/category/create', '/category/list',
+    '/post/list/', '/post/create/', '/video/list',
+    '/video/create', '/admin/users'];
 
-    // Check if the current location is one of the excluded paths
-    const shouldRenderHeader = !excludedPaths.includes(location.pathname);
-  
-    // Render the Header only if it's not one of the excluded paths
-    if (!shouldRenderHeader) {
-      return null;
-    }
+  // Check if the current location is one of the excluded paths
+  const shouldRenderHeader = !excludedPaths.includes(location.pathname);
+
+  // Render the Header only if it's not one of the excluded paths
+  if (!shouldRenderHeader) {
+    return null;
+  }
   return (
     <div>
       <AppBar position="static" className="gradient-header">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className="text-ye" style={{ textAlign: 'left' }} href="/">
-            Youth Empowerment
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className="text-ye" style={{ textAlign: 'left' }}>
+            <a href="/" style={{ color: 'white', textDecoration: 'none' }}>
+              Youth Empowerment
+            </a>
           </Typography>
-       
 
           <Box>
             {userAuthenticated ? (
