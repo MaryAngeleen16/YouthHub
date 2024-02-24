@@ -54,10 +54,6 @@ const Dashboard = () => {
             <Header OpenSidebar={OpenSidebar} />
             <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
             <main className='main-container'>
-                <div className='main-title'>
-                    <h3>DASHBOARD</h3>
-                </div>
-
                 <div className='unique-card-container'>
                     <div className='card'>
                         <div className='card-inner'>

@@ -35,7 +35,7 @@ function Sidebar() {
                 <ul className="sidebar-nav">
                     <li className=''>
                         <a href="/" className="sidebar-link">
-                            <box-icon name='category'></box-icon>
+                            <box-icon name='home'></box-icon>
                             <span>Home</span>
                         </a>
                     </li>

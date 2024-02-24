@@ -22,9 +22,9 @@ h1 {
     font-size: 1.5rem;
 }
 
-body {
+.dashboard-body {
     font-family: 'Poppins', sans-serif;
-    background-color: #ffffff;
+    background-color: #e8fbff;
 }
 
 .wrapper {
@@ -181,6 +181,7 @@ a.sidebar-link:hover {
       'sidebar header header header'
       'sidebar main main main';
     height: 100vh;
+    
   }
   
   /* Header  */
@@ -190,9 +191,10 @@ a.sidebar-link:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px 0 30px;
+    padding: 0 30px 20px 30px; /* Adjusted padding */
     box-shadow: 0 6px 7px -3px #c9e4de;
   }
+  
   
   .menu-icon {
     display: none;
