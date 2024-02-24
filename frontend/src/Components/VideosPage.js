@@ -22,7 +22,9 @@ return (
 <div className="video-card">
     <img src={thumbnailUrl} alt={video.name} className='video-thumbnail' />
     <h3 className='videos-title'>{video.name}</h3>
-    <p>{video.description}</p>
+    <p> {video.description.length > 80 ?
+        video.description.slice(0, 80) +
+        "..." : video.description}</p>
     <Link to={`/video/${video._id}`}>Watch Now</Link>
 </div>
 );
@@ -121,17 +123,14 @@ return (
             <h3 className='video-filter-title'>Filter by Category </h3>
             {categories.map(category => (
             <div key={category._id} className='video-filter-category card-checkbox'>
-                <label className="checkbox-label txt-category" >
-                    <input type="checkbox" value={category._id} 
-                  
-                    checked={selectedCategories.includes(category._id)}
+                <label className="checkbox-label txt-category">
+                    <input type="checkbox" value={category._id} checked={selectedCategories.includes(category._id)}
                         onChange={()=> filterByCategory(category._id)}/>
                     {category.name}
                 </label>
             </div>
             ))}
-            <button onClick={resetFilter}
-            className='video-button-style'>Reset</button>
+            <button onClick={resetFilter} className='video-button-style'>Reset</button>
 
         </div>
 

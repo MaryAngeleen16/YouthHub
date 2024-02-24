@@ -59,7 +59,9 @@ return (
                 <img src={post.images[0].url} alt={post.name} className="post-image-youth" />
                 <p>Category: {getCategoryName(post.category)}</p>
                 <p>Last Updated Date: {new Date(post.updatedAt).toLocaleString()}</p>
-                <p className='post-title-information'>{post.description}</p>
+                            {post.description.split('\r\n').map((paragraph, index) => (
+                                <p key={index} className='post-title-information'>{paragraph}</p>
+                            ))}
             </div>
             ) : (
             <p>Loading post details...</p>
