@@ -5,12 +5,12 @@ import './PostPage.css';
 
 const PostCard = ({ post }) => {
     return (
-        <div className="col-lg-4 col-md-4 col-sm-6 mb-4"> {/* Adjusted column size to fit 3-4 posts per row */}
+        <div className="col-lg-4 col-md-4 col-sm-6 mb-4"> 
             <div className="card product-cart-text prodcard-JSON">
                 <img
                     src={post.images[0].url}
                     alt={post.name}
-                    className="card-img-top product-image" // Added class for styling
+                    className="card-img-top product-image" 
                 />
                 <div className="card-body card-des">
                     <h6 className="card-title card-title-des">

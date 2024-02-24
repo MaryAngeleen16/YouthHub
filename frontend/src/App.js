@@ -35,6 +35,8 @@ import PregnancyPostPage from './Components/PregnancyPostPage.js';
 import Forum from './Components/Forums/Forum.js';
 import EditTopic from './Components/Forums/EditTopic.js';
 import VideosPage from './Components/VideosPage.js';
+
+import PostDetails from './Components/PostDetails.js';
 function App() {
   return (
     <div>
@@ -62,6 +64,9 @@ function App() {
 
 
           <Route path="/Pregnancy" element={<PregnancyPostPage />} exact />
+
+          <Route path="/post/:id" element={<PostDetails />} exact />
+
 
           <Route path="/dashboard" element={
             <ProtectedRoute isAdmin={true}>

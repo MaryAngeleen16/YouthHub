@@ -81,6 +81,7 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className="text-ye" style={{ textAlign: 'left' }} href="/">
             Youth Empowerment
           </Typography>
+       
 
           <Box>
             {userAuthenticated ? (

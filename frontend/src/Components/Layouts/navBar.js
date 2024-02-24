@@ -23,6 +23,7 @@ const Navbar = () => {
           <li className="nav-item color-nav"><b>
             <a className="nav-link header-link" href="/forums">Forums</a>
           </b></li>
+          
         </ul>
       </div>
   );
