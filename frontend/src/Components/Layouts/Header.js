@@ -83,7 +83,6 @@ const Header = () => {
               Youth Empowerment
             </a>
           </Typography>
-
           <Box>
             {userAuthenticated ? (
               <Tooltip title="Open settings">
