@@ -7,10 +7,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
 
 const UpdateInfo = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [bio, setBio] = useState('');
+    const [birthday, setBirthday] = useState('');
+    const [location, setLocation] = useState('');
+    const [phone, setPhone] = useState('');
     const [avatar, setAvatar] = useState('');
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
+    const [gender, setGender] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
     const [isUpdated, setIsUpdated] = useState(false);
@@ -27,8 +30,11 @@ const UpdateInfo = () => {
 
             try {
                 const { data } = await axios.get(`http://localhost:4001/api/me`, config);
-                setName(data.user.name);
-                setEmail(data.user.email);
+                setBio(data.user.bio || '');
+                setBirthday(data.user.birthday || '');
+                setLocation(data.user.location || '');
+                setPhone(data.user.phone || '');
+                setGender(data.user.gender || '');
                 setAvatarPreview(data.user.avatar.url);
                 setUser(data.user);
                 setLoading(false);
@@ -48,7 +54,7 @@ const UpdateInfo = () => {
             };
 
             try {
-                const { data } = await axios.get(`http://localhost:4001/api/me/additional-info`, config);
+                const { data } = await axios.get(`http://localhost:4001/api/me/info`, config);
                 setUser(prevUser => ({ ...prevUser, ...data }));
             } catch (error) {
                 console.error('Error fetching additional info:', error);
@@ -104,16 +110,22 @@ const UpdateInfo = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if (!name || !email) {
-            toast.error('Name and email are required', {
+        // Check if required fields are filled
+        if (!bio || !birthday || !location || !phone) {
+            toast.error('Bio, birthday, location, and phone are required', {
                 position: toast.POSITION.BOTTOM_CENTER,
             });
             return;
         }
 
         const formData = new FormData();
-        formData.set('name', name);
-        formData.set('email', email);
+        formData.set('bio', bio);
+        formData.set('birthday', birthday);
+        formData.set('location', location);
+        formData.set('phone', phone);
+        formData.set('gender', gender);
+
+        // If avatar is selected, add it to the form data
         if (avatar) {
             formData.set('avatar', avatar);
         }
@@ -128,18 +140,45 @@ const UpdateInfo = () => {
     };
 
     const onChange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-
-        reader.onloadend = () => {
-            setAvatar(file);
-            setAvatarPreview(reader.result);
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
+        const { name, value, files } = e.target;
+    
+        // If it's a file input (avatar), set the avatar state
+        if (name === 'avatar') {
+            const file = files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setAvatar(file);
+                setAvatarPreview(reader.result);
+            };
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        } else {
+            // If it's not a file input, update the corresponding state
+            if(name === 'gender') {
+                setGender(value);
+            } else {
+                // For other inputs, update state directly
+                switch(name) {
+                    case 'bio':
+                        setBio(value);
+                        break;
+                    case 'birthday':
+                        setBirthday(value);
+                        break;
+                    case 'location':
+                        setLocation(value);
+                        break;
+                    case 'phone':
+                        setPhone(value);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     };
+
 
     // Bootstrap CSS
     useEffect(() => {
@@ -186,10 +225,11 @@ const UpdateInfo = () => {
                                                 <label htmlFor="bio_field" style={{ fontWeight: 'bold' }}>Bio</label>
                                                 <textarea
                                                     id="bio_field"
+                                                    name="bio" // Update name attribute
                                                     className="form-control form-control-sm"
                                                     rows="5"
-                                                    value={user.bio || ''}
-                                                    onChange={(e) => setUser({ ...user, bio: e.target.value })}
+                                                    value={bio || ''}
+                                                    onChange={onChange}
                                                 ></textarea>
                                             </div>
 
@@ -198,9 +238,10 @@ const UpdateInfo = () => {
                                                 <input
                                                     type="date"
                                                     id="birthday_field"
+                                                    name="birthday" // Update name attribute
                                                     className="form-control form-control-sm"
-                                                    value={user.birthday || ''}
-                                                    onChange={(e) => setUser({ ...user, birthday: e.target.value })}
+                                                    value={birthday || ''}
+                                                    onChange={onChange}
                                                 />
                                             </div>
 
@@ -209,13 +250,15 @@ const UpdateInfo = () => {
                                                 <br />
                                                 <select
                                                     id="gender_field"
+                                                    name="gender" // Update name attribute
                                                     className="custom-select form-control-sm"
-                                                    value={user.gender || ''}
-                                                    onChange={(e) => setUser({ ...user, gender: e.target.value })}
+                                                    value={gender || ''}
+                                                    onChange={onChange}
                                                 >
-                                                    <option>Male</option>
-                                                    <option>Female</option>
-                                                    <option>Other</option>
+                                                    <option value="">Select Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
                                                 </select>
                                             </div>
 
@@ -224,15 +267,17 @@ const UpdateInfo = () => {
                                                 <br />
                                                 <select
                                                     id="location_field"
+                                                    name="location" // Update name attribute
                                                     className="custom-select form-control-sm"
-                                                    value={user.country || ''}
-                                                    onChange={(e) => setUser({ ...user, country: e.target.value })}
+                                                    value={location || ''}
+                                                    onChange={onChange}
                                                 >
-                                                    <option>USA</option>
-                                                    <option>Canada</option>
-                                                    <option>UK</option>
-                                                    <option>Germany</option>
-                                                    <option>France</option>
+                                                    <option value="">Select Location</option>
+                                                    <option value="USA">USA</option>
+                                                    <option value="Canada">Canada</option>
+                                                    <option value="UK">UK</option>
+                                                    <option value="Germany">Germany</option>
+                                                    <option value="France">France</option>
                                                 </select>
                                             </div>
 
@@ -247,9 +292,10 @@ const UpdateInfo = () => {
                                                     <input
                                                         type="text"
                                                         id="phone_field"
+                                                        name="phone" // Update name attribute
                                                         className="form-control form-control-sm"
-                                                        value={user.phone || ''}
-                                                        onChange={(e) => setUser({ ...user, phone: e.target.value })}
+                                                        value={phone || ''}
+                                                        onChange={onChange}
                                                     />
                                                 </div>
                                                 <div className="form-group mb-0">
