@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import './PostDetails.css';
-import { getToken } from '../utils/helpers';
+import { getToken, getUser } from '../utils/helpers';
 import './CommentSection.css';
 
 
@@ -14,7 +14,7 @@ const PostDetails = () => {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   const [usersMap, setUsersMap] = useState({});
-
+  const loggedInUserId = getUser(); 
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -88,6 +88,8 @@ const PostDetails = () => {
       );
       console.log('Comment added:', response.data);    
       setComment(''); 
+      window.location.reload(); // Reload the page after adding comment
+
     } catch (error) {
       console.error('Error adding comment:', error);
     } finally {
@@ -95,6 +97,38 @@ const PostDetails = () => {
     }
   };
 
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+        setLoading(true);
+
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        };
+
+        const response = await axios.delete(`http://localhost:4001/api/post/delete-comment/${id}?commentId=${commentId}`, config);
+        
+        console.log('Comment deleted:', response.data);
+        window.location.reload(); // Reload the page after adding comment
+
+        
+        // Update the post state or perform any necessary actions after successful deletion
+        // For example, you can update the UI to reflect the deleted comment
+        
+    } catch (error) {
+        if (error.response.status === 403) {
+            console.error('Authorization error:', error.response.data.message);
+            alert("You are not authorized to delete this comment");
+        } else {
+            console.error('Error deleting comment:', error);
+            alert("Error occurred while deleting the comment");
+        }
+    } finally {
+        setLoading(false);
+    }
+};
   return (
     <div className="container-youth">
       <div className="main-content-youth">
@@ -124,23 +158,28 @@ const PostDetails = () => {
                 <p>Loading...</p> 
               ) : (
                 <button onClick={handleAddComment} className='commentButton'>
-                  Add Comment
+                  Post Comment
                 </button>
               )}
             </div>
 
             {/* Display comments */}
             <div className="comments">
-              {post.comments && post.comments.length > 0 ? (
-                post.comments.map((comment, index) => (
-                  <div key={index} className="comment">
-                    <p className='comment-username'><strong>{usersMap[comment.user]}</strong> - {new Date(comment.createdAt).toLocaleString()}</p>
-                    <p>{comment.comment}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No comments available.</p>
-              )}
+            {post.comments.map((comment, index) => (
+  <div key={index} className="comment">
+    <p className='comment-username'><strong>{usersMap[comment.user]}</strong> - {new Date(comment.createdAt).toLocaleString()}</p>
+    <p>{comment.comment}</p>
+    {/* Log the values for comparison */}
+    {console.log('Comment user:', comment.user)}
+    {console.log('Logged in user ID:', loggedInUserId)}
+    {/* Delete button comment */}
+    {comment.user === loggedInUserId._id && (
+  <button onClick={() => handleDeleteComment(comment._id)}
+  className='delete-commentButton'>Delete</button>
+)}
+  </div>
+))}
+
             </div>
           </div>
         ) : (

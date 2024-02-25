@@ -240,3 +240,31 @@ exports.getPostById = async (req, res) => {
         });
     }
 };
+
+
+exports.deleteComment = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Get the post ID from the URL params
+        const { commentId } = req.query; // Get the comment ID from the query params
+
+        // Find the post by ID
+        const post = await Post.findById(id);
+
+        // Check if the post exists
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Filter out the comment with the specified ID
+        post.comments = post.comments.filter(comment => comment._id.toString() !== commentId);
+
+        // Save the post with the updated comments
+        await post.save();
+
+        // Return success response
+        return res.status(200).json({ message: 'Comment deleted successfully', post });
+    } catch (error) {
+        console.error('Error deleting comment:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};

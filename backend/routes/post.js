@@ -11,6 +11,7 @@ const {
   getSinglePost,
   getPostById,
   addComment,
+  deleteComment,
 } = require('../controllers/postController');
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
 
@@ -19,6 +20,7 @@ router.get('/posts/:id', getSinglePost);
 router.get('/post/:id', getPostById);
 
 router.post('/post/add-comment/:id',isAuthenticatedUser, addComment);
+router.delete('/post/delete-comment/:id', isAuthenticatedUser, deleteComment);
 
 //admin
 router.put('/admin/update/post/:id', isAuthenticatedUser, authorizeRoles("admin"), upload.array('images'),updatePost);
