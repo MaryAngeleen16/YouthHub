@@ -182,63 +182,99 @@ const UpdateInfo = () => {
                                 <form onSubmit={submitHandler} encType="multipart/form-data">
                                     <div className="tab-pane fade show active" id="account-info">
                                         <div className="card-body pb-2">
-                                            <div className="form-group">
-                                                <label className="form-label">Bio</label>
-                                                <textarea className="form-control" rows="5" value={user.bio || ''} onChange={(e) => setUser({ ...user, bio: e.target.value })}></textarea>
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="bio_field" style={{ fontWeight: 'bold' }}>Bio</label>
+                                                <textarea
+                                                    id="bio_field"
+                                                    className="form-control form-control-sm"
+                                                    rows="5"
+                                                    value={user.bio || ''}
+                                                    onChange={(e) => setUser({ ...user, bio: e.target.value })}
+                                                ></textarea>
                                             </div>
-                                            <div className="form-group">
-                                                <label className="form-label">Birthday</label>
-                                                <input type="date" className="form-control" value={user.birthday || ''} onChange={(e) => setUser({ ...user, birthday: e.target.value })} />
+
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="birthday_field" style={{ fontWeight: 'bold' }}>Birthday</label>
+                                                <input
+                                                    type="date"
+                                                    id="birthday_field"
+                                                    className="form-control form-control-sm"
+                                                    value={user.birthday || ''}
+                                                    onChange={(e) => setUser({ ...user, birthday: e.target.value })}
+                                                />
                                             </div>
-                                            <div>
-                                                <div className="form-group">
-                                                    <label className="form-label">Gender</label>
-                                                    <div>
-                                                        <select className="custom-select" value={user.gender || ''} onChange={(e) => setUser({ ...user, gender: e.target.value })}>
-                                                            <option>Male</option>
-                                                            <option>Female</option>
-                                                            <option>Other</option>
-                                                        </select>
-                                                    </div>
+
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="gender_field" style={{ fontWeight: 'bold' }}>Gender</label>
+                                                <br />
+                                                <select
+                                                    id="gender_field"
+                                                    className="custom-select form-control-sm"
+                                                    value={user.gender || ''}
+                                                    onChange={(e) => setUser({ ...user, gender: e.target.value })}
+                                                >
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                    <option>Other</option>
+                                                </select>
+                                            </div>
+
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="location_field" style={{ fontWeight: 'bold' }}>Location (within Taguig City)</label>
+                                                <br />
+                                                <select
+                                                    id="location_field"
+                                                    className="custom-select form-control-sm"
+                                                    value={user.country || ''}
+                                                    onChange={(e) => setUser({ ...user, country: e.target.value })}
+                                                >
+                                                    <option>USA</option>
+                                                    <option>Canada</option>
+                                                    <option>UK</option>
+                                                    <option>Germany</option>
+                                                    <option>France</option>
+                                                </select>
+                                            </div>
+
+
+
+                                            <hr className="border-light m-0" />
+
+                                            <div className="card-body pb-2">
+                                                <h6 className="mb-4">Contacts</h6>
+                                                <div className="form-group mb-3">
+                                                    <label htmlFor="phone_field" style={{ fontWeight: 'bold' }}>Phone</label>
+                                                    <input
+                                                        type="text"
+                                                        id="phone_field"
+                                                        className="form-control form-control-sm"
+                                                        value={user.phone || ''}
+                                                        onChange={(e) => setUser({ ...user, phone: e.target.value })}
+                                                    />
                                                 </div>
-                                                <div className="form-group">
-                                                    <label className="form-label">Location (within Taguig City) </label>
-                                                    <div>
-                                                        <select className="custom-select" value={user.country || ''} onChange={(e) => setUser({ ...user, country: e.target.value })}>
-                                                            <option>USA</option>
-                                                            <option>Canada</option>
-                                                            <option>UK</option>
-                                                            <option>Germany</option>
-                                                            <option>France</option>
-                                                        </select>
-                                                    </div>
+                                                <div className="form-group mb-0">
+                                                    <label htmlFor="website_field" style={{ fontWeight: 'bold' }}>Website</label>
+                                                    <input
+                                                        type="text"
+                                                        id="website_field"
+                                                        className="form-control form-control-sm"
+                                                        value={user.website || ''}
+                                                        onChange={(e) => setUser({ ...user, website: e.target.value })}
+                                                    />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <hr className="border-light m-0" />
-                                        <div className="card-body pb-2">
-                                            <h6 className="mb-4">Contacts</h6>
-                                            <div className="form-group">
-                                                <label className="form-label">Phone</label>
-                                                <input type="text" className="form-control" value={user.phone || ''} onChange={(e) => setUser({ ...user, phone: e.target.value })} />
-                                            </div>
-                                            <div className="form-group">
-                                                <label className="form-label">Website</label>
-                                                <input type="text" className="form-control" value={user.website || ''} onChange={(e) => setUser({ ...user, website: e.target.value })} />
+                                            <div className="text-right mt-3">
+                                                <button
+                                                    type="submit"
+                                                    className="btn-sm btn-primary"
+                                                    disabled={loading ? true : false}
+                                                >
+                                                    Save changes
+                                                </button>&nbsp;&nbsp;
+                                                <button type="button" className="btn-sm btn-default" onClick={() => navigate('/me')}>Cancel</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="text-right mt-3">
-                                        <button
-                                            type="submit"
-                                            className="btn-sm btn-primary"
-                                            disabled={loading ? true : false}
-                                        >
-                                            Save changes
-                                        </button>&nbsp;&nbsp;
-                                        <button type="button" className="btn-sm btn-default" onClick={() => navigate('/me')}>Cancel</button>
-                                    </div>
-                                    &nbsp;&nbsp;
                                 </form>
                             </div>
                         </div>
