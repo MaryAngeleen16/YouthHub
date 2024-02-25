@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './adminHeader';
 import { getToken } from '../../utils/helpers';
@@ -57,64 +56,69 @@ const Dashboard = () => {
                 <div className='unique-card-container'>
                     <div className='card'>
                         <div className='card-inner'>
-                            <h3>USERS</h3>
+                        <h3 style={{ color: 'white' }}>USERS</h3>
                             <BsFillArchiveFill className='card_icon' />
                         </div>
-                        <h1>{users.length}</h1>
+                        <h1 style={{ color: 'white' }}>{users.length}</h1>
                     </div>
                     <div className='card'>
                         <div className='card-inner'>
-                            <h3>POSTS</h3>
+                            <h3 style={{ color: 'white' }}>POSTS</h3>
                             <BsFillGrid3X3GapFill className='card_icon' />
                         </div>
-                        <h1>12</h1>
+                        <h1 style={{ color: 'white' }}>12</h1>
                     </div>
                     <div className='card'>
                         <div className='card-inner'>
-                            <h3>CATEGORIES</h3>
+                            <h3 style={{ color: 'white' }}>CATEGORIES</h3>
                             <BsPeopleFill className='card_icon' />
                         </div>
-                        <h1>33</h1>
+                        <h1 style={{ color: 'white' }}>33</h1>
                     </div>
                     <div className='card'>
                         <div className='card-inner'>
-                            <h3>ALERTS</h3>
+                            <h3 style={{ color: 'white' }}>ALERTS</h3>
                             <BsFillBellFill className='card_icon' />
                         </div>
-                        <h1>0</h1>
-                    </div>
-                    <div className="card">
-                    <div className="card-body d-flex flex-column align-items-center">
-                        <h5 className="card-title" style={{ color: "#b38269" }}>User Registration by Day</h5>
-                        <Chart
-                            options={{
-                                chart: {
-                                    id: "user-registration-chart"
-                                },
-                                xaxis: {
-                                    categories: Object.keys(userRegistrationDates)
-                                }
-                            }}
-                            series={[
-                                {
-                                    name: "users-registered",
-                                    data: Object.values(userRegistrationDates)
-                                }
-                            ]}
-                            type="bar"
-                            width="500"
-                        />
+                        <h1 style={{ color: 'white' }}>0</h1>
                     </div>
                 </div>
+                <div className="charts-container d-flex justify-content-between">
+                    <div className="unique-chart-container">
+                        <div className="card-user">
+                            <div className="card-user-body d-flex flex-column align-items-center">
+                                <h5 className="card-title" style={{ color: "#b38269" }}>User Registration by Day</h5>
+                                <Chart
+                                    options={{
+                                        chart: {
+                                            id: "user-registration-chart"
+                                        },
+                                        xaxis: {
+                                            categories: Object.keys(userRegistrationDates)
+                                        }
+                                    }}
+                                    series={[
+                                        {
+                                            name: "users-registered",
+                                            data: Object.values(userRegistrationDates)
+                                        }
+                                    ]}
+                                    type="bar"
+                                    width="500"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="unique-chart-loc">
+                        <div className="card-loc">
+                            <div className="card-loc-body d-flex flex-column align-items-center">
+                                <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
+                                <FemaleTeenagersChart />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                
-                <div className="card">
-                    <div className="card-body d-flex flex-column align-items-center">
-                        <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
-                        <FemaleTeenagersChart />
-                    </div>
-                </div>
             </main>
         </div>
     );
