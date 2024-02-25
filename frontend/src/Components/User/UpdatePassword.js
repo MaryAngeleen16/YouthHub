@@ -101,7 +101,7 @@ const UpdatePassword = () => {
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
                                 href="/password/update">Change password</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
-                                href="#account-info">Info</a>
+                                href="/me/info">Info</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
                                 href="#account-social-links">Social links</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"

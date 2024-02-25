@@ -9,6 +9,7 @@ import Login from './Components/User/Login';
 import Register from './Components/User/Register';
 import Profile from './Components/User/Profile';
 import UpdateProfile from './Components/User/UpdateProfile';
+import UpdateInfo from './Components/User/UpdateInfo';
 import ForgotPassword from './Components/User/ForgotPassword';
 import NewPassword from './Components/User/NewPassword';
 import UpdatePassword from './Components/User/UpdatePassword';
@@ -51,6 +52,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/me" element={<Profile />} />
           <Route path="/me/update" element={<UpdateProfile />} />
+          <Route path="/me/info" element={<UpdateInfo />} />
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<NewPassword />} />
           <Route path="/password/update" element={<UpdatePassword />} />
