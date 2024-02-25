@@ -151,6 +151,42 @@ exports.getUserDetails = async (req, res, next) => {
         user
     });
 };
+
+exports.updateUserInfo = async (req, res, next) => {
+    try {
+        const userId = req.user.id; // Get the user ID from the request
+
+        // Update user information based on the request body
+        const updatedUserData = {
+            bio: req.body.bio,
+            birthday: req.body.birthday,
+            location: req.body.location,
+            phone: req.body.phone
+        };
+
+        // Find the user by ID and update the information
+        const user = await User.findByIdAndUpdate(userId, updatedUserData, {
+            new: true, // Return the updated document
+            runValidators: true // Run validation
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+};
+
 exports.editUserRole = async (req, res, next) => {
     const { userId, newRole } = req.body;
 
