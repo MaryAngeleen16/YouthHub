@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import './PostDetails.css';
-import { getToken } from '../utils/helpers';
-import './CommentSection.css';
+import { getToken, getUser} from '../utils/helpers';
 
 
 const PostDetails = () => {
@@ -13,7 +12,6 @@ const PostDetails = () => {
   const [recentPosts, setRecentPosts] = useState([]);
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
-  const [usersMap, setUsersMap] = useState({});
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -44,26 +42,9 @@ const PostDetails = () => {
       }
     };
 
-    const fetchUsers = async () => {
-        try {
-          const response = await axios.get('http://localhost:4001/api/admin/users');
-          const users = response.data.users;
-          const usersMap = {};
-          users.forEach(user => {
-            usersMap[user._id] = user.name;
-          });
-          console.log('Users Map:', usersMap); // Log the users map
-          setUsersMap(usersMap);
-        } catch (error) {
-          console.error('Error fetching users:', error);
-        }
-      };
-      
-
     fetchPost();
     fetchCategories();
     fetchRecentPosts();
-    fetchUsers();
   }, [id]);
 
   const getCategoryName = (categoryId) => {
@@ -88,9 +69,9 @@ const PostDetails = () => {
       );
       console.log('Comment added:', response.data);    
       setComment(''); 
+      setLoading(false);
     } catch (error) {
       console.error('Error adding comment:', error);
-    } finally {
       setLoading(false);
     }
   };
@@ -107,41 +88,22 @@ const PostDetails = () => {
             {post.description.split('\r\n').map((paragraph, index) => (
               <p key={index} className='post-title-information'>{paragraph}</p>
             ))}
+         
 
-            <h2 className='comment-h1'>Comments</h2>
-            <hr className="rounded divider-comments"/>
 
-            {/* Form to add a comment */}
-            <div className="add-comment-form">
-              <h2 className='comment-addcomment'>Add Comment</h2>
-              <textarea
-                placeholder="   Write your comment here..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                className='commentBox'
-              />
-              {loading ? (
-                <p>Loading...</p> 
-              ) : (
-                <button onClick={handleAddComment} className='commentButton'>
-                  Add Comment
-                </button>
-              )}
-            </div>
+ {/* Form to add a comment */}
+ <div className="add-comment-form">
+        <h2>Add Comment</h2>
+        <textarea
+          placeholder="Write your comment here..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button onClick={handleAddComment} disabled={loading}>
+          {loading ? 'Adding Comment...' : 'Add Comment'}
+        </button>
+      </div>
 
-            {/* Display comments */}
-            <div className="comments">
-              {post.comments && post.comments.length > 0 ? (
-                post.comments.map((comment, index) => (
-                  <div key={index} className="comment">
-                    <p className='comment-username'><strong>{usersMap[comment.user]}</strong> - {new Date(comment.createdAt).toLocaleString()}</p>
-                    <p>{comment.comment}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No comments available.</p>
-              )}
-            </div>
           </div>
         ) : (
           <p>Loading post details...</p>

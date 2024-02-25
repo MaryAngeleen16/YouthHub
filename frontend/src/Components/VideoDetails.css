@@ -22,7 +22,7 @@
   }
   
   .video-card-youth {
-    border: 2px solid#F8D4BC;
+    border: 3px solid#F8D4BC;
     margin-bottom: 10px;
     border-radius: 6px;
     padding: 10px;
@@ -40,8 +40,10 @@
 
   .video-title-details
   {
-    text-align: center;    text-transform: uppercase;
+    text-align: left;    
+    text-transform: uppercase;
     font-weight: 500;
+    font-size: 36px;
   }
 
   .video-title-information

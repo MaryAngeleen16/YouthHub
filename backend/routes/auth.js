@@ -10,7 +10,7 @@ const { registerUser, loginUser, logout, forgotPassword,
     allUsers,
     getUserDetails,
     editUserRole,
-    deleteUser
+    deleteUser,
 
 } = require('../controllers/authController');
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');

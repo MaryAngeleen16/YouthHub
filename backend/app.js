@@ -5,7 +5,7 @@ const categories = require('./routes/category');
 const auth = require('./routes/auth');
 const post = require('./routes/post');
 const video = require('./routes/video');
-const forum = require('./routes/forum')
+const forum = require('./routes/forum');
 const app = express();
 
 // Middleware setup
@@ -18,9 +18,10 @@ app.use(cookieParser());
 
 
 // Use the imported routes modules
-app.use('/api', forum)
+app.use('/api', forum);
 app.use('/api', categories);
 app.use('/api', auth);
 app.use('/api', post);
 app.use('/api', video);
+
 module.exports = app;

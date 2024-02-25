@@ -25,11 +25,16 @@
 //       },
 //     },
 //   ],
+
 // });
 
 // const Post = mongoose.model('Post', postSchema);
 
 // module.exports = Post;
+
+
+
+
 
 
 const mongoose = require('mongoose');
@@ -59,21 +64,26 @@ const postSchema = new mongoose.Schema({
       },
     },
   ],
-  createdAt: {
-    type: Date,
-    default: Date.now 
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now 
-  }
-});
-
-postSchema.pre('save', function(next) {
-  this.updatedAt = new Date();
-  next();
-});
+  comments: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User' // Replace 'User' with the actual model name if different
+      },
+      comment: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }
+  ]
+}, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;
+

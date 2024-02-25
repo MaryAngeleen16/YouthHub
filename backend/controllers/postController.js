@@ -205,3 +205,38 @@ exports.getPostById = async (req, res) => {
 	}
   };
 
+  exports.addComment = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Get the ID of the post
+        const userId = req.user._id; // Get the ID of the user posting the comment
+
+        const post = await Post.findById(id); // Find the post by ID
+
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: 'Post not found'
+            });
+        }
+
+        const newComment = {
+            user: userId,
+            comment: req.body.comment,
+        };
+
+        post.comments.push(newComment); // Add the new comment to the post
+        await post.save(); // Save the changes
+
+        res.status(201).json({
+            success: true,
+            message: 'Comment posted',
+            post: post,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+};
