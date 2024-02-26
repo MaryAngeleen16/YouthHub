@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
 import BackDropLoading from '../Layouts/BackDropLoading';
+import '../Profile.css';
 
 const Profile = () => {
     const [name, setName] = useState('');
