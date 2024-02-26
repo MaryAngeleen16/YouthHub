@@ -36,17 +36,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'user'
     },
-    bio: String, // Added bio field
-    birthday: Date, // Added birthday field
-    location: String, // Added location field
-    phone: String, // Added phone field
     createdAt: {
         type: Date,
         default: Date.now
     },
     resetPasswordToken: String,
-    resetPasswordExpire: Date
+    resetPasswordExpire: Date,
+    bio: String, // Added bio field
+    birthday: Date, // Added birthday field
+    location: String, // Added location field
+    phone: String, // Added phone field
+    gender: String // Added gender field
 });
+
 
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {

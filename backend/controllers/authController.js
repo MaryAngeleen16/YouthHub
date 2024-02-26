@@ -4,31 +4,39 @@ const cloudinary = require('cloudinary');
 const crypto = require('crypto');
 
 exports.registerUser = async (req, res, next) => {
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: 'avatars',
-        width: 150,
-        crop: "scale"
-    }, (err, res) => {
-        console.log(err, res);
-    });
-    const { name, email, password, role } = req.body;
-    const user = await User.create({
-        name,
-        email,
-        password,
-        avatar: {
-            public_id: result.public_id,
-            url: result.secure_url
-        },
-    });
+    try {
+        const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: 'avatars',
+            width: 150,
+            crop: "scale"
+        });
 
-    if (!user) {
-        return res.status(500).json({
+        const { name, email, password, role } = req.body;
+        const user = await User.create({
+            name,
+            email,
+            password,
+            avatar: {
+                public_id: result.public_id,
+                url: result.secure_url
+            },
+        });
+
+        if (!user) {
+            return res.status(500).json({
+                success: false,
+                message: 'User not created'
+            });
+        }
+
+        sendToken(user, 200, res);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
             success: false,
-            message: 'User not created'
+            message: 'Internal Server Error'
         });
     }
-    sendToken(user, 200, res);
 };
 
 exports.loginUser = async (req, res, next) => {
@@ -85,7 +93,7 @@ exports.getUserProfile = async (req, res, next) => {
 
 exports.updatePassword = async (req, res, next) => {
     const user = await User.findById(req.user.id).select('password');
-    
+
     const isMatched = await user.comparePassword(req.body.oldPassword);
     if (!isMatched) {
         return res.status(400).json({ message: 'Old password is incorrect' });
@@ -96,39 +104,47 @@ exports.updatePassword = async (req, res, next) => {
 };
 
 exports.updateProfile = async (req, res, next) => {
-    const newUserData = {
-        name: req.body.name,
-        email: req.body.email
-    };
 
-    if (req.body.avatar !== '') {
-        const user = await User.findById(req.user.id);
+    try {
+        // const newUserData = {
+        //     name: req.body.name,
+        //     email: req.body.email
+        // };
+        console.log(req.body);
+        if (req.body.avatar) {
+            const user = await User.findById(req.user.id);
 
-        const image_id = user.avatar.public_id;
-        const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-            folder: 'avatars',
-            width: 150,
-            crop: "scale"
+            const image_id = user.avatar.public_id;
+            const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+                folder: 'avatars',
+                width: 150,
+                crop: "scale"
+            });
+
+            req.body.avatar = {
+                public_id: result.public_id,
+                url: result.secure_url
+            };
+        }
+
+        const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+            new: true,
+            runValidators: true,
         });
 
-        newUserData.avatar = {
-            public_id: result.public_id,
-            url: result.secure_url
-        };
+        if (!user) {
+            return res.status(401).json({ message: 'User Not Updated' });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Update Successfully',
+            user: user
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: err.message })
     }
-
-    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-        new: true,
-        runValidators: true,
-    });
-
-    if (!user) {
-        return res.status(401).json({ message: 'User Not Updated' });
-    }
-
-    res.status(200).json({
-        success: true
-    });
 };
 
 exports.allUsers = async (req, res, next) => {
@@ -152,7 +168,7 @@ exports.getUserDetails = async (req, res, next) => {
     });
 };
 
-exports.updateUserInfo = async (req, res, next) => {
+exports.getAdditionalInfo = async (req, res, next) => {
     try {
         const userId = req.user.id; // Get the user ID from the request
 
@@ -161,7 +177,8 @@ exports.updateUserInfo = async (req, res, next) => {
             bio: req.body.bio,
             birthday: req.body.birthday,
             location: req.body.location,
-            phone: req.body.phone
+            phone: req.body.phone,
+            gender: req.body.gender // Include gender field
         };
 
         // Find the user by ID and update the information
@@ -173,7 +190,7 @@ exports.updateUserInfo = async (req, res, next) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
+        // sendToken(user, 200, res)
         res.status(200).json({
             success: true,
             user

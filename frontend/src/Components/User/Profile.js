@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 const Profile = () => {
     const [name, setName] = useState('');
@@ -44,6 +45,7 @@ const Profile = () => {
     }, []);
 
     const updateProfile = async (userData) => {
+        setLoading(true);
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -60,15 +62,22 @@ const Profile = () => {
             });
             navigate('/me', { replace: true });
         } catch (error) {
+            setLoading(false);
             console.error('Error updating profile:', error);
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
                 console.error('Server response:', error.response.data);
                 console.error('Status code:', error.response.status);
-                toast.error(error.response.data.message || 'User update failed', {
-                    position: toast.POSITION.BOTTOM_CENTER,
-                });
+                if (error.response.data && error.response.data.message) {
+                    toast.error(error.response.data.message, {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                    });
+                } else {
+                    toast.error('User update failed', {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                    });
+                }
             } else if (error.request) {
                 // The request was made but no response was received
                 console.error('No response received from the server');
@@ -82,8 +91,10 @@ const Profile = () => {
                     position: toast.POSITION.BOTTOM_CENTER,
                 });
             }
+            setLoading(false); // Ensure loading state is updated even in case of error
         }
     };
+
 
     // Submit form handler
     const submitHandler = async (e) => {
@@ -147,8 +158,11 @@ const Profile = () => {
         };
     }, []);
 
+    // console.log(user);
+
     return (
         <Fragment>
+            <BackDropLoading open={loading} />
             <MetaData title={'Profile'} />
 
             <div className="container light-style flex-grow-1 container-p-y">

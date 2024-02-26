@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from '../../utils/helpers';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 const UpdateInfo = () => {
     const [bio, setBio] = useState('');
@@ -55,6 +56,7 @@ const UpdateInfo = () => {
 
             try {
                 const { data } = await axios.get(`http://localhost:4001/api/me/info`, config);
+                console.log(data);
                 setUser(prevUser => ({ ...prevUser, ...data }));
             } catch (error) {
                 console.error('Error fetching additional info:', error);
@@ -69,6 +71,7 @@ const UpdateInfo = () => {
     }, []);
 
     const updateProfile = async (userData) => {
+        setLoading(true);
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -80,17 +83,20 @@ const UpdateInfo = () => {
             const { data } = await axios.put(`http://localhost:4001/api/me/update`, userData, config);
             setIsUpdated(data.success);
             setLoading(false);
+            setUser(data.user)
             toast.success('User updated', {
                 position: toast.POSITION.BOTTOM_CENTER,
             });
-            navigate('/me', { replace: true });
+
+            // navigate('/me', { replace: true });
         } catch (error) {
+            setLoading(false);
             console.error('Error updating profile:', error);
             if (error.response) {
                 console.error('Server response:', error.response.data);
                 console.error('Status code:', error.response.status);
                 toast.error(error.response.data.message || 'User update failed', {
-                    position: toast.POSITION.BOTTOM_CENTER,
+                    position: 'toast.POSITION.BOTTOM_CENTER',
                 });
             } else if (error.request) {
                 console.error('No response received from the server');
@@ -109,14 +115,13 @@ const UpdateInfo = () => {
     // Submit form handler
     const submitHandler = async (e) => {
         e.preventDefault();
-
         // Check if required fields are filled
-        if (!bio || !birthday || !location || !phone) {
-            toast.error('Bio, birthday, location, and phone are required', {
-                position: toast.POSITION.BOTTOM_CENTER,
-            });
-            return;
-        }
+        // if (!bio || !birthday || !location || !phone) {
+        //     toast.error('Bio, birthday, location, and phone are required', {
+        //         position: toast.POSITION.BOTTOM_CENTER,
+        //     });
+        //     return;
+        // }
 
         const formData = new FormData();
         formData.set('bio', bio);
@@ -141,7 +146,7 @@ const UpdateInfo = () => {
 
     const onChange = (e) => {
         const { name, value, files } = e.target;
-    
+
         // If it's a file input (avatar), set the avatar state
         if (name === 'avatar') {
             const file = files[0];
@@ -155,11 +160,11 @@ const UpdateInfo = () => {
             }
         } else {
             // If it's not a file input, update the corresponding state
-            if(name === 'gender') {
+            if (name === 'gender') {
                 setGender(value);
             } else {
                 // For other inputs, update state directly
-                switch(name) {
+                switch (name) {
                     case 'bio':
                         setBio(value);
                         break;
@@ -198,6 +203,7 @@ const UpdateInfo = () => {
 
     return (
         <Fragment>
+            <BackDropLoading open={loading} />
             <MetaData title={'Profile'} />
 
             <div className="container light-style flex-grow-1 container-p-y">
@@ -225,7 +231,7 @@ const UpdateInfo = () => {
                                                 <label htmlFor="bio_field" style={{ fontWeight: 'bold' }}>Bio</label>
                                                 <textarea
                                                     id="bio_field"
-                                                    name="bio" // Update name attribute
+                                                    name="bio"
                                                     className="form-control form-control-sm"
                                                     rows="5"
                                                     value={bio || ''}
@@ -238,9 +244,9 @@ const UpdateInfo = () => {
                                                 <input
                                                     type="date"
                                                     id="birthday_field"
-                                                    name="birthday" // Update name attribute
+                                                    name="birthday"
                                                     className="form-control form-control-sm"
-                                                    value={birthday || ''}
+                                                    value={birthday ? formatDate(new Date(birthday)) : ''}
                                                     onChange={onChange}
                                                 />
                                             </div>
@@ -250,7 +256,7 @@ const UpdateInfo = () => {
                                                 <br />
                                                 <select
                                                     id="gender_field"
-                                                    name="gender" // Update name attribute
+                                                    name="gender"
                                                     className="custom-select form-control-sm"
                                                     value={gender || ''}
                                                     onChange={onChange}
@@ -267,7 +273,7 @@ const UpdateInfo = () => {
                                                 <br />
                                                 <select
                                                     id="location_field"
-                                                    name="location" // Update name attribute
+                                                    name="location"
                                                     className="custom-select form-control-sm"
                                                     value={location || ''}
                                                     onChange={onChange}
@@ -280,6 +286,7 @@ const UpdateInfo = () => {
                                                     <option value="France">France</option>
                                                 </select>
                                             </div>
+
 
 
 
@@ -330,5 +337,13 @@ const UpdateInfo = () => {
         </Fragment>
     );
 };
+
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 
 export default UpdateInfo;
