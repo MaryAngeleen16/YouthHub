@@ -268,3 +268,39 @@ exports.deleteComment = async (req, res, next) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
+exports.editComment = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Get the post ID from the URL params
+        const { commentId } = req.query; // Get the comment ID from the query params
+        const { comment: updatedComment } = req.body; // Get the updated comment text from the request body
+
+        // Find the post by ID
+        const post = await Post.findById(id);
+
+        // Check if the post exists
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Find the comment within the post's comments array and update it
+        const commentToUpdate = post.comments.find(comment => comment._id.toString() === commentId);
+        if (!commentToUpdate) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        // Update the comment text
+        commentToUpdate.comment = updatedComment;
+
+        // Save the post with the updated comment
+        await post.save();
+
+        // Return success response
+        return res.status(200).json({ message: 'Comment updated successfully', post });
+    } catch (error) {
+        console.error('Error updating comment:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};

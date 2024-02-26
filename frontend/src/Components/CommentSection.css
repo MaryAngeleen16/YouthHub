@@ -15,6 +15,9 @@
     border-radius: 18px;
 }
 
+.add-comment-form .commentBox {
+    font-size: 22px;
+}
 .commentBox::placeholder
 {
     font-size: 22px;
@@ -68,7 +71,7 @@ background-color: white;
 
 .delete-commentButton
 {
-    background-color: #ff9b3e;
+    background-color:  #fd6d68 ;
     color: white;
     text-transform: uppercase;
     font-weight: 500;
@@ -76,10 +79,71 @@ background-color: white;
     font-size: 14px;
     border: none;
     border-radius: 18px;
-margin-left: 300px;
+    margin-left: 20px;
 }
 
 .delete-commentButton:hover
 {
-    background-color: rgb(255, 76, 76);
+    background-color: #d04945; 
+}
+
+.edit-commentButton
+{
+    background-color:#54a6ff;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 18px;
+}
+
+.edit-commentButton:hover {
+    background-color: #0056b3; 
+}
+.edit-textarea
+{
+    width: 500px;
+    height: 50px;
+    display: flex;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.edit-SubmitButton
+{
+    background-color: #fd8b86 ;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 18px;
+    margin-left: 20px;
+
+    
+}
+
+.edit-SubmitButton:hover {
+    background-color: #ff5c57;
+}
+.cancel-SubmitButton
+{
+    color: #2b313a;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 18px;
+    margin-left: 350px;
+}
+
+.cancel-SubmitButton:hover
+{
+    background-color: #7d8087;
+    color: white;
+
 }

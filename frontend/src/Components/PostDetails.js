@@ -15,6 +15,9 @@ const PostDetails = () => {
   const [loading, setLoading] = useState(false);
   const [usersMap, setUsersMap] = useState({});
   const loggedInUserId = getUser(); 
+  const [commentId, setCommentId] = useState(null);
+  const [updatedComment, setUpdatedComment] = useState('');
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -82,53 +85,124 @@ const PostDetails = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:4001/api/post/add-comment/${id}`, 
+        `http://localhost:4001/api/post/add-comment/${id}?commentId=${commentId}`, 
         { comment },
         config
       );
       console.log('Comment added:', response.data);    
       setComment(''); 
-      window.location.reload(); // Reload the page after adding comment
+      window.location.reload(); 
 
     } catch (error) {
       console.error('Error adding comment:', error);
     } finally {
       setLoading(false);
+
     }
   };
 
 
-  const handleDeleteComment = async (commentId) => {
-    try {
-        setLoading(true);
+//   const handleDeleteComment = async (commentId) => {
+//     try {
+//         setLoading(true);
 
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${getToken()}`
-            }
-        };
+//         const config = {
+//             headers: {
+//                 'Authorization': `Bearer ${getToken()}`
+//             }
+//         };
 
-        const response = await axios.delete(`http://localhost:4001/api/post/delete-comment/${id}?commentId=${commentId}`, config);
+//         const response = await axios.delete(`http://localhost:4001/api/post/delete-comment/${id}?commentId=${commentId}`, config);
         
-        console.log('Comment deleted:', response.data);
-        window.location.reload(); // Reload the page after adding comment
+//         console.log('Comment deleted:', response.data);
+//         window.location.reload(); // Reload the page after adding comment
 
         
-        // Update the post state or perform any necessary actions after successful deletion
-        // For example, you can update the UI to reflect the deleted comment
-        
-    } catch (error) {
-        if (error.response.status === 403) {
-            console.error('Authorization error:', error.response.data.message);
-            alert("You are not authorized to delete this comment");
-        } else {
-            console.error('Error deleting comment:', error);
-            alert("Error occurred while deleting the comment");
-        }
-    } finally {
-        setLoading(false);
-    }
+//     } catch (error) {
+//         if (error.response.status === 403) {
+//             console.error('Authorization error:', error.response.data.message);
+//             alert("You are not authorized to delete this comment");
+//         } else {
+//             console.error('Error deleting comment:', error);
+//             alert("Error occurred while deleting the comment");
+//         }
+//     } finally {
+//         setLoading(false);
+//     }
+// };
+
+
+const handleDeleteComment = async (commentId) => {
+  try {
+    const confirmDelete = window.confirm("Are you sure you want to delete this comment? This action cannot be undone.");
+
+      if (confirmDelete) {
+          setLoading(true);
+
+          const config = {
+              headers: {
+                  'Authorization': `Bearer ${getToken()}`
+              }
+          };
+
+          const response = await axios.delete(`http://localhost:4001/api/post/delete-comment/${id}?commentId=${commentId}`, config);
+          
+          console.log('Comment deleted:', response.data);
+          window.location.reload(); // Reload the page after deleting the comment
+      }
+  } catch (error) {
+      if (error.response && error.response.status === 403) {
+          console.error('Authorization error:', error.response.data.message);
+          alert("You are not authorized to delete this comment");
+      } else {
+          console.error('Error deleting comment:', error);
+          alert("Error occurred while deleting the comment");
+      }
+  } finally {
+      setLoading(false);
+  }
 };
+
+
+const handleEditSubmit = async () => {
+  try {
+    setLoading(true);
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${getToken()}`
+      }
+    };
+    const response = await axios.put(`http://localhost:4001/api/post/edit-comment/${id}?commentId=${commentId}`, { comment: updatedComment }, config);
+    console.log('Comment edited:', response.data);
+    window.location.reload();
+    setPost(prevPost => ({
+      ...prevPost,
+      comments: prevPost.comments.map(c => c._id === commentId ? { ...c, comment: updatedComment } : c)
+    }));
+  } catch (error) {
+    console.error('Error editing comment:', error);
+    // Handle error
+  } finally {
+    setLoading(false);
+    // Reset commentId and updatedComment after editing
+    setCommentId(null);
+    setUpdatedComment('');
+  }
+};
+
+const handleEditComment = (commentId, currentComment) => {
+  setUpdatedComment(currentComment);
+  setCommentId(commentId);
+};
+const handleUpdatedCommentChange = (e) => {
+  setUpdatedComment(e.target.value);
+};
+const handleCancelEdit = () => {
+  setCommentId(null);
+  setUpdatedComment('');
+};
+
+
   return (
     <div className="container-youth">
       <div className="main-content-youth">
@@ -164,23 +238,40 @@ const PostDetails = () => {
             </div>
 
             {/* Display comments */}
-            <div className="comments">
             {post.comments.map((comment, index) => (
   <div key={index} className="comment">
     <p className='comment-username'><strong>{usersMap[comment.user]}</strong> - {new Date(comment.createdAt).toLocaleString()}</p>
-    <p>{comment.comment}</p>
-    {/* Log the values for comparison */}
-    {console.log('Comment user:', comment.user)}
-    {console.log('Logged in user ID:', loggedInUserId)}
-    {/* Delete button comment */}
-    {comment.user === loggedInUserId._id && (
-  <button onClick={() => handleDeleteComment(comment._id)}
-  className='delete-commentButton'>Delete</button>
-)}
+    {comment._id === commentId ? (
+      <div>
+        <textarea
+          value={updatedComment}
+          onChange={handleUpdatedCommentChange}
+          className='edit-textarea'
+        />
+        <div>
+        <button onClick={handleCancelEdit}
+          className='cancel-SubmitButton'>Cancel</button>
+          <button onClick={handleEditSubmit} 
+          className='edit-SubmitButton'>Submit</button>
+        
+        </div>
+      </div>
+    ) : (
+      <div>
+        <p>{comment.comment}</p>
+        {comment.user === loggedInUserId._id && (
+          <div>
+            <button onClick={() => handleEditComment(comment._id, comment.comment)}
+            className='edit-commentButton'>Edit</button>
+            <button onClick={() => handleDeleteComment(comment._id)}
+            className='delete-commentButton'>Delete</button>
+          </div>
+        )}
+      </div>
+    )}
   </div>
 ))}
 
-            </div>
           </div>
         ) : (
           <p>Loading post details...</p>
