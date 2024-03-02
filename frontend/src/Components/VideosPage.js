@@ -10,8 +10,7 @@ if (video.videos && video.videos.length > 0) {
 const publicId = video.videos[0].public_id; // Accessing public_id from the first video
 return `https://res.cloudinary.com/dvokiypaw/video/upload/${publicId}.jpg`;
 } else {
-// Handle the case when videos array is empty or undefined
-return ''; // or return a placeholder URL, or handle it based on your requirements
+return ''; 
 }
 };
 
@@ -19,16 +18,30 @@ const VideoCard = ({ video }) => {
 const thumbnailUrl = generateThumbnailUrl(video);
 
 return (
-<div className="video-card">
+    <div className="video-card">
+      <img src={thumbnailUrl} alt={video.name} className='video-thumbnail' />
+      <div className="video-details">
+        <h3 className='videos-title'>{video.name}</h3>
+        <p> {video.description.length > 80 ?
+            video.description.slice(0, 80) +
+            "..." : video.description}</p>
+      </div>
+      <Link to={`/video/${video._id}`} className="video-watch">Watch Now</Link>
+    </div>
+  );
+};
+{/* <div className="video-card">
     <img src={thumbnailUrl} alt={video.name} className='video-thumbnail' />
     <h3 className='videos-title'>{video.name}</h3>
     <p> {video.description.length > 80 ?
         video.description.slice(0, 80) +
         "..." : video.description}</p>
-    <Link to={`/video/${video._id}`}>Watch Now</Link>
+    <Link to={`/video/${video._id}` } className="video-watch">Watch Now</Link>
 </div>
 );
-};
+}; */}
+
+
 
 
 
@@ -113,35 +126,70 @@ cardCheckbox.classList.toggle('checked', this.checked);
 });
 
 
+// return (
+// <div className="video-page">
+//     <NavBar />
+//     <h1 className='videos-header'>ALL VIDEOS</h1>
+
+//     <div className="videos-container">
+//         <div className="side-filter video-filter">
+//             <h3 className='video-filter-title'>Filter by Category </h3>
+//             {categories.map(category => (
+//             <div key={category._id} className='video-filter-category card-checkbox'>
+//                 <label className="checkbox-label txt-category">
+//                     <input type="checkbox" value={category._id} checked={selectedCategories.includes(category._id)}
+//                         onChange={()=> filterByCategory(category._id)}/>
+//                     {category.name}
+//                 </label>
+//             </div>
+//             ))}
+//             <button onClick={resetFilter} className='video-button-style'>Reset</button>
+
+//         </div>
+
+//         <div className="video-container">
+//             {filteredVideos.map(video => (
+//             <VideoCard key={video._id} video={video} />
+//             ))}
+//         </div>
+//     </div>
+// </div>
+// );
+// };
+
+// export default VideosPage;
 return (
-<div className="video-page">
-    <NavBar />
-    <h1 className='videos-header'>ALL VIDEOS</h1>
+    <div className="video-page">
+      <NavBar />
+      <h1 className='videos-header'>ALL VIDEOS</h1>
 
-    <div className="videos-container">
+      <div className="videos-container">
         <div className="side-filter video-filter">
-            <h3 className='video-filter-title'>Filter by Category </h3>
-            {categories.map(category => (
+          <h3 className='video-filter-title'>Filter by Category </h3>
+          {categories.map(category => (
             <div key={category._id} className='video-filter-category card-checkbox'>
-                <label className="checkbox-label txt-category">
-                    <input type="checkbox" value={category._id} checked={selectedCategories.includes(category._id)}
-                        onChange={()=> filterByCategory(category._id)}/>
-                    {category.name}
-                </label>
+              <label className="checkbox-label txt-category">
+                <input
+                  type="checkbox"
+                  value={category._id}
+                  checked={selectedCategories.includes(category._id)}
+                  onChange={() => filterByCategory(category._id)}
+                />
+                {category.name}
+              </label>
             </div>
-            ))}
-            <button onClick={resetFilter} className='video-button-style'>Reset</button>
-
+          ))}
+          <button onClick={resetFilter} className='video-button-style'>Reset</button>
         </div>
 
         <div className="video-container">
-            {filteredVideos.map(video => (
+          {filteredVideos.map(video => (
             <VideoCard key={video._id} video={video} />
-            ))}
+          ))}
         </div>
+      </div>
     </div>
-</div>
-);
+  );
 };
 
 export default VideosPage;

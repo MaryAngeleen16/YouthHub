@@ -137,7 +137,8 @@ useEffect(() => {
                 <Sidebar/> 
 
                 </div>
-                <div className="col-md-9 text-crud" style={{ paddingBottom: '50px' }}>
+                <div className="col-md-9 text-crud" style={{ paddingBottom: '150px',
+    paddingTop: '100px' }}>
                     <h2 className='title-crud'>Update Post</h2>
                     <form onSubmit={submitHandler}>
                         <div className="mb-3">

@@ -35,7 +35,7 @@ const Navbar = () => {
         </li>
         <li className="nav-item color-nav">
           <b>
-            <a className="nav-link header-link" href="/">Youth Events</a>
+            <a className="nav-link header-link" href="/YouthEvents">Youth Events</a>
           </b>
         </li>
         <li className="nav-item color-nav">

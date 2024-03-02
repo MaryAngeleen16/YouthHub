@@ -251,4 +251,26 @@ exports.deleteUser = async (req, res, next) => {
     }
 };
 
+// authController.js
 
+exports.getPublicUserNames = async (req, res, next) => {
+    try {
+        if (req.publicUsers) {
+            return res.status(200).json({
+                success: true,
+                users: req.publicUsers
+            });
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: 'No public users found'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+};

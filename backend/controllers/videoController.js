@@ -258,3 +258,103 @@ exports.getVideoById = async (req, res) => {
 		return res.status(500).json({ error: 'Internal server error' });
 	}
 };
+
+
+
+
+exports.addComment = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Get the ID of the video
+        const userId = req.user._id; // Get the ID of the user posting the comment
+
+        const video = await Video.findById(id); // Find the video by ID
+
+        if (!video) {
+            return res.status(404).json({
+                success: false,
+                message: 'Video not found'
+            });
+        }
+
+        const newComment = {
+            user: userId,
+            comment: req.body.comment,
+        };
+
+        video.comments.push(newComment); // Add the new comment to the video
+        await video.save(); // Save the changes
+
+        res.status(201).json({
+            success: true,
+            message: 'Comment posted',
+            video: video,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+};
+
+exports.deleteComment = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Get the video ID from the URL params
+        const { commentId } = req.query; // Get the comment ID from the query params
+
+        // Find the video by ID
+        const video = await Video.findById(id);
+
+        // Check if the video exists
+        if (!video) {
+            return res.status(404).json({ message: 'Video not found' });
+        }
+
+        // Filter out the comment with the specified ID
+        video.comments = video.comments.filter(comment => comment._id.toString() !== commentId);
+
+        // Save the video with the updated comments
+        await video.save();
+
+        // Return success response
+        return res.status(200).json({ message: 'Comment deleted successfully', video });
+    } catch (error) {
+        console.error('Error deleting comment:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+exports.editComment = async (req, res, next) => {
+    try {
+        const { id } = req.params; // Get the video ID from the URL params
+        const { commentId } = req.query; // Get the comment ID from the query params
+        const { comment: updatedComment } = req.body; // Get the updated comment text from the request body
+
+        // Find the video by ID
+        const video = await Video.findById(id);
+
+        // Check if the video exists
+        if (!video) {
+            return res.status(404).json({ message: 'Video not found' });
+        }
+
+        // Find the comment within the video's comments array and update it
+        const commentToUpdate = video.comments.find(comment => comment._id.toString() === commentId);
+        if (!commentToUpdate) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        // Update the comment text
+        commentToUpdate.comment = updatedComment;
+
+        // Save the video with the updated comment
+        await video.save();
+
+        // Return success response
+        return res.status(200).json({ message: 'Comment updated successfully', video });
+    } catch (error) {
+        console.error('Error updating comment:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};

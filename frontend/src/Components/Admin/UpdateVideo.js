@@ -149,7 +149,7 @@ const UpdateVideo = () => {
                 <div className="col-md-3">
                     <Sidebar />
                 </div>
-                <div className="col-md-9 text-crud" style={{ paddingBottom: '50px' }}>
+                <div className="col-md-9 text-crud" style={{ paddingBottom: '150px' }}>
                     <h2 className='title-crud'>Update Video</h2>
                     <form onSubmit={submitHandler}>
                         <div className="mb-3">

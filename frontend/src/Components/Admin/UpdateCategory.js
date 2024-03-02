@@ -84,7 +84,8 @@ return (
        <Sidebar/> 
       
       </div>
-      <div className="col-md-9 text-crud" style={{ paddingBottom: '50px' }}>
+      <div className="col-md-9 text-crud" style={{ paddingBottom: '200px',
+    paddingTop: '100px' }}>
         
         <h2 className="title-crud">Update Category</h2>
         <form>

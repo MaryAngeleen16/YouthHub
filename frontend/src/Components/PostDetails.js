@@ -47,21 +47,43 @@ const PostDetails = () => {
       }
     };
 
+    // const fetchUsers = async () => {
+    //     try {
+    //       const response = await axios.get('http://localhost:4001/api/admin/users');
+    //       const users = response.data.users;
+    //       const usersMap = {};
+    //       users.forEach(user => {
+    //         usersMap[user._id] = user.name;
+    //       });
+    //       console.log('Users Map:', usersMap); // Log the users map
+    //       setUsersMap(usersMap);
+    //     } catch (error) {
+    //       console.error('Error fetching users:', error);
+    //     }
+    //   };
+  
     const fetchUsers = async () => {
-        try {
-          const response = await axios.get('http://localhost:4001/api/admin/users');
+      try {
+          const token = getToken(); 
+          const config = {
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          };
+          
+          const response = await axios.get('http://localhost:4001/api/public/users', config);
           const users = response.data.users;
           const usersMap = {};
           users.forEach(user => {
-            usersMap[user._id] = user.name;
+              usersMap[user._id] = user.name;
           });
-          console.log('Users Map:', usersMap); // Log the users map
+          console.log('Users Map:', usersMap); 
           setUsersMap(usersMap);
-        } catch (error) {
+      } catch (error) {
           console.error('Error fetching users:', error);
-        }
-      };
-      
+      }
+  };
+
 
     fetchPost();
     fetchCategories();
@@ -240,7 +262,9 @@ const handleCancelEdit = () => {
             {/* Display comments */}
             {post.comments.map((comment, index) => (
   <div key={index} className="comment">
-    <p className='comment-username'><strong>{usersMap[comment.user]}</strong> - {new Date(comment.createdAt).toLocaleString()}</p>
+    <p className='comment-username'><strong>
+      {usersMap[comment.user]}</strong> - 
+      {new Date(comment.createdAt).toLocaleString()}</p>
     {comment._id === commentId ? (
       <div>
         <textarea

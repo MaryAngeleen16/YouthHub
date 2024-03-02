@@ -15,14 +15,19 @@ const {
     getUserDetails,
     editUserRole,
     deleteUser,
-    getAdditionalInfo // Added controller function
+    getAdditionalInfo,
+    getPublicUserNames // Added controller function
 } = require('../controllers/authController');
 
-const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
+const { isAuthenticatedUser, authorizeRoles, getUserInformation } = require('../middleware/auth');
 
 router.post('/register', upload.single("avatar"), registerUser);
 router.post('/login', loginUser);
 router.get('/logout', logout);
+
+
+
+router.get('/public/users', getUserInformation, getPublicUserNames); // Retrieves names of all users for display purposes
 
 router.post('/password/forgot', forgotPassword);
 router.put('/password/reset/:token', resetPassword);

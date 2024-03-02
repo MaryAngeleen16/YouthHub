@@ -10,9 +10,10 @@
   margin-top: 100px;
   text-align: center;
   padding: 20px;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
+  margin-bottom: -100px;
 }
 
 .navbar-nav {
@@ -21,7 +22,7 @@
   list-style-type: none;
   padding: 0;
   color: rgb(235, 232, 207) !important;
-  margin-top: 5px; 
+  margin-top: 20px; 
   margin-bottom: 5px; 
 }
 

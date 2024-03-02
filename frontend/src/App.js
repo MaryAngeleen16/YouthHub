@@ -33,6 +33,7 @@ import UpdateVideo from './Components/Admin/UpdateVideo';
 import UserManagement from './Components/Admin/userManagement';
 
 import PregnancyPostPage from './Components/PregnancyPostPage.js';
+import YouthEvents from './Components/YouthEvents.js';
 import Forum from './Components/Forums/Forum.js';
 import EditTopic from './Components/Forums/EditTopic.js';
 import VideosPage from './Components/VideosPage.js';
@@ -40,6 +41,7 @@ import VideosPage from './Components/VideosPage.js';
 import PostDetails from './Components/PostDetails.js';
 
 import VideoDetails from './Components/VideoDetails.js';
+
 
 function App() {
   return (
@@ -69,7 +71,7 @@ function App() {
 
 
           <Route path="/Pregnancy" element={<PregnancyPostPage />} exact />
-
+          <Route path="/YouthEvents" element={<YouthEvents />} exact />
           <Route path="/post/:id" element={<PostDetails />} exact />
           <Route path="/video/:id" element={<VideoDetails />} exact />
 
