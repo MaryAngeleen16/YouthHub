@@ -7,7 +7,7 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
 import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
 import FemaleTeenagersChart from './FemaleTeenLoc';
-
+import MostPopularCategory from './MostPopularCategory';
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
@@ -248,11 +248,22 @@ const Dashboard = () => {
                                     width="760"
                                 />
                             </div>
+
+                            
                         </div>
                         {/* Your existing JSX code */}
+
+
+                    
                     </div>
+              
                 </div>
+                <div className="most-popular-category-container">
+              <MostPopularCategory/>
+
+              </div>
             </main>
+            
         </div>
     );
 };
