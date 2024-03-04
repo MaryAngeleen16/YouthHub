@@ -198,3 +198,11 @@ exports.getUserInformation = async (req, res, next) => {
       next(error);
     }
 };
+
+exports.isCounselor = (req, res, next) => {
+  // Check if user is a counselor
+  if (req.user.role !== 'counselor') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+  next();
+};

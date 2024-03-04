@@ -1,0 +1,49 @@
+/* VentList.css */
+.table-container-vent {
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .vent-button-space {
+    margin-right: 20px !important;
+  }
+  
+  .title-vent {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 36px;
+    color: #fd8b86;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 600px) {
+    .table-container-vent {
+      padding: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    .title-vent {
+      font-size: 24px;
+    }
+  }
+  
+  .ventlist-center
+  {
+    justify-content: center; 
+    margin-top: 50px;
+    /* max-width: 1000px; */
+  }
+
+  .ventform-center
+  {
+margin-left: 200px;  
+margin-bottom: 500px;
+}
+
+
+.ventform-message
+{
+    min-height: 400px !important;
+}

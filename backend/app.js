@@ -6,6 +6,7 @@ const auth = require('./routes/auth');
 const post = require('./routes/post');
 const video = require('./routes/video');
 const forum = require('./routes/forum');
+const vent = require('./routes/vent');
 const app = express();
 
 // Middleware setup
@@ -23,5 +24,5 @@ app.use('/api', categories);
 app.use('/api', auth);
 app.use('/api', post);
 app.use('/api', video);
-
+app.use('/api', vent);
 module.exports = app;

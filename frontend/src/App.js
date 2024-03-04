@@ -41,8 +41,9 @@ import VideosPage from './Components/VideosPage.js';
 import PostDetails from './Components/PostDetails.js';
 
 import VideoDetails from './Components/VideoDetails.js';
-
-
+import VentForm from './Components/VentForm.js';
+import VentList from './Components/Counselor/VentList.js';
+import VentFormByUser from './Components/VentFormByUser.js';
 function App() {
   return (
     <div>
@@ -75,8 +76,14 @@ function App() {
           <Route path="/post/:id" element={<PostDetails />} exact />
           <Route path="/video/:id" element={<VideoDetails />} exact />
 
+          <Route path="/vent/new" element={<VentForm />} exact />
+          <Route path="/vent/me" element={<VentFormByUser/>} exact />
 
-          <Route path="/dashboard" element={
+          <Route path="/vent/list" element={<VentList/>} exact />
+
+
+          <Route path="/dashboard" element
+          ={
             <ProtectedRoute isAdmin={true}>
 
               <Dashboard />
