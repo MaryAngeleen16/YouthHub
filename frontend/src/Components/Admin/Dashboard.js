@@ -13,6 +13,9 @@ const Dashboard = () => {
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
     const [userRegistrationDates, setUserRegistrationDates] = useState({});
     const [genderCounts, setGenderCounts] = useState({});
+    const [selectedCategory, setSelectedCategory] = useState('all'); // Initially set to 'all'
+    const [teenMomCount, setTeenMomCount] = useState(0);
+    const [teenagersCount, setTeenagersCount] = useState(0);
 
     const OpenSidebar = () => {
         setOpenSidebarToggle(!openSidebarToggle);
@@ -45,7 +48,15 @@ const Dashboard = () => {
             }, {});
             setGenderCounts(genderCountsData);
 
-            console.log(data.users);
+            // Filter users for teenagers
+            const teenageUsers = data.users.filter(user => user.roleStatus === 'Teenager');
+            console.log("Teenage users:", teenageUsers);
+            setTeenagersCount(teenageUsers.length);
+
+            // Filter users for teen moms
+            const teenMomUsers = data.users.filter(user => user.roleStatus === 'Teen Mom');
+            console.log("Teen mom users:", teenMomUsers);
+            setTeenMomCount(teenMomUsers.length);
         } catch (error) {
             console.error(error);
             // Handle the error as needed
@@ -54,7 +65,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         getUsers();
-    }, []);
+    }, [selectedCategory]); // Trigger useEffect when selectedCategory changes
 
     return (
         <div className='grid-container'>
@@ -130,26 +141,49 @@ const Dashboard = () => {
                 </div>
 
                 <div className="charts-container d-flex justify-content-between">
-                {/* Other charts */}
-                <div className="card">
-                    <div className="card-inner">
-                        <h5 style={{ color: "#b38269" }}>User Gender Distribution</h5>
+                    {/* Other charts */}
+                    <div className="card">
+                        <div className="card-inner">
+                            <h5 style={{ color: "#b38269" }}>User Gender Distribution</h5>
+                        </div>
+                        <div className="card-body">
+                            <Chart
+                                options={{
+                                    labels: Object.keys(genderCounts),
+                                    legend: {
+                                        show: true
+                                    }
+                                }}
+                                series={Object.values(genderCounts)}
+                                type="donut"
+                                width="760"
+                            />
+                        </div>
                     </div>
-                    <div className="card-body">
-                        <Chart
-                            options={{
-                                labels: Object.keys(genderCounts),
-                                legend: {
-                                    show: true
-                                }
-                            }}
-                            series={Object.values(genderCounts)}
-                            type="donut"
-                            width="500"
-                        />
+                    <div className="charts-container d-flex justify-content-between">
+                    {/* Your existing JSX code */}
+                    {/* Pie chart for teen moms vs teenagers */}
+                    <div className="card">
+                        <div className="card-inner">
+                            <h5 style={{ color: "#b38269" }}>Teen Moms vs Teenagers</h5>
+                        </div>
+                        <div className="card-body">
+                            <Chart
+                                options={{
+                                    labels: ['Teen Moms', 'Teenagers'],
+                                    legend: {
+                                        show: true
+                                    }
+                                }}
+                                series={[teenMomCount, teenagersCount]}
+                                type="donut"
+                                width="760"
+                            />
+                        </div>
                     </div>
+                    {/* Your existing JSX code */}
                 </div>
-            </div>
+                </div>
             </main>
         </div>
     );
