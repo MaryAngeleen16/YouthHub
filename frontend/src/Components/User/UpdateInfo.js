@@ -279,11 +279,44 @@ const UpdateInfo = () => {
                                                     onChange={onChange}
                                                 >
                                                     <option value="">Select Location</option>
-                                                    <option value="USA">USA</option>
-                                                    <option value="Canada">Canada</option>
-                                                    <option value="UK">UK</option>
-                                                    <option value="Germany">Germany</option>
-                                                    <option value="France">France</option>
+                                                    <option value="Bagumbayan">Bagumbayan</option>
+                                                    <option value="Bambang">Bambang</option>
+                                                    <option value="Calzada Tipas">Calzada Tipas</option>
+                                                    <option value="Cembo">Cembo</option>
+                                                    <option value="Central Bicutan">Central Bicutan</option>
+                                                    <option value="Central Signal Village">Central Signal Village</option>
+                                                    <option value="Comembo">Comembo</option>
+                                                    <option value="East Rembo">East Rembo</option>
+                                                    <option value="Fort Bonifacio">Fort Bonifacio</option>
+                                                    <option value="Hagonoy">Hagonoy</option>
+                                                    <option value="Ibayo-Tipas">Ibayo-Tipas</option>
+                                                    <option value="Katuparan">Katuparan</option>
+                                                    <option value="Ligid Tipas">Ligid Tipas</option>
+                                                    <option value="Lower Bicutan">Lower Bicutan</option>
+                                                    <option value="Maharlika Village">Maharlika Village</option>
+                                                    <option value="Napindan">Napindan</option>
+                                                    <option value="New Lower Bicutan">New Lower Bicutan</option>
+                                                    <option value="North Daang Hari">North Daang Hari</option>
+                                                    <option value="North Signal Village">North Signal Village</option>
+                                                    <option value="Palingon Tipas">Palingon Tipas</option>
+                                                    <option value="Pembo">Pembo</option>
+                                                    <option value="Pinagsama">Pinagsama</option>
+                                                    <option value="Pitogo">Pitogo</option>
+                                                    <option value="Post Proper Northside">Post Proper Northside</option>
+                                                    <option value="Post Proper Southside">Post Proper Southside</option>
+                                                    <option value="Rizal">Rizal</option>
+                                                    <option value="San Miguel">San Miguel</option>
+                                                    <option value="Santa Ana">Santa Ana</option>
+                                                    <option value="South Cembo">South Cembo</option>
+                                                    <option value="South Daang Hari">South Daang Hari</option>
+                                                    <option value="South Signal Village">South Signal Village</option>
+                                                    <option value="Tanyag">Tanyag</option>
+                                                    <option value="Tuktukan">Tuktukan</option>
+                                                    <option value="Upper Bicutan">Upper Bicutan</option>
+                                                    <option value="Ususan">Ususan</option>
+                                                    <option value="Wawa">Wawa</option>
+                                                    <option value="West Rembo">West Rembo</option>
+                                                    <option value="Western Bicutan">Western Bicutan</option>
                                                 </select>
                                             </div>
 
