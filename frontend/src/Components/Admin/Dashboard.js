@@ -16,6 +16,7 @@ const Dashboard = () => {
     const [selectedCategory, setSelectedCategory] = useState('all'); // Initially set to 'all'
     const [teenMomCount, setTeenMomCount] = useState(0);
     const [teenagersCount, setTeenagersCount] = useState(0);
+    const [femaleTeenagersLocations, setFemaleTeenagersLocations] = useState({}); // State to store female teenagers' locations
 
     const OpenSidebar = () => {
         setOpenSidebarToggle(!openSidebarToggle);
@@ -57,6 +58,14 @@ const Dashboard = () => {
             const teenMomUsers = data.users.filter(user => user.roleStatus === 'Teen Mom');
             console.log("Teen mom users:", teenMomUsers);
             setTeenMomCount(teenMomUsers.length);
+
+            // Extract female teenagers' locations
+            const femaleTeenagers = data.users.filter(user => user.gender === 'Female' && user.roleStatus === 'Teenager');
+            const locationsCount = femaleTeenagers.reduce((acc, user) => {
+                acc[user.location] = (acc[user.location] || 0) + 1;
+                return acc;
+            }, {});
+            setFemaleTeenagersLocations(locationsCount);
         } catch (error) {
             console.error(error);
             // Handle the error as needed
@@ -132,6 +141,31 @@ const Dashboard = () => {
                         <div className="card-loc">
                             <div className="card-loc-body d-flex flex-column align-items-center">
                                 <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
+                                <Chart
+                                    options={{
+                                        chart: {
+                                            id: "female-teenagers-locations-chart"
+                                        },
+                                        xaxis: {
+                                            categories: Object.keys(femaleTeenagersLocations)
+                                        }
+                                    }}
+                                    series={[
+                                        {
+                                            name: "female-teenagers-locations",
+                                            data: Object.values(femaleTeenagersLocations)
+                                        }
+                                    ]}
+                                    type="line"
+                                    width="500"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="unique-chart-loc">
+                        <div className="card-loc">
+                            <div className="card-loc-body d-flex flex-column align-items-center">
+                                <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
                                 <FemaleTeenagersChart />
                             </div>
                         </div>
@@ -161,28 +195,28 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="charts-container d-flex justify-content-between">
-                    {/* Your existing JSX code */}
-                    {/* Pie chart for teen moms vs teenagers */}
-                    <div className="card">
-                        <div className="card-inner">
-                            <h5 style={{ color: "#b38269" }}>Teen Moms vs Teenagers</h5>
+                        {/* Your existing JSX code */}
+                        {/* Pie chart for teen moms vs teenagers */}
+                        <div className="card">
+                            <div className="card-inner">
+                                <h5 style={{ color: "#b38269" }}>Teen Moms vs Teenagers</h5>
+                            </div>
+                            <div className="card-body">
+                                <Chart
+                                    options={{
+                                        labels: ['Teen Moms', 'Teenagers'],
+                                        legend: {
+                                            show: true
+                                        }
+                                    }}
+                                    series={[teenMomCount, teenagersCount]}
+                                    type="donut"
+                                    width="760"
+                                />
+                            </div>
                         </div>
-                        <div className="card-body">
-                            <Chart
-                                options={{
-                                    labels: ['Teen Moms', 'Teenagers'],
-                                    legend: {
-                                        show: true
-                                    }
-                                }}
-                                series={[teenMomCount, teenagersCount]}
-                                type="donut"
-                                width="760"
-                            />
-                        </div>
+                        {/* Your existing JSX code */}
                     </div>
-                    {/* Your existing JSX code */}
-                </div>
                 </div>
             </main>
         </div>
