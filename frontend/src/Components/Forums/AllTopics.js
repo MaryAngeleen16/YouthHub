@@ -85,7 +85,7 @@ const AllTopics = memo(({ setTopic, setValue, sortType, setCategory }) => {
                                         "&:hover": {
                                             color: '#666666'
                                         },
-                                    }}>{topic.category.name}</Typography>
+                                    }}>{topic.category?.name}</Typography>
                                 </Typography>
                             } />
                             <Box display={'flex'} alignItems={'center'} flex={'row'} mr={10}>

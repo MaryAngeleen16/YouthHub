@@ -21,8 +21,8 @@ const MyTopics = memo(({ setTopic, setValue }) => {
             name: "image",
             label: "Image",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return <img src={value?.url} style={{ width: 75, height: 75 }} />
                 }
@@ -58,7 +58,7 @@ const MyTopics = memo(({ setTopic, setValue }) => {
                 filter: true,
                 sort: true,
                 customBodyRender: (value, tableMeta, updateValue) => {
-                    return value.name;
+                    return value?.name;
                 }
             },
 
@@ -67,8 +67,8 @@ const MyTopics = memo(({ setTopic, setValue }) => {
             name: "userComments",
             label: "Comments",
             options: {
-                filter: true,
-                sort: true,
+                filter: false,
+                sort: false,
                 customBodyRender: (value, tableMeta, updateValue) => {
                     let totalComments = 0;
                     if (Array.isArray(value)) {
@@ -94,6 +94,8 @@ const MyTopics = memo(({ setTopic, setValue }) => {
             name: 'actions',
             label: 'Actions',
             options: {
+                filter: false,
+                sort: false,
                 customBodyRender: (value, tableMeta, updateValue) => {
                     return (
                         <ButtonGroup variant="text" aria-label="text button group">

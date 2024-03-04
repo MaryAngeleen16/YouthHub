@@ -27,6 +27,8 @@ import axios from 'axios';
 import { getToken, getUser } from '../../utils/helpers';
 import BackDropLoading from '../Layouts/BackDropLoading';
 
+const imgDefault = 'https://cdn.stockmediaserver.com/smsimg35/pv/IsignstockContributors/ISS_18592_03648.jpg?token=CwTMufzkdF16eBCpIc7NbBSHYe006RuT7r96JWK72Nc&class=pv&smss=53&expires=4102358400'
+
 
 const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
 
@@ -319,7 +321,7 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
                     <CardHeader
                         avatar={
                             // <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" >
-                            <img src="/images/lofi.jpg" width={75} height={75} />
+                            <img src={forumTopic?.user?.avatar.url || imgDefault} width={75} height={75} />
                             // </Avatar>
                         }
                         title={<Typography fontSize={20}>{forumTopic?.user?.name}</Typography>}
@@ -338,10 +340,11 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
                                 },
                             }}>in {forumTopic.category?.name}</Typography>
 
-                        <div ref={compRef}></div>
                         <Typography variant="body2" color="text.secondary" fontSize={18} mt={3} maxWidth={800}>
                             {forumTopic.content}
                         </Typography>
+                        <img src={forumTopic?.image?.url} height={300} style={{ marginTop: 10 }} />
+                        <div ref={compRef}></div>
                     </CardContent>
                     <Box ref={boxRef} position={isSticky ? 'fixed' : (isFloating ? 'absolute' : 'static')} top={isSticky ? '0' : (isFloating ? `${window.scrollY}px` : 'auto')} zIndex={isSticky ? '1100' : 'auto'} bgcolor={'#AAD8DC'} >
                         <Divider sx={{ mx: 2, mt: 3 }} />
