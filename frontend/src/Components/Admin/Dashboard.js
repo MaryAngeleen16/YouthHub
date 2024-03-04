@@ -12,6 +12,7 @@ const Dashboard = () => {
     const [users, setUsers] = useState([]);
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
     const [userRegistrationDates, setUserRegistrationDates] = useState({});
+    const [genderCounts, setGenderCounts] = useState({});
 
     const OpenSidebar = () => {
         setOpenSidebarToggle(!openSidebarToggle);
@@ -37,6 +38,13 @@ const Dashboard = () => {
             }, {});
             setUserRegistrationDates(registrationDatesCount);
 
+            // Extract gender counts
+            const genderCountsData = data.users.reduce((acc, user) => {
+                acc[user.gender] = (acc[user.gender] || 0) + 1;
+                return acc;
+            }, {});
+            setGenderCounts(genderCountsData);
+
             console.log(data.users);
         } catch (error) {
             console.error(error);
@@ -56,7 +64,7 @@ const Dashboard = () => {
                 <div className='unique-card-container'>
                     <div className='card'>
                         <div className='card-inner'>
-                        <h3 style={{ color: 'white' }}>USERS</h3>
+                            <h3 style={{ color: 'white' }}>USERS</h3>
                             <BsFillArchiveFill className='card_icon' />
                         </div>
                         <h1 style={{ color: 'white' }}>{users.length}</h1>
@@ -117,8 +125,31 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
+                <div className="charts-container d-flex justify-content-between">
+                {/* Other charts */}
+                <div className="card">
+                    <div className="card-inner">
+                        <h5 style={{ color: "#b38269" }}>User Gender Distribution</h5>
+                    </div>
+                    <div className="card-body">
+                        <Chart
+                            options={{
+                                labels: Object.keys(genderCounts),
+                                legend: {
+                                    show: true
+                                }
+                            }}
+                            series={Object.values(genderCounts)}
+                            type="donut"
+                            width="500"
+                        />
+                    </div>
+                </div>
+            </div>
             </main>
         </div>
     );

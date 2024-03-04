@@ -15,6 +15,7 @@ const UpdateInfo = () => {
     const [avatar, setAvatar] = useState('');
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
     const [gender, setGender] = useState('');
+    const [roleStatus, setRoleStatus] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
     const [isUpdated, setIsUpdated] = useState(false);
@@ -36,9 +37,12 @@ const UpdateInfo = () => {
                 setLocation(data.user.location || '');
                 setPhone(data.user.phone || '');
                 setGender(data.user.gender || '');
+                setRoleStatus(data.user.roleStatus || '');
                 setAvatarPreview(data.user.avatar.url);
                 setUser(data.user);
                 setLoading(false);
+
+                console.log("Role Status:", data.user.roleStatus); // Log roleStatus
             } catch (error) {
                 console.error('Error fetching profile:', error);
                 toast.error('Error fetching user profile', {
@@ -129,6 +133,7 @@ const UpdateInfo = () => {
         formData.set('location', location);
         formData.set('phone', phone);
         formData.set('gender', gender);
+        formData.set('roleStatus', roleStatus);
 
         // If avatar is selected, add it to the form data
         if (avatar) {
@@ -162,6 +167,9 @@ const UpdateInfo = () => {
             // If it's not a file input, update the corresponding state
             if (name === 'gender') {
                 setGender(value);
+            } else if (name === 'roleStatus') { // Update roleStatus directly
+                console.log(value); // Log the selected value
+                setRoleStatus(value);
             } else {
                 // For other inputs, update state directly
                 switch (name) {
@@ -183,6 +191,7 @@ const UpdateInfo = () => {
             }
         }
     };
+
 
 
     // Bootstrap CSS
@@ -319,6 +328,25 @@ const UpdateInfo = () => {
                                                     <option value="Western Bicutan">Western Bicutan</option>
                                                 </select>
                                             </div>
+
+                                            <div className="form-group mb-3">
+                                                <label htmlFor="roleStatus_field" style={{ fontWeight: 'bold' }}>Status</label>
+                                                <br />
+                                                <select
+                                                    id="roleStatus_field"  // Updated id attribute to match htmlFor attribute of the label
+                                                    name="roleStatus"
+                                                    className="custom-select form-control-sm"
+                                                    value={roleStatus || ''}
+                                                    onChange={onChange}
+                                                >
+                                                    <option value="">Select Status</option>
+                                                    <option value="Teenager">Teenager</option>
+                                                    <option value="Teen Mom">Teen Mom</option>
+                                                    <option value="Mom">Mom</option>
+                                                </select>
+
+                                            </div>
+
 
 
 

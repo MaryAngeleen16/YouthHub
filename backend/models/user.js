@@ -46,7 +46,8 @@ const userSchema = new mongoose.Schema({
     birthday: Date, // Added birthday field
     location: String, // Added location field
     phone: String, // Added phone field
-    gender: String // Added gender field
+    gender: String, // Added gender field
+    roleStatus: String //
 });
 
 

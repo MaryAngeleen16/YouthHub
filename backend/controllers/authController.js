@@ -178,7 +178,8 @@ exports.getAdditionalInfo = async (req, res, next) => {
             birthday: req.body.birthday,
             location: req.body.location,
             phone: req.body.phone,
-            gender: req.body.gender // Include gender field
+            gender: req.body.gender, // Include gender field
+            roleStatus: req.body.roleStatus
         };
 
         // Find the user by ID and update the information
