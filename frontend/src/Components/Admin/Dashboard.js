@@ -79,6 +79,7 @@ const Dashboard = () => {
             console.error(error);
             // Handle the error as needed
         }
+        
     };
 
     useEffect(() => {
