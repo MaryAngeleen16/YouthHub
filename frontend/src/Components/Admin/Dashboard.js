@@ -17,6 +17,7 @@ const Dashboard = () => {
     const [teenMomCount, setTeenMomCount] = useState(0);
     const [teenagersCount, setTeenagersCount] = useState(0);
     const [femaleTeenagersLocations, setFemaleTeenagersLocations] = useState({}); // State to store female teenagers' locations
+    const [teenMomLocations, setTeenMomLocations] = useState({});
 
     const OpenSidebar = () => {
         setOpenSidebarToggle(!openSidebarToggle);
@@ -66,6 +67,14 @@ const Dashboard = () => {
                 return acc;
             }, {});
             setFemaleTeenagersLocations(locationsCount);
+
+            // Extract teen moms' locations
+            const teenMomLocationsCount = teenMomUsers.reduce((acc, user) => {
+                acc[user.location] = (acc[user.location] || 0) + 1;
+                return acc;
+            }, {});
+            setTeenMomLocations(teenMomLocationsCount);
+
         } catch (error) {
             console.error(error);
             // Handle the error as needed
@@ -162,15 +171,39 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="unique-chart-loc">
+                    {/* <div className="unique-chart-loc">
                         <div className="card-loc">
                             <div className="card-loc-body d-flex flex-column align-items-center">
                                 <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
                                 <FemaleTeenagersChart />
                             </div>
                         </div>
+                    </div> */}
+                    <div className="unique-chart-loc">
+                    <div className="card-loc">
+                        <div className="card-loc-body d-flex flex-column align-items-center">
+                            <h5 className="card-title" style={{ color: "#b38269" }}>Teen Moms in Different Locations</h5>
+                            <Chart
+                                options={{
+                                    chart: {
+                                        id: "teen-moms-locations-chart"
+                                    },
+                                    xaxis: {
+                                        categories: Object.keys(teenMomLocations)
+                                    }
+                                }}
+                                series={[
+                                    {
+                                        name: "teen-moms-locations",
+                                        data: Object.values(teenMomLocations)
+                                    }
+                                ]}
+                                type="line"
+                                width="450"
+                            />
+                        </div>
                     </div>
-
+                </div>
 
                 </div>
 
