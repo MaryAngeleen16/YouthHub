@@ -16,6 +16,14 @@ import UpdatePassword from './Components/User/UpdatePassword';
 import Dashboard from './Components/Admin/Dashboard';
 import Home from './Home.js';
 
+// import EventList from './Components/Admin/EventList';
+import CreateEvent from './Components/Events/NewEvent';
+// import UpdateEvent from './Components/Admin/UpdateEvent';
+
+import VenueList from './Components/Venue/AllVenues';
+import CreateVenue from './Components/Venue/NewVenue';
+import UpdateVenue from './Components/Venue/UpdateVenue';
+
 import CategoryList from './Components/Admin/CategoryList';
 import CreateCategory from './Components/Admin/CreateCategory';
 import UpdateCategory from './Components/Admin/UpdateCategory';
@@ -59,6 +67,14 @@ function App() {
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<NewPassword />} />
           <Route path="/password/update" element={<UpdatePassword />} />
+
+          <Route path="/venue/create" element={<CreateVenue />} />
+          <Route path="/venue/update/:id" element={<UpdateVenue />} />
+          <Route path="/venue/list" element={<VenueList />} />
+
+          <Route path="/event/create" element={<CreateEvent />} />
+          {/* <Route path="/event/update/:id" element={<UpdateEvent />} />
+          <Route path="/event/list" element={<EventList />} /> */}
 
           <Route path="/category/create" element={<CreateCategory />} />
           <Route path="/category/update/:id" element={<UpdateCategory />} />
