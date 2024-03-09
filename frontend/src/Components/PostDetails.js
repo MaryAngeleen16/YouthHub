@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 import './PostDetails.css';
 import { getToken, getUser } from '../utils/helpers';
 import './CommentSection.css';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const offensiveWords =
 (comment) => {
@@ -58,6 +60,8 @@ const offensiveWords =
     
        return englishMatch || tagalogMatch;
     };
+
+
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -153,11 +157,11 @@ const PostDetails = () => {
     return !offensiveWords(comment);
 };
 
-  const handleAddComment = async () => {
-    setLoading(true);
-    if (!isCommentValid(comment)) {
+const handleAddComment = async () => {
+  setLoading(true);
+  if (!isCommentValid(comment)) {
       setLoading(false);
-      alert('Your comment contains offensive words. Your comment will be erased and it will not be posted.');
+      toast.error('Your comment contains offensive words. Your comment have been cleared.');
       setComment('');
       return;
   }
@@ -290,6 +294,8 @@ const handleCancelEdit = () => {
 
   return (
     <div className="container-youth">
+
+<ToastContainer className={'toast-container-offensive'}   autoClose={3000} />
       <div className="main-content-youth">
         {post ? (
           <div>

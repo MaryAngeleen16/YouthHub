@@ -26,6 +26,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { getToken, getUser } from '../../utils/helpers';
 import BackDropLoading from '../Layouts/BackDropLoading';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../Components/CommentSection.css';
 
 const imgDefault = 'https://cdn.stockmediaserver.com/smsimg35/pv/IsignstockContributors/ISS_18592_03648.jpg?token=CwTMufzkdF16eBCpIc7NbBSHYe006RuT7r96JWK72Nc&class=pv&smss=53&expires=4102358400'
 
@@ -136,7 +139,7 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
         setLoading(true)
         if (!isCommentValid(comment)) {
             setLoading(false);
-            alert('Your comment contains offensive words. Your comment will be erased and it will not be posted.');
+            toast.error('Your comment contains offensive words. Your comment have been cleared.');
             setComment('');
             return;
         }
@@ -380,6 +383,8 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
         <>
             <BackDropLoading open={loading} />
             <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <ToastContainer className={'toast-container-offensive'}   autoClose={3000} />
+
                 <Card sx={{ bgcolor: 'transparent', boxShadow: 'none' }}>
                     <CardHeader
                         avatar={
