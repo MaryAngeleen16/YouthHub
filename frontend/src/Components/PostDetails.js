@@ -5,6 +5,59 @@ import './PostDetails.css';
 import { getToken, getUser } from '../utils/helpers';
 import './CommentSection.css';
 
+const offensiveWords =
+(comment) => {
+       const englishOffensiveWords = [
+            'asshole',
+             'bitch',
+             'stupid',
+             'bastard',
+             'jerk',
+             'moron',
+             'gay',
+             'nigga',
+            'faggot',
+             'retard',
+           'asswipe',
+          'motherfucker',
+            'fuck you',
+            'son of a bitch',
+            'slut',
+            'cock',
+          'dick'
+     ];
+       const tagalogOffensiveWords = [
+            'bobo',
+            'tangina',
+            'tang ina',
+            'tanga',
+            'gago',
+            'inutil',
+            'pokpok',
+            'malandi',
+            'maldita',
+            'gaga',
+            'bobita',
+            'tangina',
+            'engot',
+            'pakyu',
+            'pakyo',
+            'pota',
+            'potangina',
+            'potang ina',
+            'ulol',
+            'olol', 
+            'bobita',
+            'ampota',
+            'boboo',
+            'tnga'
+       ];
+    
+       const englishMatch = englishOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+    const tagalogMatch = tagalogOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+    
+       return englishMatch || tagalogMatch;
+    };
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -96,8 +149,18 @@ const PostDetails = () => {
     return category ? category.name : 'Unknown';
   };
 
+  const isCommentValid = (comment) => {
+    return !offensiveWords(comment);
+};
+
   const handleAddComment = async () => {
     setLoading(true);
+    if (!isCommentValid(comment)) {
+      setLoading(false);
+      alert('Your comment contains offensive words. Your comment will be erased and it will not be posted.');
+      setComment('');
+      return;
+  }
     const config = {
       headers: {
         'Authorization': `Bearer ${getToken()}`,

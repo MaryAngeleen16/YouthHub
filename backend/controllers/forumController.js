@@ -1,6 +1,7 @@
 const Forum = require('../models/forum');
 const cloudinary = require('cloudinary');
 
+
 exports.getForums = async (req, res, next) => {
 
     try {
@@ -232,9 +233,11 @@ exports.editForumTopic = async (req, res, next) => {
 exports.makeComment = async (req, res, next) => {
 
     try {
+        
 
         const topicId = req.params.id;
         const userId = req.user._id;
+
 
         const forumTopic = await Forum.findById(topicId);
 
@@ -269,6 +272,102 @@ exports.makeComment = async (req, res, next) => {
 
     }
 }
+
+// Define offensive language check function within the controller
+// const containsOffensiveLanguage = (comment) => {
+//     const englishOffensiveWords = [
+//         'asshole',
+//         'bitch',
+//         'stupid',
+//         'bastard',
+//         'jerk',
+//         'moron',
+//         'gay',
+//         'nigga',
+//         'faggot',
+//         'retard',
+//         'asswipe',
+//         'motherfucker',
+//         'fuck you',
+//         'son of a bitch',
+//         'slut',
+//         'cock',
+//         'dick'
+//     ];
+//     const tagalogOffensiveWords = [
+//         'bobo',
+//         'tangina mo',
+//         'tanga',
+//         'gago',
+//         'inutil',
+//         'pokpok',
+//         'malandi',
+//         'maldita',
+//         'gaga',
+//         'bobita',
+//         'tangina',
+//         'engot',
+//         'pakyu',
+//         'pakyo',
+//         'pota',
+//         'potangina',
+//         'ulol',
+//         'olol', 
+//         'bobita'
+//     ];
+
+//     const englishMatch = englishOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+//     const tagalogMatch = tagalogOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+
+//     return englishMatch || tagalogMatch;
+// };
+
+
+// exports.makeComment = async (req, res, next) => {
+//     try {
+//         const topicId = req.params.id;
+//         const userId = req.user._id;
+//         const { comment } = req.body;
+
+//         if (containsOffensiveLanguage(comment)) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: 'Your comment goes against the community standards. It will not be posted.'
+//             });
+//         }
+
+//         const forumTopic = await Forum.findById(topicId);
+
+//         if (!forumTopic) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: 'Forum topic not found'
+//             });
+//         }
+
+//         const newComment = {
+//             user: userId,
+//             comment: comment,
+//         };
+
+//         forumTopic.userComments.push(newComment);
+//         await forumTopic.save(); // Ensure that saving is awaited
+
+//         res.status(201).json({
+//             success: true,
+//             message: 'Comment posted',
+//             forumTopic: forumTopic,
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         return res.status(500).json({
+//             success: false,
+//             message: 'Error occurred while processing the request.'
+//         });
+//     }
+// };
+
+
 
 exports.editComment = async (req, res, next) => {
 
