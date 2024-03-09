@@ -1,44 +1,47 @@
 const mongoose = require('mongoose');
 
+const eventInfoSchema = new mongoose.Schema({
+  eventName: String,
+  type: String,
+  fee: Number
+});
+
 const eventSchema = new mongoose.Schema({
-    schedule: {
-        type: String,
-        required: true
-    },
-    venue: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Venue',
-        required: true
-    },
-    type: {
-        eventInfo: {
-            eventName: {
-                type: String
-            },
-            type: {
-                type: String
-            },
-            fee: {
-                type: Number
-            }
-        },
-        required: true
-    },
-    payment_status: {
-        type: String
-    },
-    amount: {
-        type: Number
-    },
-    audience_capacity: {
-        type: Number
-    },
-    banner: {
-        type: String
-    },
-    additionalImages: [{
-        type: String
-    }]
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  schedule: {
+    type: Date,
+    required: true
+  },
+  venue_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Venue',
+    required: true
+  },
+  type: eventInfoSchema, // Corrected to use the nested schema directly
+  payment_status: {
+    type: String,
+    required: true
+  },
+  amount: {
+    type: Number
+  },
+  audience_capacity: {
+    type: Number,
+    required: true
+  },
+  banner: {
+    type: String
+  },
+  additionalImages: [{
+    type: String
+  }]
 }, { timestamps: true });
 
 const Event = mongoose.model('Event', eventSchema);

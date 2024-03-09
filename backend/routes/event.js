@@ -17,7 +17,7 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
 router.get('/events', getAllEvents);
 router.get('/events/:id', getEventById);
 
-router.post('/events', isAuthenticatedUser, createEvent);
+router.post('/events/new', isAuthenticatedUser, createEvent);
 router.put('/events/:id', isAuthenticatedUser, updateEvent);
 router.delete('/events/:id', isAuthenticatedUser, deleteEvent);
 

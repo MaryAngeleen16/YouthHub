@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getToken } from '../../utils/helpers';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Admin/Sidebar';
@@ -14,20 +15,43 @@ const CreateEvent = () => {
     schedule: '',
     venue_id: '',
     type: '',
-    payment_status: '',
+    payment_status: '1',
     amount: '',
     audience_capacity: '',
     banner: null,
     additionalImages: [],
   });
 
+  const [venues, setVenues] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState({});
+  // const [paymentStatus, setPaymentStatus] = useState('1');
+  // const [setAmount] = useState('');
+
   const onChange = (e) => {
-    if (e.target.type === 'file') {
-      setEvent({ ...event, [e.target.name]: e.target.files[0] });
+    const { name, value, type, checked, files } = e.target;
+
+    if (type === 'checkbox') {
+      setEvent({ ...event, [name]: checked ? '1' : '0' });
+    } else if (name === 'amount') {
+      setEvent({ ...event, [name]: value });
+    } else if (type === 'file') {
+      setEvent({ ...event, [name]: files[0] });
     } else {
-      setEvent({ ...event, [e.target.name]: e.target.value });
+      setEvent({ ...event, [name]: value });
     }
   };
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'venues_id') {
+      setEvent({ ...event, venues_id: value });
+    } else {
+      setEvent({ ...event, [name]: value });
+    }
+  };
+
 
   const {
     title,
@@ -41,6 +65,26 @@ const CreateEvent = () => {
     banner,
     additionalImages,
   } = event;
+
+  useEffect(() => {
+    console.log('Fetching venues...');
+    axios
+      .get('http://localhost:4001/api/venues', configs)
+      .then((response) => {
+        console.log('Venues data:', response.data);
+        setVenues(response.data.venues);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch venues:', error);
+      });
+  }, []);
+
+  const configs = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      'Authorization': `Bearer ${getToken()}`
+    }
+  }
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -63,15 +107,40 @@ const CreateEvent = () => {
     formData.append('banner', banner);
     additionalImages.forEach((image) => formData.append('additionalImages', image));
 
-    try {
-      const response = await axios.post('http://localhost:4001/api/events/new', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+  //   try {
+  //     const response = await axios.post('http://localhost:4001/api/events/new', formData, {
+  //       headers: { 'Content-Type': 'multipart/form-data' },
+  //     });
+  //     toast.success('Event created successfully');
+  //     navigate('/events/list');
+  //   } catch (error) {
+  //     toast.error('Failed to create event');
+  //   }
+  // };
+
+  axios
+      .post('http://localhost:4001/api/events/new', { title, description, schedule, 
+      venue_id, type, payment_status, amount, audience_capacity, banner, additionalImages
+    })
+      .then((res) => {
+        toast.success('Successfully Created');
+        navigate('/event/list');
+        setEvent({
+          title: '',
+          description: '',
+          schedule: '',
+          venue_id: '',
+          type: '',
+          payment_status: '',
+          amount: '',
+          audience_capacity: '',
+          banner: '',
+          additionalImages: ''
+        });
+      })
+      .catch((err) => {
+        toast.error('Failed to create'); // Use toast for error message
       });
-      toast.success('Event created successfully');
-      navigate('/events/list');
-    } catch (error) {
-      toast.error('Failed to create event');
-    }
   };
 
   useEffect(() => {
@@ -100,7 +169,7 @@ const CreateEvent = () => {
     };
   }, []);
 
-  
+
   return (
     <div className="container mt-6">
       <div className="row">
@@ -132,17 +201,17 @@ const CreateEvent = () => {
                   Schedule
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control datetimepicker"
                   name="schedule"
-                  value={schedule}
+                  value={schedule ? formatDate(new Date(schedule)) : ''}
                   onChange={onChange}
                   required
-                  autoComplete="off"
                 />
               </div>
             </div>
-            <div className="form-group row">
+
+            {/* <div className="form-group row">
               <div className="col-md-5">
                 <label htmlFor="venue_id" className="control-label">
                   Venue
@@ -156,10 +225,31 @@ const CreateEvent = () => {
                   required
                 >
                   <option value=""></option>
-                  {/* Add options dynamically based on the data */}
                 </select>
               </div>
+            </div> */}
+
+            <div className="mb-3">
+              <label htmlFor="venue" className="form-label">
+                Venue
+              </label>
+              <select
+                className="form-control"
+                id="venue"
+                name="venue_id" // Corrected name to venue_id
+                required
+                value={venue_id} // Corrected to venue_id
+                onChange={handleChange}
+              >
+                <option value="">Select Venue</option> {/* New option added */}
+                {venues.map((venue) => (
+                  <option key={venue._id} value={venue._id}>
+                    {venue.name}
+                  </option>
+                ))}
+              </select>
             </div>
+
             <div className="form-group row">
               <div className="col-md-10">
                 <label htmlFor="description" className="control-label">
@@ -177,56 +267,47 @@ const CreateEvent = () => {
                 ></textarea>
               </div>
             </div>
-            <div className="form-group">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value="2"
-                  id="type"
-                  name="type"
-                  checked={type === '2'}
-                  onChange={onChange}
-                />
-                <label className="form-check-label" htmlFor="type">
-                  Private Event (<i>Do not show in website</i>)
-                </label>
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value="1"
-                  id="payment_status"
-                  name="payment_status"
-                  checked={payment_status === '1'}
-                  onChange={onChange}
-                />
-                <label className="form-check-label" htmlFor="payment_status">
-                  Free For All
-                </label>
-              </div>
-            </div>
-            <div className="form-group row" style={{ display: payment_status === '1' ? 'none' : 'block' }}>
+
+
+            <div className="form-group row">
               <div className="col-md-5">
-                <label htmlFor="amount" className="control-label">
-                  Registration Fee
-                </label>
-                <input
-                  type="number"
-                  step="any"
-                  className="form-control text-right"
-                  name="amount"
-                  id="amount"
-                  value={amount}
-                  onChange={onChange}
-                  required
-                  autoComplete="off"
-                />
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value="1"
+                    id="payment_status"
+                    name="payment_status"
+                    checked={payment_status === '1'}
+                    onChange={onChange}
+                  />
+                  <label className="form-check-label" htmlFor="payment_status">
+                    Free For All
+                  </label>
+                </div>
+                {payment_status === '0' && (
+                  <div>
+                    <label htmlFor="amount" className="control-label">
+                      Registration Fee
+                    </label>
+                    <input
+                      type="number"
+                      step="any"
+                      className="form-control text-right"
+                      name="amount"
+                      id="amount"
+                      value={amount}
+                      onChange={onChange}
+                      required={!payment_status}
+                      autoComplete="off"
+                    />
+                  </div>
+                )}
               </div>
             </div>
+
+
+
             <div className="form-group row">
               <div className="col-md-5">
                 <label htmlFor="audience_capacity" className="control-label">
@@ -245,6 +326,8 @@ const CreateEvent = () => {
                 />
               </div>
             </div>
+
+
             <div className="row form-group">
               <div className="col-md-5">
                 <label htmlFor="banner" className="control-label">
@@ -298,5 +381,12 @@ const CreateEvent = () => {
     </div>
   );
 };
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-indexed
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 export default CreateEvent;
