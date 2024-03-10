@@ -17,10 +17,11 @@ const UpdateVenue = () => {
 
     useEffect(() => {
         console.log("Fetching venue details for ID:", id);
-        axios.get(`http://localhost:4001/api/venues/${id}`)
+        axios
+            .get(`http://localhost:4001/api/venues/${id}`)
             .then((res) => {
                 console.log("Venue details response:", res.data);
-                const { name, location, description } = res.data;
+                const { name, location, description } = res.data.venue; // Assuming the venue data is nested under the 'venue' key
                 // Set the initial state of the form fields with existing data
                 setVenue({ name, location, description });
             })
@@ -29,7 +30,7 @@ const UpdateVenue = () => {
                 toast.error('Failed to fetch venue details');
             });
     }, [id]);
-    
+
 
     console.log('Initial Venue State:', venue); // Check initial state of venue
 
@@ -48,7 +49,8 @@ const UpdateVenue = () => {
             return;
         }
 
-        axios.put(`http://localhost:4001/api/venues/${id}`, { name, location, description })
+        axios
+            .put(`http://localhost:4001/api/venues/${id}`, { name, location, description })
             .then(() => {
                 toast.success('Venue updated successfully');
                 navigate('/venue/list');
