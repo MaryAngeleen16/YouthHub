@@ -2,12 +2,15 @@ const Event = require('../models/event');
 const cloudinary = require('cloudinary');
 
 exports.createEvent = async (req, res, next) => {
-    try {
+    try { 
+        if (req.body.payment_status !== '0' ){
+            req.body.amount = 0
+        }
         let imagesLinks = [];
         let images = [];
 
         // Extract image paths from the request
-        if (req.files.length > 0) {
+        if (req.files?.length > 0) {
             req.files.forEach(image => {
                 images.push(image.path);
             });
@@ -88,7 +91,10 @@ exports.deleteEvent = async (req, res, next) => {
 exports.getAllEvents = async (req, res, next) => {
     try {
         // Fetch all events from the database
-        const events = await Event.find();
+        const events = await Event.find().populate({
+            path: 'venue_id', 
+            model: 'Venue'
+        })
 
         // Respond with the fetched events
         res.status(200).json({ events });
@@ -125,4 +131,4 @@ exports.getSingleEvent = async (req, res, next) => {
     }
 };
 
-// Additional controller methods for updating, deleting comments, etc. can be added as needed.
+// Additional ntroller methods for updating, deleting comments, etc. can be added as needed.

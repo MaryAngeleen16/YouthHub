@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Admin/Sidebar';
 import '../../Components/Admin/crud.css';
+import { faBatteryEmpty } from '@fortawesome/free-solid-svg-icons';
 
 const CreateEvent = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const CreateEvent = () => {
     schedule: '',
     venue_id: '',
     type: '',
-    payment_status: '1',
+    payment_status: '0',
     amount: '',
     audience_capacity: '',
     banner: null,
@@ -44,13 +45,38 @@ const CreateEvent = () => {
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'venues_id') {
-      setEvent({ ...event, venues_id: value });
+    const { name, value, type } = e.target;
+
+    if (type === 'file') {
+      const files = e.target.files;
+      if (!files || files.length === 0) {
+        return; // No files selected, do nothing
+      }
+
+      const imagePreviews = {};
+
+      Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            imagePreviews[file.name] = reader.result;
+            setEvent({ ...event, imagePreviews });
+          }
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      setEvent({ ...event, images: Array.from(files) });
     } else {
-      setEvent({ ...event, [name]: value });
+      if (name === 'venues_id') {
+        setEvent({ ...event, venues_id: value });
+      } else {
+        setEvent({ ...event, [name]: value });
+      }
     }
   };
+
 
 
   const {
@@ -105,23 +131,25 @@ const CreateEvent = () => {
     formData.append('amount', amount);
     formData.append('audience_capacity', audience_capacity);
     formData.append('banner', banner);
-    additionalImages.forEach((image) => formData.append('additionalImages', image));
+    if (additionalImages.length > 0) {
+      additionalImages.forEach((image) => formData.append('additionalImages', image));
+    }
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+    //   try {
+    //     const response = await axios.post('http://localhost:4001/api/events/new', formData, {
+    //       headers: { 'Content-Type': 'multipart/form-data' },
+    //     });
+    //     toast.success('Event created successfully');
+    //     navigate('/events/list');
+    //   } catch (error) {
+    //     toast.error('Failed to create event');
+    //   }
+    // };
 
-  //   try {
-  //     const response = await axios.post('http://localhost:4001/api/events/new', formData, {
-  //       headers: { 'Content-Type': 'multipart/form-data' },
-  //     });
-  //     toast.success('Event created successfully');
-  //     navigate('/events/list');
-  //   } catch (error) {
-  //     toast.error('Failed to create event');
-  //   }
-  // };
-
-  axios
-      .post('http://localhost:4001/api/events/new', { title, description, schedule, 
-      venue_id, type, payment_status, amount, audience_capacity, banner, additionalImages
-    })
+    axios
+      .post('http://localhost:4001/api/events/new', formData, configs)
       .then((res) => {
         toast.success('Successfully Created');
         navigate('/event/list');
@@ -347,7 +375,8 @@ const CreateEvent = () => {
                 )}
               </div>
             </div>
-            <div className="form-group">
+
+            {/* <div className="form-group">
               <label htmlFor="additionalImages" className="control-label">
                 Additional Images
               </label>
@@ -363,10 +392,9 @@ const CreateEvent = () => {
                 <strong>Choose File</strong>
               </label>
               <div id="drop">
-                {/* Additional image previews can be shown here */}
               </div>
               <div id="list"></div>
-            </div>
+            </div> */}
             <div className="row">
               <div className="col-md-12">
                 <button type="submit" className="btn btn-sm btn-block btn-primary col-sm-2">

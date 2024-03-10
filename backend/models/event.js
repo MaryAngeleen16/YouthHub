@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const eventInfoSchema = new mongoose.Schema({
-  eventName: String,
-  type: String,
-  fee: Number
-});
+// const eventInfoSchema = new mongoose.Schema({
+//   eventName: String,
+//   type: String,
+//   fee: Number
+// });
 
 const eventSchema = new mongoose.Schema({
   title: {
@@ -24,7 +24,14 @@ const eventSchema = new mongoose.Schema({
     ref: 'Venue',
     required: true
   },
-  type: eventInfoSchema, // Corrected to use the nested schema directly
+  // type: {
+  //   // eventName: String,
+  //   typename: {
+  //     type: String, 
+  //     default: '0'
+  //   },
+  //   fee: Number
+  // }, // Corrected to use the nested schema directly
   payment_status: {
     type: String,
     required: true

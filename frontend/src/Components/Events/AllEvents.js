@@ -75,8 +75,13 @@ const AllEvents = () => {
       data.rows.push({
         _id: event._id,
         schedule: event.schedule,
-        venue: event.venue,
-        event_info: event.event_info,
+        venue: event.venue_id.name,
+        event_info: (
+          <div>
+            <div>{event.title}</div>
+            <div>{event.amount === 0 ? 'Free':event.amount}</div>
+          </div>
+        ),
         description: event.description,
         actions: (
           <div style={{ display: 'flex', alignItems: 'center' }}>
