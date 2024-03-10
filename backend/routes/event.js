@@ -4,7 +4,7 @@ const upload = require('../utils/multer');
 const Event = require('../models/event');
 const {
     createEvent,
-    // updateEvent,
+    updateEvent,
     deleteEvent,
     getAllEvents,
     getSingleEvent,
@@ -18,7 +18,7 @@ router.get('/events', getAllEvents);
 router.get('/events/:id', getSingleEvent);
 
 router.post('/events/new', isAuthenticatedUser, upload.single('banner'), createEvent);
-// router.put('/events/:id', isAuthenticatedUser, updateEvent);
+router.put('/events/:id', isAuthenticatedUser, upload.single('banner'), updateEvent);
 router.delete('/events/:id', isAuthenticatedUser, deleteEvent);
 
 // router.post('/events/:id/participants', isAuthenticatedUser, addParticipant);

@@ -68,6 +68,40 @@ exports.createEvent = async (req, res, next) => {
     }
 };
 
+exports.updateEvent = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        // Find the event by ID
+        let event = await Event.findById(id);
+
+        // Check if event exists
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        // Update event fields with the request body
+        event.title = req.body.title || event.title;
+        event.description = req.body.description || event.description;
+        event.schedule = req.body.schedule || event.schedule;
+        event.venue_id = req.body.venue_id || event.venue_id;
+        event.type = req.body.type || event.type;
+        event.payment_status = req.body.payment_status || event.payment_status;
+        event.amount = req.body.amount || event.amount;
+        event.audience_capacity = req.body.audience_capacity || event.audience_capacity;
+
+        // Save the updated event
+        event = await event.save();
+
+        // Respond with the updated event
+        res.json({ message: 'Event updated successfully', event });
+    } catch (error) {
+        console.error('Error updating event:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
 exports.deleteEvent = async (req, res, next) => {
     try {
         const { id } = req.params;

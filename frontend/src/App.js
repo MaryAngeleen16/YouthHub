@@ -18,7 +18,7 @@ import Home from './Home.js';
 
 import AllEvents from './Components/Events/AllEvents';
 import CreateEvent from './Components/Events/NewEvent';
-// import UpdateEvent from './Components/Admin/UpdateEvent';
+import UpdateEvent from './Components/Events/UpdateEvent';
 
 import VenueList from './Components/Venue/AllVenues';
 import CreateVenue from './Components/Venue/NewVenue';
@@ -74,7 +74,7 @@ function App() {
           <Route path="/venue/list" element={<VenueList />} />
 
           <Route path="/event/create" element={<CreateEvent />} />
-          {/* <Route path="/event/update/:id" element={<UpdateEvent />} /> */}
+          <Route path="/event/update/:id" element={<UpdateEvent />} />
           <Route path="/event/list" element={<AllEvents />} />
 
           <Route path="/category/create" element={<CreateCategory />} />
