@@ -10,7 +10,7 @@ import '../../Components/Admin/crud.css';
 const UpdateEvent = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
+  
   const [event, setEvent] = useState({
     title: '',
     description: '',
@@ -150,7 +150,7 @@ const UpdateEvent = () => {
                   type="date"
                   className="form-control datetimepicker"
                   name="schedule"
-                  value={event.schedule}
+                  value={formatDate(new Date(event.schedule))}
                   onChange={onChange}
                   required
                 />
@@ -281,4 +281,13 @@ const UpdateEvent = () => {
   );
 };
 
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-indexed
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export default UpdateEvent;
+
