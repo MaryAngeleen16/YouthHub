@@ -75,7 +75,7 @@ function App() {
 
           <Route path="/event/create" element={<CreateEvent />} />
           {/* <Route path="/event/update/:id" element={<UpdateEvent />} /> */}
-          {/* <Route path="/event/list" element={<EventList />} /> */}
+          <Route path="/event/list" element={<AllEvents />} />
 
           <Route path="/category/create" element={<CreateCategory />} />
           <Route path="/category/update/:id" element={<UpdateCategory />} />

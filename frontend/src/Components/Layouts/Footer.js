@@ -7,7 +7,7 @@ const Footer = () => {
   const location = useLocation(); // Get the current location
 
    // Define the paths where you don't want the Header to appear
-   const excludedPaths = ['/dashboard', '/venue/list','/venue/create','/event/create', '/category/create', '/category/list',
+   const excludedPaths = ['/dashboard', '/venue/list','/venue/create','/event/create','/event/list', '/category/create', '/category/list',
                           '/post/list/','/post/create/','/video/list',
                           '/video/create','/admin/users'];
 

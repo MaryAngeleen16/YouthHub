@@ -60,7 +60,7 @@ function Sidebar() {
                         </a>
                         <ul id="event" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li className="sidebar-event">
-                                <a href="/" className="sidebar-link">Event List</a>
+                                <a href="/event/list" className="sidebar-link">Event List</a>
                             </li>
                             <li className="sidebar-item">
                                 <a href="/event/create" className="sidebar-link">Create New Event</a>

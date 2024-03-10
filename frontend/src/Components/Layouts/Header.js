@@ -68,6 +68,7 @@ const Header = () => {
     '/venue/list',
     '/venue/create',
     '/event/create',
+    '/event/list',
     '/category/create',
     '/category/list',
     '/post/list/',

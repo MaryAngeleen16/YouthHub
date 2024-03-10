@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const event = require('./routes/event');
+// const event = require('./routes/event');
 const venue = require('./routes/venue');
 const categories = require('./routes/category');
 const auth = require('./routes/auth');
@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 // Use the imported routes modules
 app.use('/api', forum);
-app.use('/api', event);
+// app.use('/api', event);
 app.use('/api', venue);
 app.use('/api', categories);
 app.use('/api', auth);
