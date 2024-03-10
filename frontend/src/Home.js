@@ -8,7 +8,7 @@ const Home = () => {
             <Navbar /> {/* Render the Navbar component */}
             <div className="home-banner-container">
                 <div className="home-bannerImage-container">
-                    <img src="/images/home.png" alt="Banner" />
+                    {/* <img src="/images/home.png" alt="Banner" /> */}
                 </div>
             </div>
         </div>
