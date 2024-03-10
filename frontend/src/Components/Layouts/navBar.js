@@ -28,11 +28,11 @@ const Navbar = () => {
             <a className="nav-link header-link" href="/VideosPage">Videos</a>
           </b>
         </li>
-        <li className="nav-item color-nav">
+        {/* <li className="nav-item color-nav">
           <b>
             <a className="nav-link header-link" href="/">Sexual Education</a>
           </b>
-        </li>
+        </li> */}
         <li className="nav-item color-nav">
           <b>
             <a className="nav-link header-link" href="/YouthEvents">Youth Events</a>
