@@ -19,6 +19,7 @@ import Home from './Home.js';
 import AllEvents from './Components/Events/AllEvents';
 import CreateEvent from './Components/Events/NewEvent';
 import UpdateEvent from './Components/Events/UpdateEvent';
+import EventDetails from './Components/EventDetails.js';
 
 import VenueList from './Components/Venue/AllVenues';
 import CreateVenue from './Components/Venue/NewVenue';
@@ -97,6 +98,7 @@ function App() {
           <Route path="/vent/me" element={<VentFormByUser/>} exact />
 
           <Route path="/vent/list" element={<VentList/>} exact />
+          <Route path="/events/:id" element={<EventDetails />} exact />
 
 
           <Route path="/dashboard" element

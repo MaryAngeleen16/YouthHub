@@ -165,4 +165,119 @@ exports.getSingleEvent = async (req, res, next) => {
     }
 };
 
-// Additional ntroller methods for updating, deleting comments, etc. can be added as needed.
+
+
+
+exports.getEventById = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const event = await Event.findById(id);
+  
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
+  
+      return res.json(event);
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
+  exports.addCommentToEvent = async (req, res, next) => {
+    try {
+      const { id } = req.params; // Get the ID of the event
+      const userId = req.user._id; // Get the ID of the user posting the comment
+  
+      const event = await Event.findById(id); // Find the event by ID
+  
+      if (!event) {
+        return res.status(404).json({
+          success: false,
+          message: 'Event not found'
+        });
+      }
+  
+      const newComment = {
+        user: userId,
+        comment: req.body.comment,
+      };
+  
+      event.comments.push(newComment); // Add the new comment to the event
+      await event.save(); // Save the changes
+  
+      res.status(201).json({
+        success: true,
+        message: 'Comment posted',
+        event: event,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error'
+      });
+    }
+  };
+  
+  exports.deleteCommentFromEvent = async (req, res, next) => {
+    try {
+      const { id } = req.params; // Get the event ID from the URL params
+      const { commentId } = req.query; // Get the comment ID from the query params
+  
+      // Find the event by ID
+      const event = await Event.findById(id);
+  
+      // Check if the event exists
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
+  
+      // Filter out the comment with the specified ID
+      event.comments = event.comments.filter(comment => comment._id.toString() !== commentId);
+  
+      // Save the event with the updated comments
+      await event.save();
+  
+      // Return success response
+      return res.status(200).json({ message: 'Comment deleted successfully', event });
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
+  exports.editCommentOfEvent = async (req, res, next) => {
+    try {
+      const { id } = req.params; // Get the event ID from the URL params
+      const { commentId } = req.query; // Get the comment ID from the query params
+      const { comment: updatedComment } = req.body; // Get the updated comment text from the request body
+  
+      // Find the event by ID
+      const event = await Event.findById(id);
+  
+      // Check if the event exists
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
+  
+      // Find the comment within the event's comments array and update it
+      const commentToUpdate = event.comments.find(comment => comment._id.toString() === commentId);
+      if (!commentToUpdate) {
+        return res.status(404).json({ message: 'Comment not found' });
+      }
+  
+      // Update the comment text
+      commentToUpdate.comment = updatedComment;
+  
+      // Save the event with the updated comment
+      await event.save();
+  
+      // Return success response
+      return res.status(200).json({ message: 'Comment updated successfully', event });
+    } catch (error) {
+      console.error('Error updating comment:', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
