@@ -9,7 +9,7 @@ import '../../Components/Admin/crud.css';
 
 const UpdateEvent = () => {
   const navigate = useNavigate();
-  const { event_id } = useParams();
+  const { id } = useParams();
 
   const [event, setEvent] = useState({
     title: '',
@@ -28,7 +28,7 @@ const UpdateEvent = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4001/api/events/${event_id}`, configs)
+      .get(`http://localhost:4001/api/events/${id}`, configs)
       .then((response) => {
         const eventData = response.data.event;
         setEvent(eventData);
@@ -45,7 +45,7 @@ const UpdateEvent = () => {
       .catch((error) => {
         console.error('Failed to fetch venues:', error);
       });
-  }, [event_id]);
+  }, [event]);
 
   const configs = {
     headers: {
@@ -91,10 +91,10 @@ const UpdateEvent = () => {
     }
 
     axios
-      .put(`http://localhost:4001/api/events/${event_id}`, formData, configs)
+      .put(`http://localhost:4001/api/events/${id}`, formData, configs)
       .then((res) => {
         toast.success('Event updated successfully');
-        navigate(`/events/${event_id}`);
+        navigate(`/events/${id}`);
       })
       .catch((err) => {
         toast.error('Failed to update event');
