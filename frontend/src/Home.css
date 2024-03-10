@@ -1,0 +1,117 @@
+ .WomanReadingWithBaby {
+    width: 496px;
+    height: 400px;
+    justify-content: left;
+    align-items: left;
+    display: inline-flex;
+}
+
+.WomanReadingWithBaby img {
+    width: 600px;
+    height: 500px;
+    margin-left: 1200px; 
+}
+
+.Frame21 {
+    width: 612px;
+    height: 284px;
+    padding: 8px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    display: inline-flex;
+    position: relative;
+    top: 50px; 
+    right: 250px; 
+}
+
+
+.Frame9 {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: flex;
+}
+
+.YouthEmpowerment {
+    color: #FF9999;
+    font-size: 100px;
+    font-family: Arial;
+    font-weight: 700;
+    line-height: 76.80px;
+    word-wrap: break-word;
+}
+
+.LoremIpsumDolorSitAmetSitTeFerriHabemusConstitutoSimulFuissetProAdUtPerpetuaModeratiusSitMeaNeDictaLaoreetOporteatVerteremOcurreretLiberavisseNeUsuOmnisAtomorumNamInAliquamSalutatusPro {
+    color: #673737;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: 400;
+    line-height: 19.20px;
+    word-wrap: break-word;
+}
+
+.Frame8 {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    display: inline-flex;
+}
+
+.Frame1 {
+    width: 200px;
+    height: 55px;
+    background: #FF9999;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.Frame6 {
+    width: 200px;
+    height: 55px;
+    border-radius: 50px;
+    border: 1px #FF9999 solid;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+ .Button-banner {
+    color: #f76b6b;
+    font-size: 15px;
+    font-family: Arial;
+    font-weight: 700;
+    line-height: 18px;
+    word-wrap: break-word;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.Button-banner:hover {
+    background-color: #f76b6b;
+    color: white;
+}
+
+.Button-banner:active {
+    background-color: #d63c3c;
+    color: white;
+}
+
+
+.container-banner {
+    display: flex;
+    flex-direction: row;
+}
+
+.row-banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.col-banner {
+    flex: 1;
+}
