@@ -9,6 +9,6 @@ router.post('/venues/new', isAuthenticatedUser, venueController.createVenue);
 router.put('/venues/:id', isAuthenticatedUser, venueController.updateVenue);
 router.delete('/venues/:id', isAuthenticatedUser, venueController.deleteVenue);
 router.get('/venues', isAuthenticatedUser, venueController.getAllVenues);
-router.get('/venues/:id', isAuthenticatedUser, venueController.getSingleVenue);
+router.get('/venues/:id', isAuthenticatedUser, venueController.getVenueById);
 
 module.exports = router;

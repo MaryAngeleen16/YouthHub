@@ -16,9 +16,10 @@ const UpdateVenue = () => {
     });
 
     useEffect(() => {
-        // Fetch venue details using the venue ID from the URL
+        console.log("Fetching venue details for ID:", id);
         axios.get(`http://localhost:4001/api/venues/${id}`)
             .then((res) => {
+                console.log("Venue details response:", res.data);
                 const { name, location, description } = res.data;
                 // Set the initial state of the form fields with existing data
                 setVenue({ name, location, description });
@@ -92,7 +93,7 @@ const UpdateVenue = () => {
                                     type="text"
                                     className="form-control"
                                     name="name"
-                                    value={venue.name}
+                                    value={name}
                                     onChange={onChange}
                                     required
                                 />
@@ -107,7 +108,7 @@ const UpdateVenue = () => {
                                     type="text"
                                     className="form-control"
                                     name="location"
-                                    value={venue.location}
+                                    value={location}
                                     onChange={onChange}
                                     required
                                 />
@@ -124,7 +125,7 @@ const UpdateVenue = () => {
                                     className="form-control"
                                     cols="30"
                                     rows="5"
-                                    value={venue.description}
+                                    value={description}
                                     onChange={onChange}
                                     required
                                 ></textarea>

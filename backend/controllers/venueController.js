@@ -32,6 +32,33 @@ exports.updateVenue = async (req, res) => {
     }
   };
 
+  exports.getVenueById = async (req, res, next) => {
+    try {
+        // Find the venue by ID
+        const venue = await Venue.findById(req.params.id);
+
+        // Check if venue exists
+        if (!venue) {
+            return res.status(404).json({
+                success: false,
+                message: 'Venue not found'
+            });
+        }
+
+        // Respond with the fetched venue
+        res.status(200).json({
+            success: true,
+            venue
+        });
+    } catch (error) {
+        console.error('Error fetching venue:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+};
+
 exports.deleteVenue = async (req, res, next) => {
     try {
         const { id } = req.params;

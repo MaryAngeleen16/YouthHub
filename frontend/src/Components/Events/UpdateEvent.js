@@ -9,7 +9,7 @@ import '../../Components/Admin/crud.css';
 
 const UpdateEvent = () => {
   const navigate = useNavigate();
-  const { eventId } = useParams();
+  const { event_id } = useParams();
 
   const [event, setEvent] = useState({
     title: '',
@@ -28,7 +28,7 @@ const UpdateEvent = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4001/api/events/${eventId}`, configs)
+      .get(`http://localhost:4001/api/events/${event_id}`, configs)
       .then((response) => {
         const eventData = response.data.event;
         setEvent(eventData);
@@ -45,7 +45,7 @@ const UpdateEvent = () => {
       .catch((error) => {
         console.error('Failed to fetch venues:', error);
       });
-  }, [eventId]);
+  }, [event_id]);
 
   const configs = {
     headers: {
@@ -91,10 +91,10 @@ const UpdateEvent = () => {
     }
 
     axios
-      .put(`http://localhost:4001/api/events/${eventId}`, formData, configs)
+      .put(`http://localhost:4001/api/events/${event_id}`, formData, configs)
       .then((res) => {
         toast.success('Event updated successfully');
-        navigate(`/events/${eventId}`);
+        navigate(`/events/${event_id}`);
       })
       .catch((err) => {
         toast.error('Failed to update event');
@@ -116,7 +116,7 @@ const UpdateEvent = () => {
       document.head.removeChild(styleElement);
     };
   }, []);
-  
+
   return (
     <div className="container mt-6">
       <div className="row">
