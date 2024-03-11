@@ -4,6 +4,7 @@ import MetaData from '../Layouts/Metadata';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flip } from 'react-toastify';
 import { getToken } from '../../utils/helpers';
 import BackDropLoading from '../Layouts/BackDropLoading';
 import '../Profile.css';
@@ -58,9 +59,17 @@ const Profile = () => {
             const { data } = await axios.put(`http://localhost:4001/api/me/update`, userData, config);
             setIsUpdated(data.success);
             setLoading(false);
-            toast.success('User updated', {
-                position: toast.POSITION.BOTTOM_CENTER,
-            });
+            toast.success('✅ User Profile Updated', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Flip,
+              });
             navigate('/me', { replace: true });
         } catch (error) {
             setLoading(false);
@@ -75,9 +84,17 @@ const Profile = () => {
                         position: toast.POSITION.BOTTOM_CENTER,
                     });
                 } else {
-                    toast.error('User update failed', {
-                        position: toast.POSITION.BOTTOM_CENTER,
-                    });
+                    toast.error('User Update Failed', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Flip,
+                        });
                 }
             } else if (error.request) {
                 // The request was made but no response was received

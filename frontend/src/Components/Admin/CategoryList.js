@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flip } from 'react-toastify';
 import { MDBDataTable } from 'mdbreact';
 import 'mdbreact/dist/css/mdb.css';
 import Sidebar from './Sidebar';
@@ -26,11 +27,31 @@ const CategoryDataTable = () => {
       .delete(`http://localhost:4001/api/categories/${categoryId}`)
       .then(() => {
         setCategories(categories.filter((category) => category._id !== categoryId));
-        toast.success('Category deleted successfully');
+        toast.success('Category Deleted Successfully', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+          });
       })
       .catch((err) => {
         console.error(err);
-        toast.error('Failed to delete category');
+        toast.error('Failed to Delete Category', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+          });
       });
   };
 

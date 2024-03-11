@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MDBDataTable } from 'mdbreact';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flip } from 'react-toastify';
 import axios from 'axios';
 import { getToken } from '../../utils/helpers';
 import Sidebar from './Sidebar';
@@ -126,11 +127,32 @@ const PostDataTable = () => {
       .delete(`http://localhost:4001/api/admin/delete/post/${postId}`)
       .then(() => {
         setPosts(posts.filter((post) => post._id !== postId));
-        toast.success('Post is deleted successfully');
+        toast.success('Post is Deleted Succesfully', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+        });
       })
       .catch((err) => {
         console.error(err);
-        toast.error('Failed to delete post');
+        toast.error('Failed to Delete Post', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+          });
+          
       });
   };
 
