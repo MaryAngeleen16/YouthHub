@@ -46,13 +46,12 @@
     word-wrap: break-word;
 }
 
-.LoremIpsumDolorSitAmetSitTeFerriHabemusConstitutoSimulFuissetProAdUtPerpetuaModeratiusSitMeaNeDictaLaoreetOporteatVerteremOcurreretLiberavisseNeUsuOmnisAtomorumNamInAliquamSalutatusPro {
-    color: #673737;
-    font-size: 16px;
-    font-family: Arial;
-    font-weight: 400;
-    line-height: 19.20px;
-    word-wrap: break-word;
+.banner-paragraph {
+  color: #A3716E;
+  font-size: 16px;
+  font-family: Metropolis;
+  font-weight: 400;
+  line-height: 29px;
 }
 
 .Frame8 {
@@ -124,115 +123,6 @@
 }
 
 /* New Content */
-
-/* .recent-posts-section .post-content {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 7%;
-    margin-right: 50px;
-  }
-  
-  .recent-posts-section .posts-image {
-    width: 75%; 
-    height: 250px; 
-    border-radius: 6px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-top: 10px;
-  }
-  
-  .recent-posts-section .post-details {
-    width: 100%; 
-    margin-bottom: -50px;
-  }
-  
-  .recent-posts-section .button-container-ye {
-    text-align: right; 
-    margin-top: 30px;
-    margin-right: 20px;
-  }
-  
-  .recent-posts-section .card-title-des {
-    margin: 0; 
-  }
-  
-  .recent-posts-section .ye-button {
-    background-color: #BA94D1 !important;
-    color: white !important;
-    font-weight: 500 !important;
-  }
-  
-  .recent-posts-section .ye-button:hover {
-    background-color: #FFC7C7 !important;
-    color: #7F669D !important;
-  }
-  
-  .recent-posts-section .card-body.card-des {
-    padding: 0; 
-    max-width: 250px;
-    max-height: 300px;
-  }
-  
-  .recent-posts-section .posts-title {
-    text-transform: capitalize;
-    font-weight: 900 !important;
-    font-size: 18px;
-    margin-top: -50px;
-    margin-bottom: 100px;
-    padding-right: 25px !important;
-    position: sticky;
-    width: 300px;
-  }
-  
-  .recent-posts-section .posts-desc {
-    font-weight: 300 !important;
-    font-size: 16px;
-    margin-top: -20%;
-    margin-bottom: 50px !important;
-    position: sticky;
-    word-wrap: break-word;
-    padding-right: 10px;
-  }
-  
-  .recent-posts-section .maxwidthh {
-    width: 600px;
-    align-self: center;
-    margin-top: 30px;
-    border: 3px solid #F3CCF3 !important; 
-    border-radius: 6px;
-    background-color: white !important;
-  }
-  
-  .recent-posts-section .center-row {
-    display: flex;
-    justify-content: center !important;
-    margin-left: -100px !important;
-    margin-right: -100px !important;
-  }
-  
-  .recent-posts-section .ye-row {
-    display: flex;
-    margin: 0;
-  }
-  
-  .recent-posts-section .posts-maincontainer {
-    margin-bottom: 10%;
-  }
-  
-  .recent-posts-section .posts-maincontainer .row-posts {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-gap: -50px; 
-  }
-  
-  .recent-posts-section .posts-header {
-    font-weight: 900;
-    text-align: center;
-    margin-top: 50px;
-    font-size: 52px;
-    color: #FFB0B0;
-  }
-   */
 
    .Content {
     width: 1440px;

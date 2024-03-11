@@ -183,7 +183,7 @@ const Profile = () => {
             <BackDropLoading open={loading} />
             <MetaData title={'Profile'} />
 
-            <div className="container light-style flex-grow-1 container-p-y">
+            <div className="container light-style flex-grow-1 container-p-y profile-card">
                 <h4 className="font-weight-bold py-3 mb-4">
                     Account settings
                 </h4>
@@ -215,7 +215,7 @@ const Profile = () => {
                                                     <input type="file" className="account-settings-fileinput" style={{ paddingTop: '10px' }} onChange={onChange} />
                                                 </label> &nbsp;
                                                 <button type="button" className="btn-sm btn-default">Reset</button>
-                                                <div className="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                                <div className="text-dark small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                             </div>
                                         </div>
                                         <hr className="border-light m-0" />

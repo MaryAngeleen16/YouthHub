@@ -58,7 +58,10 @@ const Home = () => {
                         <div className="Frame21">
                             <div className="banner-para">
                                 <div className="YouthEmpowerment">Youth Empowerment Hub</div>
-                                <div className="LoremIpsumDolorSitAmetSitTeFerriHabemusConstitutoSimulFuissetProAdUtPerpetuaModeratiusSitMeaNeDictaLaoreetOporteatVerteremOcurreretLiberavisseNeUsuOmnisAtomorumNamInAliquamSalutatusPro">Lorem ipsum dolor sit amet, sit te ferri habemus constituto, <br />simul fuisset pro ad. Ut perpetua moderatius sit. Mea ne dicta <br />laoreet oporteat. Verterem ocurreret liberavisse ne usu, omnis<br />atomorum nam in. Aliquam salutatus pro</div>
+                                <div className="banner-paragraph">Join us in curbing premature parenthood through community-driven support<br />
+                                and education. Together, let's build a healthy online community dedicated<br />
+                                to empowering adolescents and preventing unwanted pregnancies.<br />
+                                Together, we can make a difference.</div>
                                 <div className="Frame8">
                                     <div className="Frame1">
                                         <div className="Button-banner" onClick={() => { window.location.href = '/register'; }}>CREATE ACCOUNT</div>
@@ -82,7 +85,11 @@ const Home = () => {
                 <div class="Frame26">
                     <div class="Frame19">
                         <div class="ThereAreManyReaso">PARENTHOOD is a gift buuut!</div>
-                        <div class="AlthoughThisIsWel">IPDC Finance Limited (previously known as "Industrial Promotion and Development Company of Bangladesh Limited") is the first private sector financial institution of the country established in 1981 by a distinguished group of shareholders namely International Finance Corporation (IFC), USA, German Investment and Development Company (DEG), Germany, The Aga Khan Fund for Economic Development (AKFED), Switzerland, Commonwealth Development Corporation (CDC), UK and the Government of Bangladesh</div>
+                        <div class="AlthoughThisIsWel">Parenthood is a gift, but it's important to be prepared. 
+                        At the Youth Empowerment Hub, we believe in equipping adolescents with the knowledge 
+                        and support they need for responsible decision-making. Explore our educational posts 
+                        to learn about adolescent empowerment and how to navigate the journey to parenthood 
+                        with confidence. Start your journey toward informed choices today.</div>
                     </div>
                     <div class="Frame25">
                         <div class="ReadMore">Read Post</div>
