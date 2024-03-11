@@ -341,4 +341,18 @@
     height: 14.51px;
     background: #ED017F;
   }
+
+  /* Recent Post */
+
+  .recent-posts-section {
+    background-color: #F38783;
+  }
   
+  .posts-maincontainer {
+    padding-top: 5px;
+    padding-bottom: 50px;
+  }
+
+  .posts-header {
+    color: white !important;
+  }

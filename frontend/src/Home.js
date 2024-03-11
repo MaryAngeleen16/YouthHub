@@ -59,7 +59,7 @@ const Home = () => {
                                 <div className="LoremIpsumDolorSitAmetSitTeFerriHabemusConstitutoSimulFuissetProAdUtPerpetuaModeratiusSitMeaNeDictaLaoreetOporteatVerteremOcurreretLiberavisseNeUsuOmnisAtomorumNamInAliquamSalutatusPro">Lorem ipsum dolor sit amet, sit te ferri habemus constituto, <br />simul fuisset pro ad. Ut perpetua moderatius sit. Mea ne dicta <br />laoreet oporteat. Verterem ocurreret liberavisse ne usu, omnis<br />atomorum nam in. Aliquam salutatus pro</div>
                                 <div className="Frame8">
                                     <div className="Frame1">
-                                        <div className="Button-banner" onClick={() => { window.location.href = '/login'; }}>CREATE ACCOUNT</div>
+                                        <div className="Button-banner" onClick={() => { window.location.href = '/register'; }}>CREATE ACCOUNT</div>
                                     </div>
                                     <div className="Frame6">
                                         <div className="Button-banner" onClick={() => { window.location.href = '/VideosPage'; }}>WATCH VIDEO</div>
