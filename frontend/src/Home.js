@@ -68,56 +68,6 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-
-
-                    {/* <div className="recent-posts-section">
-                        <h2>Recent Posts</h2>
-                        <div className="container mt-4 posts-maincontainer">
-                            <h1 className="posts-header">RECENT POSTS</h1>
-                            {loading ? (
-                                <p>Loading...</p>
-                            ) : error ? (
-                                <p className="error-message">Error: {error.message}</p>
-                            ) : posts.length > 0 ? (
-                                <div className="row row-posts" style={{ margin: '10px 150px' }}>
-                                    {posts.map(recentPost => (
-                                        <div className='center-row' key={recentPost._id}>
-                                            <div className="card product-cart-text maxwidthh">
-                                                <div className="card-body card-des">
-                                                    <div className="post-content ">
-                                                        <img
-                                                            src={recentPost.images[0].url}
-                                                            alt={recentPost.name}
-                                                            className="card-img-top posts-image"
-                                                        />
-                                                        <div className="post-details">
-                                                            <h6 className="card-title card-title-des posts-title">
-                                                                {recentPost.name.length > 50 ?
-                                                                    recentPost.name.slice(0, 50) + "..." : recentPost.name}
-                                                            </h6>
-                                                            <h6 className="card-title card-title-des posts-desc">
-                                                                {recentPost.description.length > 80 ?
-                                                                    recentPost.description.slice(0, 80) +
-                                                                    "..." : recentPost.description}
-                                                            </h6>
-                                                            <div className="button-container button-container-ye">
-                                                                <Link to={`/post/${recentPost._id}`}
-                                                                    className="btn ye-button">
-                                                                    Read More
-                                                                </Link>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className="no-products-message">No posts found.</p>
-                            )}
-                        </div>
-                    </div> */}
                 </div>
             </div>
 
@@ -138,6 +88,56 @@ const Home = () => {
                             <div class="Vector"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+
+            <div className="recent-posts-section">
+                {/* <h2>Recent Posts</h2> */}
+                <div className="container mt-4 posts-maincontainer">
+                    <h1 className="posts-header">RECENT POSTS</h1>
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : error ? (
+                        <p className="error-message">Error: {error.message}</p>
+                    ) : posts.length > 0 ? (
+                        <div className="row row-posts" style={{ margin: '10px 150px' }}>
+                            {posts.map(recentPost => (
+                                <div className='center-row' key={recentPost._id}>
+                                    <div className="card product-cart-text maxwidthh">
+                                        <div className="card-body card-des">
+                                            <div className="post-content ">
+                                                <img
+                                                    src={recentPost.images[0].url}
+                                                    alt={recentPost.name}
+                                                    className="card-img-top posts-image"
+                                                />
+                                                <div className="post-details">
+                                                    <h6 className="card-title card-title-des posts-title">
+                                                        {recentPost.name.length > 50 ?
+                                                            recentPost.name.slice(0, 50) + "..." : recentPost.name}
+                                                    </h6>
+                                                    <h6 className="card-title card-title-des posts-desc">
+                                                        {recentPost.description.length > 80 ?
+                                                            recentPost.description.slice(0, 80) +
+                                                            "..." : recentPost.description}
+                                                    </h6>
+                                                    <div className="button-container button-container-ye">
+                                                        <Link to={`/post/${recentPost._id}`}
+                                                            className="btn ye-button">
+                                                            Read More
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-products-message">No posts found.</p>
+                    )}
                 </div>
             </div>
 
