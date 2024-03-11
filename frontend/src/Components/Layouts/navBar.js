@@ -17,8 +17,8 @@ const Navbar = () => {
           <ul className="dropdown-menu">
             <li className="dropdown-item"><a href="/PostsPage">All Post</a></li>
             <li className="dropdown-item"><a href="/pregnancy">Pregnancy</a></li>
-            <li className="dropdown-item"><a href="#">Sexual Education</a></li>
-            <li className="dropdown-item"><a href="#">Contraceptive</a></li>
+            {/* <li className="dropdown-item"><a href="#">Sexual Education</a></li>
+            <li className="dropdown-item"><a href="#">Contraceptive</a></li> */}
             {/* Add more dropdown items as needed */}
           </ul>
         </li>

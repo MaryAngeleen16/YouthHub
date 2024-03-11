@@ -41,8 +41,10 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
-  };
+    setTimeout(() => {
+      navigate('/'); // Navigate to the home page after logout
+    }, 10); // 10ms delay
+  };  
 
   const onChange = (e) => {
     const reader = new FileReader();
