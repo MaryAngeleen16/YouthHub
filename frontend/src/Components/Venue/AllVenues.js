@@ -6,10 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { MDBDataTable } from 'mdbreact';
 import 'mdbreact/dist/css/mdb.css';
 import Sidebar from '../../Components/Admin/Sidebar';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 const VenueList = () => {
   const [venues, setVenues] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios
       .get('http://localhost:4001/api/venues')
@@ -112,6 +113,7 @@ const VenueList = () => {
     <div className="container mt-6">
       <div className="row">
         <div className="col-md-3">
+        <BackDropLoading open={loading} />
           <Sidebar />
         </div>
         <div className="col-md-9">

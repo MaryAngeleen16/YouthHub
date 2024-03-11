@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from './Components/Layouts/navBar';
 import './Home.css';
 import { Link } from 'react-router-dom';
+import BackDropLoading from './Components/Layouts/BackDropLoading';
 
 const PostCard = ({ post }) => (
     <div className="card product-cart-text">
@@ -43,6 +44,7 @@ const Home = () => {
 
     return (
         <div>
+            <BackDropLoading open={loading} />
             <Navbar />
             <div className="container-banner">
                 <div className="row-banner">

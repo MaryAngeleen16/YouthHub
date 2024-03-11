@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Posts.css';
+import BackDropLoading from './Layouts/BackDropLoading';
 import NavBar from '../Components/Layouts/navBar'; // Adjust the path as per your actual file structure
 
 const PregnancyPostPage = () => {
@@ -39,6 +40,7 @@ const PregnancyPostPage = () => {
 
     return (
         <>
+            <BackDropLoading open={loading} />
             <NavBar />
             <div className="container mt-4 posts-maincontainer">
                 <h1 className="posts-header">PREGNANCY POSTS</h1>

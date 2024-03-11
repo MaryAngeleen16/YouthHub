@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Flip } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Metadata from '../Layouts/Metadata';
 import { toast } from 'react-toastify';
@@ -25,7 +26,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate('/login');
     }
     if (error) {
       console.log(error);
@@ -107,7 +108,18 @@ const Register = () => {
       setIsAuthenticated(true);
       setLoading(false);
       setUser(data.user);
-      navigate('/');
+      navigate('/login');
+      toast.success('✅ User Account Created!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip,
+      });
     } catch (error) {
       setIsAuthenticated(false);
       setLoading(false);
