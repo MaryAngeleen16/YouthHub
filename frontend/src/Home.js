@@ -59,9 +59,9 @@ const Home = () => {
                             <div className="banner-para">
                                 <div className="YouthEmpowerment">Youth Empowerment Hub</div>
                                 <div className="banner-paragraph">Join us in curbing premature parenthood through community-driven support<br />
-                                and education. Together, let's build a healthy online community dedicated<br />
-                                to empowering adolescents and preventing unwanted pregnancies.<br />
-                                Together, we can make a difference.</div>
+                                    and education. Together, let's build a healthy online community dedicated<br />
+                                    to empowering adolescents and preventing unwanted pregnancies.<br />
+                                    Together, we can make a difference.</div>
                                 <div className="Frame8">
                                     <div className="Frame1">
                                         <div className="Button-banner" onClick={() => { window.location.href = '/register'; }}>CREATE ACCOUNT</div>
@@ -85,15 +85,14 @@ const Home = () => {
                 <div class="Frame26">
                     <div class="Frame19">
                         <div class="ThereAreManyReaso">PARENTHOOD is a gift buuut!</div>
-                        <div class="AlthoughThisIsWel">Parenthood is a gift, but it's important to be prepared. 
-                        At the Youth Empowerment Hub, we believe in equipping adolescents with the knowledge 
-                        and support they need for responsible decision-making. Explore our educational posts 
-                        to learn about adolescent empowerment and how to navigate the journey to parenthood 
-                        with confidence. Start your journey toward informed choices today.</div>
+                        <div class="AlthoughThisIsWel">Parenthood is a gift, but it's important to be prepared.
+                            At the Youth Empowerment Hub, we believe in equipping adolescents with the knowledge
+                            and support they need for responsible decision-making. Explore our educational posts
+                            to learn about adolescent empowerment and how to navigate the journey to parenthood
+                            with confidence. Start your journey toward informed choices today.</div>
                     </div>
                     <div class="Frame25">
-                        <div class="ReadMore">Read Post</div>
-                        <div class="RightArrow">
+                    <div class="ReadMore"><a href="/PostsPage" style={{color: "#ff9900"}}>Read Post</a></div>                        <div class="RightArrow">
                             <div class="Vector"></div>
                         </div>
                     </div>
