@@ -89,8 +89,8 @@ const UpdatePassword = () => {
 
     return (
         <div className="container light-style flex-grow-1 container-p-y">
-            <h4 className="font-weight-bold py-3 mb-4">
-                Account settings
+            <h4 className="font-weight-bold py-3 mb-4 profile-page2">
+                Password Settings
             </h4>
             <div className="card overflow-hidden">
                 <div className="row no-gutters row-bordered row-border-light">

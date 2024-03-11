@@ -69,7 +69,7 @@ const Profile = () => {
                 progress: undefined,
                 theme: "colored",
                 transition: Flip,
-              });
+            });
             navigate('/me', { replace: true });
         } catch (error) {
             setLoading(false);
@@ -94,7 +94,7 @@ const Profile = () => {
                         progress: undefined,
                         theme: "colored",
                         transition: Flip,
-                        });
+                    });
                 }
             } else if (error.request) {
                 // The request was made but no response was received
@@ -182,9 +182,8 @@ const Profile = () => {
         <Fragment>
             <BackDropLoading open={loading} />
             <MetaData title={'Profile'} />
-
             <div className="container light-style flex-grow-1 container-p-y profile-card">
-                <h4 className="font-weight-bold py-3 mb-4">
+                <h4 className="font-weight-bold py-3 mb-4 profile-page1">
                     Account settings
                 </h4>
                 <div className="card overflow-hidden">
