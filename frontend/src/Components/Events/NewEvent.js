@@ -31,7 +31,7 @@ const CreateEvent = () => {
 
   const onChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-  
+
     if (type === 'checkbox') {
       setEvent({ ...event, [name]: checked ? '1' : '0' });
     } else if (name === 'amount') {
@@ -42,7 +42,7 @@ const CreateEvent = () => {
       setEvent({ ...event, [name]: value });
     }
   };
-  
+
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -124,7 +124,7 @@ const CreateEvent = () => {
     formData.append('description', description);
     formData.append('schedule', schedule);
     formData.append('timeStarts', event.timeStarts); // Append timeStarts
-formData.append('timeEnds', event.timeEnds); // Append timeEnds
+    formData.append('timeEnds', event.timeEnds); // Append timeEnds
     formData.append('venue_id', venue_id);
     formData.append('type', type);
     formData.append('payment_status', payment_status);
@@ -227,28 +227,28 @@ formData.append('timeEnds', event.timeEnds); // Append timeEnds
             </div>
 
             <div className="form-group row">
-  <div className="col-md-5">
-    <label htmlFor="startTime">Start Time:</label>
-    <input
-      type="time"
-      id="startTime"
-      value={event.timeStarts}
-      onChange={(e) => setEvent({ ...event, timeStarts: e.target.value })}
-    />
-  </div>
-</div>
+              <div className="col-md-5">
+                <label htmlFor="startTime">Start Time:</label>
+                <input
+                  type="time"
+                  id="startTime"
+                  value={event.timeStarts}
+                  onChange={(e) => setEvent({ ...event, timeStarts: e.target.value })}
+                />
+              </div>
+            </div>
 
-<div className="form-group row">
-  <div className="col-md-5">
-    <label htmlFor="endTime">End Time:</label>
-    <input
-      type="time"
-      id="endTime"
-      value={event.timeEnds}
-      onChange={(e) => setEvent({ ...event, timeEnds: e.target.value })}
-    />
-  </div>
-</div>
+            <div className="form-group row">
+              <div className="col-md-5">
+                <label htmlFor="endTime">End Time:</label>
+                <input
+                  type="time"
+                  id="endTime"
+                  value={event.timeEnds}
+                  onChange={(e) => setEvent({ ...event, timeEnds: e.target.value })}
+                />
+              </div>
+            </div>
 
             <div className="mb-3">
               <label htmlFor="venue" className="form-label">

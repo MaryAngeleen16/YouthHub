@@ -8,8 +8,8 @@ import Sidebar from '../../Components/Admin/Sidebar';
 import '../../Components/Admin/crud.css';
 
 const UpdateEvent = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
+    const navigate = useNavigate();
+  const { id } = useParams(); // Get eventId from URL params
   
   const [event, setEvent] = useState({
     title: '',
@@ -22,55 +22,76 @@ const UpdateEvent = () => {
     audience_capacity: '',
     banner: null,
     additionalImages: [],
+    timeStarts: '',
+    timeEnds: ''
   });
 
   const [venues, setVenues] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState({});
 
   useEffect(() => {
+    // Fetch event details based on eventId
     axios
-      .get(`http://localhost:4001/api/events/${id}`, configs)
+      .get(`http://localhost:4001/api/events/${id}`)
       .then((response) => {
-        const eventData = response.data.event;
-        setEvent(eventData);
+        setEvent(response.data.event);
       })
       .catch((error) => {
         console.error('Failed to fetch event:', error);
       });
+  }, [id]);
 
-    axios
-      .get('http://localhost:4001/api/venues', configs)
-      .then((response) => {
-        setVenues(response.data.venues);
-      })
-      .catch((error) => {
-        console.error('Failed to fetch venues:', error);
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+
+    if (type === 'file') {
+      const files = e.target.files;
+      if (!files || files.length === 0) {
+        return; // No files selected, do nothing
+      }
+
+      const imagePreviews = {};
+
+      Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            imagePreviews[file.name] = reader.result;
+            setEvent({ ...event, imagePreviews });
+          }
+        };
+
+        reader.readAsDataURL(file);
       });
-  }, [event]);
 
-  const configs = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      'Authorization': `Bearer ${getToken()}`
-    }
-  };
-
-  const onChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-
-    if (type === 'checkbox') {
-      setEvent({ ...event, [name]: checked ? '1' : '0' });
-    } else if (name === 'amount') {
-      setEvent({ ...event, [name]: value });
-    } else if (type === 'file') {
-      setEvent({ ...event, [name]: files[0] });
+      setEvent({ ...event, images: Array.from(files) });
     } else {
-      setEvent({ ...event, [name]: value });
+      if (name === 'venues_id') {
+        setEvent({ ...event, venues_id: value });
+      } else {
+        setEvent({ ...event, [name]: value });
+      }
     }
   };
+
+  const {
+    title,
+    description,
+    schedule,
+    venue_id,
+    type,
+    payment_status,
+    amount,
+    audience_capacity,
+    banner,
+    additionalImages,
+  } = event;
 
   const submitForm = async (e) => {
     e.preventDefault();
 
+    // Validation
     if (!event.title || !event.description || !event.schedule || !event.venue_id) {
       toast.error('Please fill out all required fields');
       return;
@@ -80,6 +101,8 @@ const UpdateEvent = () => {
     formData.append('title', event.title);
     formData.append('description', event.description);
     formData.append('schedule', event.schedule);
+    formData.append('timeStarts', event.timeStarts);
+    formData.append('timeEnds', event.timeEnds);
     formData.append('venue_id', event.venue_id);
     formData.append('type', event.type);
     formData.append('payment_status', event.payment_status);
@@ -94,14 +117,49 @@ const UpdateEvent = () => {
       .put(`http://localhost:4001/api/events/${id}`, formData, configs)
       .then((res) => {
         toast.success('Event updated successfully');
-        navigate(`/events/${id}`);
+        navigate('/event/list');
+        setEvent({
+          title: '',
+          description: '',
+          schedule: '',
+          venue_id: '',
+          type: '',
+          payment_status: '',
+          amount: '',
+          audience_capacity: '',
+          banner: '',
+          additionalImages: '',
+          timeEnds: '',
+          timeStarts: '',
+        });
       })
       .catch((err) => {
         toast.error('Failed to update event');
       });
   };
 
-  //BOOTSTRAP CSS
+  useEffect(() => {
+    console.log('Fetching venues...');
+    axios
+      .get('http://localhost:4001/api/venues', configs)
+      .then((response) => {
+        console.log('Venues data:', response.data);
+        setVenues(response.data.venues);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch venues:', error);
+      });
+  }, []);
+
+  const configs = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      'Authorization': `Bearer ${getToken()}`
+    }
+  };
+
+
+  // BOOTSTRAP CSS
   useEffect(() => {
     const bootstrapStyles = `
       @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
@@ -116,6 +174,7 @@ const UpdateEvent = () => {
       document.head.removeChild(styleElement);
     };
   }, []);
+
 
   return (
     <div className="container mt-6">
@@ -135,8 +194,8 @@ const UpdateEvent = () => {
                   type="text"
                   className="form-control"
                   name="title"
-                  value={event.title}
-                  onChange={onChange}
+                  value={title}
+                  onChange={title}
                   required
                 />
               </div>
@@ -150,12 +209,37 @@ const UpdateEvent = () => {
                   type="date"
                   className="form-control datetimepicker"
                   name="schedule"
-                  value={formatDate(new Date(event.schedule))}
-                  onChange={onChange}
+                  value={schedule ? formatDate(new Date(schedule)) : ''}
+                  onChange={schedule}
                   required
                 />
               </div>
             </div>
+
+            <div className="form-group row">
+              <div className="col-md-5">
+                <label htmlFor="startTime">Start Time:</label>
+                <input
+                  type="time"
+                  id="startTime"
+                  value={event.timeStarts}
+                  onChange={(e) => setEvent({ ...event, timeStarts: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <div className="col-md-5">
+                <label htmlFor="endTime">End Time:</label>
+                <input
+                  type="time"
+                  id="endTime"
+                  value={event.timeEnds}
+                  onChange={(e) => setEvent({ ...event, timeEnds: e.target.value })}
+                />
+              </div>
+            </div>
+
             <div className="mb-3">
               <label htmlFor="venue" className="form-label">
                 Venue
@@ -165,8 +249,8 @@ const UpdateEvent = () => {
                 id="venue"
                 name="venue_id"
                 required
-                value={event.venue_id}
-                onChange={onChange}
+                value={venue_id}
+                onChange={handleChange}
               >
                 <option value="">Select Venue</option>
                 {venues.map((venue) => (
@@ -176,6 +260,7 @@ const UpdateEvent = () => {
                 ))}
               </select>
             </div>
+
             <div className="form-group row">
               <div className="col-md-10">
                 <label htmlFor="description" className="control-label">
@@ -187,12 +272,13 @@ const UpdateEvent = () => {
                   className="form-control jqte"
                   cols="30"
                   rows="5"
-                  value={event.description}
-                  onChange={onChange}
+                  value={description}
+                  onChange={description}
                   required
                 ></textarea>
               </div>
             </div>
+
             <div className="form-group row">
               <div className="col-md-5">
                 <div className="form-check">
@@ -202,14 +288,14 @@ const UpdateEvent = () => {
                     value="1"
                     id="payment_status"
                     name="payment_status"
-                    checked={event.payment_status === '1'}
-                    onChange={onChange}
+                    checked={payment_status === '1'}
+                    onChange={payment_status}
                   />
                   <label className="form-check-label" htmlFor="payment_status">
                     Free For All
                   </label>
                 </div>
-                {event.payment_status === '0' && (
+                {payment_status === '0' && (
                   <div>
                     <label htmlFor="amount" className="control-label">
                       Registration Fee
@@ -220,15 +306,16 @@ const UpdateEvent = () => {
                       className="form-control text-right"
                       name="amount"
                       id="amount"
-                      value={event.amount}
-                      onChange={onChange}
-                      required={!event.payment_status}
+                      value={amount}
+                      onChange={amount}
+                      required={!payment_status}
                       autoComplete="off"
                     />
                   </div>
                 )}
               </div>
             </div>
+
             <div className="form-group row">
               <div className="col-md-5">
                 <label htmlFor="audience_capacity" className="control-label">
@@ -240,13 +327,14 @@ const UpdateEvent = () => {
                   className="form-control text-right"
                   name="audience_capacity"
                   id="audience_capacity"
-                  value={event.audience_capacity}
-                  onChange={onChange}
+                  value={audience_capacity}
+                  onChange={audience_capacity}
                   required
                   autoComplete="off"
                 />
               </div>
             </div>
+
             <div className="row form-group">
               <div className="col-md-5">
                 <label htmlFor="banner" className="control-label">
@@ -256,16 +344,17 @@ const UpdateEvent = () => {
                   type="file"
                   className="form-control"
                   name="banner"
-                  onChange={onChange}
+                  onChange={banner}
                   accept="image/*"
                 />
               </div>
               <div className="col-md-5">
-                {event.banner && (
-                  <img src={URL.createObjectURL(event.banner)} alt="Banner Preview" style={{ maxWidth: '100%' }} />
+                {banner && (
+                  <img src={URL.createObjectURL(banner)} alt="Banner Preview" style={{ maxWidth: '100%' }} />
                 )}
               </div>
             </div>
+
             <div className="row">
               <div className="col-md-12">
                 <button type="submit" className="btn btn-sm btn-block btn-primary col-sm-2">
@@ -282,12 +371,10 @@ const UpdateEvent = () => {
 };
 
 
+export default UpdateEvent;
 function formatDate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are zero-indexed
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
-
-export default UpdateEvent;
-
