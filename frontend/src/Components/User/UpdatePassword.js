@@ -89,8 +89,8 @@ const UpdatePassword = () => {
 
     return (
         <div className="container light-style flex-grow-1 container-p-y">
-            <h4 className="font-weight-bold py-3 mb-4">
-                Account settings
+            <h4 className="font-weight-bold py-3 mb-4 profile-page2">
+                Password Settings
             </h4>
             <div className="card overflow-hidden">
                 <div className="row no-gutters row-bordered row-border-light">
@@ -102,12 +102,12 @@ const UpdatePassword = () => {
                                 href="/password/update">Change password</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
                                 href="/me/info">Info</a>
-                            <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
+                            {/* <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
                                 href="#account-social-links">Social links</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
                                 href="#account-connections">Connections</a>
                             <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list"
-                                href="#account-notifications">Notifications</a>
+                                href="#account-notifications">Notifications</a> */}
                         </div>
                     </div>
                     <div className="col-md-9">

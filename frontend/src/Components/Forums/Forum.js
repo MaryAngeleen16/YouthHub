@@ -19,7 +19,6 @@ import MyTopics from './MyTopics';
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
-
 const theme = createTheme({
     palette: {
         primary: {

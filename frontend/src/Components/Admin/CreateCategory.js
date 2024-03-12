@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flip } from 'react-toastify';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
  import Sidebar from './Sidebar'; 
@@ -31,7 +32,17 @@ const CreateCategory = () => {
     axios
       .post('http://localhost:4001/api/categories/new', { name, description })
       .then((res) => {
-        toast.success('Successfully Created');
+        toast.success('Category Successfully Created', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+          });
         navigate('/category/list');
         setCategory({
           name: '',
@@ -39,7 +50,17 @@ const CreateCategory = () => {
         });
       })
       .catch((err) => {
-        toast.error('Failed to create'); // Use toast for error message
+        toast.error('Category Failed to Create', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Flip,
+          });
       });
   };
 

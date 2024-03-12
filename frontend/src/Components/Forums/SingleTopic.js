@@ -26,9 +26,65 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { getToken, getUser } from '../../utils/helpers';
 import BackDropLoading from '../Layouts/BackDropLoading';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../Components/CommentSection.css';
 
 const imgDefault = 'https://cdn.stockmediaserver.com/smsimg35/pv/IsignstockContributors/ISS_18592_03648.jpg?token=CwTMufzkdF16eBCpIc7NbBSHYe006RuT7r96JWK72Nc&class=pv&smss=53&expires=4102358400'
 
+const offensiveWords =
+(comment) => {
+       const englishOffensiveWords = [
+            'asshole',
+             'bitch',
+             'stupid',
+             'bastard',
+             'jerk',
+             'moron',
+             'gay',
+             'nigga',
+            'faggot',
+             'retard',
+           'asswipe',
+          'motherfucker',
+            'fuck you',
+            'son of a bitch',
+            'slut',
+            'cock',
+          'dick'
+     ];
+       const tagalogOffensiveWords = [
+            'bobo',
+            'tangina',
+            'tang ina',
+            'tanga',
+            'gago',
+            'inutil',
+            'pokpok',
+            'malandi',
+            'maldita',
+            'gaga',
+            'bobita',
+            'tangina',
+            'engot',
+            'pakyu',
+            'pakyo',
+            'pota',
+            'potangina',
+            'potang ina',
+            'ulol',
+            'olol', 
+            'bobita',
+            'ampota',
+            'boboo',
+            'tnga'
+       ];
+    
+       const englishMatch = englishOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+    const tagalogMatch = tagalogOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+    
+       return englishMatch || tagalogMatch;
+    };
 
 const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
 
@@ -75,8 +131,18 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
         }
     }
 
+    const isCommentValid = (comment) => {
+        return !offensiveWords(comment);
+    };
+
     const handleProcess = async () => {
         setLoading(true)
+        if (!isCommentValid(comment)) {
+            setLoading(false);
+            toast.error('Your comment contains offensive words. Your comment have been cleared.');
+            setComment('');
+            return;
+        }
         const config = {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -317,6 +383,8 @@ const SingleTopic = ({ topic, setValue, setTopic, setCategory }) => {
         <>
             <BackDropLoading open={loading} />
             <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <ToastContainer className={'toast-container-offensive'}   autoClose={3000} />
+
                 <Card sx={{ bgcolor: 'transparent', boxShadow: 'none' }}>
                     <CardHeader
                         avatar={

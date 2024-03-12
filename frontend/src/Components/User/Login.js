@@ -1,13 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Metadata from '../Layouts/Metadata';
-import Loader from '../Layouts/Loader';
+// import Metadata from '../Layouts/Metadata';
+// import Loader from '../Layouts/Loader';
 import axios from 'axios';
+// import { Flip } from 'react-toastify';
 
 import 'boxicons';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { authenticate, getUser } from '../../utils/helpers';
+import BackDropLoading from '../Layouts/BackDropLoading';
 
 import '../Layouts/FH.css';
 import '../Layouts/RLForms.css';
@@ -57,8 +59,10 @@ const Login = () => {
 
   return (
     <Fragment>
+      
       {loading ? (
-        <Loader />
+        <BackDropLoading open={loading} />
+        // <Loader />
       ) : (
         <Fragment>
           <div className="container-login">

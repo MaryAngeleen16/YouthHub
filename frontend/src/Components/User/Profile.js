@@ -4,6 +4,7 @@ import MetaData from '../Layouts/Metadata';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Flip } from 'react-toastify';
 import { getToken } from '../../utils/helpers';
 import BackDropLoading from '../Layouts/BackDropLoading';
 import '../Profile.css';
@@ -58,8 +59,16 @@ const Profile = () => {
             const { data } = await axios.put(`http://localhost:4001/api/me/update`, userData, config);
             setIsUpdated(data.success);
             setLoading(false);
-            toast.success('User updated', {
-                position: toast.POSITION.BOTTOM_CENTER,
+            toast.success('✅ User Profile Updated', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Flip,
             });
             navigate('/me', { replace: true });
         } catch (error) {
@@ -75,8 +84,16 @@ const Profile = () => {
                         position: toast.POSITION.BOTTOM_CENTER,
                     });
                 } else {
-                    toast.error('User update failed', {
-                        position: toast.POSITION.BOTTOM_CENTER,
+                    toast.error('User Update Failed', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Flip,
                     });
                 }
             } else if (error.request) {
@@ -165,9 +182,8 @@ const Profile = () => {
         <Fragment>
             <BackDropLoading open={loading} />
             <MetaData title={'Profile'} />
-
-            <div className="container light-style flex-grow-1 container-p-y">
-                <h4 className="font-weight-bold py-3 mb-4">
+            <div className="container light-style flex-grow-1 container-p-y profile-card">
+                <h4 className="font-weight-bold py-3 mb-4 profile-page1">
                     Account settings
                 </h4>
                 <div className="card overflow-hidden">
@@ -177,9 +193,9 @@ const Profile = () => {
                                 <a className="list-group-item list-group-item-action active" style={{ paddingTop: '20px' }} data-toggle="list" href="/me">GENERAL</a>
                                 <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="/password/update">Change password</a>
                                 <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="/me/info">Info</a>
-                                <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="#account-social-links">Social links</a>
-                                <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="#account-connections">Connections</a>
-                                <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="#account-notifications">Notifications</a>
+                                {/* <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="#account-social-links">Social links</a> */}
+                                {/* <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="#account-connections">Connections</a> */}
+                                {/* <a className="list-group-item list-group-item-action" style={{ paddingTop: '10px' }} data-toggle="list" href="#account-notifications">Notifications</a> */}
                             </div>
                         </div>
                         <div className="col-md-9">
@@ -198,7 +214,7 @@ const Profile = () => {
                                                     <input type="file" className="account-settings-fileinput" style={{ paddingTop: '10px' }} onChange={onChange} />
                                                 </label> &nbsp;
                                                 <button type="button" className="btn-sm btn-default">Reset</button>
-                                                <div className="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                                <div className="text-dark small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
                                             </div>
                                         </div>
                                         <hr className="border-light m-0" />

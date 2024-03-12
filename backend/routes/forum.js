@@ -19,4 +19,6 @@ router.post('/forum/reply-to-comment', isAuthenticatedUser, forumController.repl
 router.put('/forum/edit-replied-comment', isAuthenticatedUser, forumController.editRepliedComment)
 router.delete('/forum/delete-replied-comments', isAuthenticatedUser, forumController.deleteRepliedComment)
 
+
+
 module.exports = router;

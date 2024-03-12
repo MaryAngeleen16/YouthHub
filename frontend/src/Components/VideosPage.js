@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from '../Components/Layouts/navBar';
+import BackDropLoading from './Layouts/BackDropLoading';
 import './Videos.css';
 
 
@@ -46,6 +47,7 @@ return (
 
 
 const VideosPage = () => {
+const [loading, setLoading] = useState(false);
 const [videos, setVideos] = useState([]);
 const [filteredVideos, setFilteredVideos] = useState([]);
 const [categories, setCategories] = useState([]);
@@ -160,6 +162,7 @@ cardCheckbox.classList.toggle('checked', this.checked);
 // export default VideosPage;
 return (
     <div className="video-page">
+      <BackDropLoading open={loading} />
       <NavBar />
       <h1 className='videos-header'>ALL VIDEOS</h1>
 

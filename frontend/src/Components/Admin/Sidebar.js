@@ -40,6 +40,34 @@ function Sidebar() {
                         </a>
                     </li>
                     <li className="sidebar-item">
+                        <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#events" aria-expanded="false" aria-controls="events">
+                            <box-icon name='location-plus'></box-icon>
+                            <span>Venue</span>
+                        </a>
+                        <ul id="event" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li className="sidebar-event">
+                                <a href="/venue/list" className="sidebar-link">Venue List</a>
+                            </li>
+                            <li className="sidebar-item">
+                                <a href="/venue/create" className="sidebar-link">Create New Venue</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="sidebar-item">
+                        <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#events" aria-expanded="false" aria-controls="events">
+                            <box-icon name='calendar-event'></box-icon>
+                            <span>Events</span>
+                        </a>
+                        <ul id="event" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li className="sidebar-event">
+                                <a href="/event/list" className="sidebar-link">Event List</a>
+                            </li>
+                            <li className="sidebar-item">
+                                <a href="/event/create" className="sidebar-link">Create New Event</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="sidebar-item">
                         <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#categories" aria-expanded="false" aria-controls="categories">
                             <box-icon name='category'></box-icon>
                             <span>Categories</span>

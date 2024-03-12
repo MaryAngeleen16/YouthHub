@@ -7,9 +7,11 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
 import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
 import FemaleTeenagersChart from './FemaleTeenLoc';
-
+import MostPopularCategory from './MostPopularCategory';
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [category, setCategory] = useState([]);
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
     const [userRegistrationDates, setUserRegistrationDates] = useState({});
     const [genderCounts, setGenderCounts] = useState({});
@@ -79,12 +81,47 @@ const Dashboard = () => {
             console.error(error);
             // Handle the error as needed
         }
-        
+
     };
+
+    const getPosts = async () => {
+        try {
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+
+            const { data } = await axios.get(`http://localhost:4001/api/posts`, config);
+            setPosts(data.posts);
+        } catch (error) {
+            console.error(error);
+            // Handle the error as needed
+        }
+    };
+
+    const getCategories = async () => {
+        try {
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+
+            const { data } = await axios.get(`http://localhost:4001/api/categories`, config);
+            setCategory(data.categories);
+        } catch (error) {
+            console.error(error);
+            // Handle the error as needed
+        }
+    };
+
 
     useEffect(() => {
         getUsers();
-    }, [selectedCategory]); // Trigger useEffect when selectedCategory changes
+        getPosts();
+        getCategories();
+    }, [selectedCategory]);
 
     return (
         <div className='grid-container'>
@@ -104,14 +141,14 @@ const Dashboard = () => {
                             <h3 style={{ color: 'white' }}>POSTS</h3>
                             <BsFillGrid3X3GapFill className='card_icon' />
                         </div>
-                        <h1 style={{ color: 'white' }}>12</h1>
+                        <h1 style={{ color: 'white' }}>{posts.length}</h1>
                     </div>
                     <div className='card'>
                         <div className='card-inner'>
                             <h3 style={{ color: 'white' }}>CATEGORIES</h3>
                             <BsPeopleFill className='card_icon' />
                         </div>
-                        <h1 style={{ color: 'white' }}>33</h1>
+                        <h1 style={{ color: 'white' }}>{category.length}</h1>
                     </div>
                     <div className='card'>
                         <div className='card-inner'>
@@ -181,30 +218,30 @@ const Dashboard = () => {
                         </div>
                     </div> */}
                     <div className="unique-chart-loc">
-                    <div className="card-loc">
-                        <div className="card-loc-body d-flex flex-column align-items-center">
-                            <h5 className="card-title" style={{ color: "#b38269" }}>Teen Moms in Different Locations</h5>
-                            <Chart
-                                options={{
-                                    chart: {
-                                        id: "teen-moms-locations-chart"
-                                    },
-                                    xaxis: {
-                                        categories: Object.keys(teenMomLocations)
-                                    }
-                                }}
-                                series={[
-                                    {
-                                        name: "teen-moms-locations",
-                                        data: Object.values(teenMomLocations)
-                                    }
-                                ]}
-                                type="line"
-                                width="450"
-                            />
+                        <div className="card-loc">
+                            <div className="card-loc-body d-flex flex-column align-items-center">
+                                <h5 className="card-title" style={{ color: "#b38269" }}>Teen Moms in Different Locations</h5>
+                                <Chart
+                                    options={{
+                                        chart: {
+                                            id: "teen-moms-locations-chart"
+                                        },
+                                        xaxis: {
+                                            categories: Object.keys(teenMomLocations)
+                                        }
+                                    }}
+                                    series={[
+                                        {
+                                            name: "teen-moms-locations",
+                                            data: Object.values(teenMomLocations)
+                                        }
+                                    ]}
+                                    type="line"
+                                    width="450"
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 </div>
 
@@ -248,11 +285,22 @@ const Dashboard = () => {
                                     width="760"
                                 />
                             </div>
+
+
                         </div>
                         {/* Your existing JSX code */}
+
+
+
                     </div>
+
+                </div>
+                <div className="most-popular-category-container">
+                    <MostPopularCategory />
+
                 </div>
             </main>
+
         </div>
     );
 };

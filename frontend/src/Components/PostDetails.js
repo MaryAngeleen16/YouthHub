@@ -4,6 +4,63 @@ import { useParams, Link } from 'react-router-dom';
 import './PostDetails.css';
 import { getToken, getUser } from '../utils/helpers';
 import './CommentSection.css';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const offensiveWords =
+(comment) => {
+       const englishOffensiveWords = [
+            'asshole',
+             'bitch',
+             'stupid',
+             'bastard',
+             'jerk',
+             'moron',
+             'gay',
+             'nigga',
+            'faggot',
+             'retard',
+           'asswipe',
+          'motherfucker',
+            'fuck you',
+            'son of a bitch',
+            'slut',
+            'cock',
+          'dick'
+     ];
+       const tagalogOffensiveWords = [
+            'bobo',
+            'tangina',
+            'tang ina',
+            'tanga',
+            'gago',
+            'inutil',
+            'pokpok',
+            'malandi',
+            'maldita',
+            'gaga',
+            'bobita',
+            'tangina',
+            'engot',
+            'pakyu',
+            'pakyo',
+            'pota',
+            'potangina',
+            'potang ina',
+            'ulol',
+            'olol', 
+            'bobita',
+            'ampota',
+            'boboo',
+            'tnga'
+       ];
+    
+       const englishMatch = englishOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+    const tagalogMatch = tagalogOffensiveWords.some(word => comment.toLowerCase().includes(word.toLowerCase()));
+    
+       return englishMatch || tagalogMatch;
+    };
+
 
 
 const PostDetails = () => {
@@ -96,8 +153,18 @@ const PostDetails = () => {
     return category ? category.name : 'Unknown';
   };
 
-  const handleAddComment = async () => {
-    setLoading(true);
+  const isCommentValid = (comment) => {
+    return !offensiveWords(comment);
+};
+
+const handleAddComment = async () => {
+  setLoading(true);
+  if (!isCommentValid(comment)) {
+      setLoading(false);
+      toast.error('Your comment contains offensive words. Your comment have been cleared.');
+      setComment('');
+      return;
+  }
     const config = {
       headers: {
         'Authorization': `Bearer ${getToken()}`,
@@ -227,6 +294,8 @@ const handleCancelEdit = () => {
 
   return (
     <div className="container-youth">
+
+<ToastContainer className={'toast-container-offensive'}   autoClose={3000} />
       <div className="main-content-youth">
         {post ? (
           <div>

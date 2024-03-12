@@ -16,6 +16,15 @@ import UpdatePassword from './Components/User/UpdatePassword';
 import Dashboard from './Components/Admin/Dashboard';
 import Home from './Home.js';
 
+import AllEvents from './Components/Events/AllEvents';
+import CreateEvent from './Components/Events/NewEvent';
+import UpdateEvent from './Components/Events/UpdateEvent';
+import EventDetails from './Components/EventDetails.js';
+
+import VenueList from './Components/Venue/AllVenues';
+import CreateVenue from './Components/Venue/NewVenue';
+import UpdateVenue from './Components/Venue/UpdateVenue';
+
 import CategoryList from './Components/Admin/CategoryList';
 import CreateCategory from './Components/Admin/CreateCategory';
 import UpdateCategory from './Components/Admin/UpdateCategory';
@@ -46,6 +55,7 @@ import VentList from './Components/Counselor/VentList.js';
 import VentFormByUser from './Components/VentFormByUser.js';
 function App() {
   return (
+    
     <div>
       <Router>
         <Header />
@@ -59,6 +69,14 @@ function App() {
           <Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<NewPassword />} />
           <Route path="/password/update" element={<UpdatePassword />} />
+
+          <Route path="/venue/create" element={<CreateVenue />} />
+          <Route path="/venue/update/:id" element={<UpdateVenue />} />
+          <Route path="/venue/list" element={<VenueList />} />
+
+          <Route path="/event/create" element={<CreateEvent />} />
+          <Route path="/event/update/:id" element={<UpdateEvent />} />
+          <Route path="/event/list" element={<AllEvents />} />
 
           <Route path="/category/create" element={<CreateCategory />} />
           <Route path="/category/update/:id" element={<UpdateCategory />} />
@@ -80,6 +98,7 @@ function App() {
           <Route path="/vent/me" element={<VentFormByUser/>} exact />
 
           <Route path="/vent/list" element={<VentList/>} exact />
+          <Route path="/events/:id" element={<EventDetails />} exact />
 
 
           <Route path="/dashboard" element
