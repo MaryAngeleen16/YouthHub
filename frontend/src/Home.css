@@ -250,3 +250,61 @@
   /* information section */
 
   
+
+
+  .text-countdown {
+    font-weight: 500;
+    font-size: 50px; /* Adjust font size as needed */
+    background: linear-gradient(90deg, #F38783 0%, #F8D4BC 57%, #FACCCC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+  }
+  
+  .text-countdown span {
+    display: inline-block; /* Display spans as inline-block elements */
+    margin-right: 15px; /* Add some space between elements */
+  }
+  
+
+
+  .countown-button {
+    background-color: #F38783;
+    font-weight: 600;
+    border: none;
+    font-size: 15px;
+    padding: 20px;
+    color: #FFF7F7;
+    font-size: 20px;
+    border-radius: 30px;
+    margin-top: -40px;
+    width: 400px;
+    margin-bottom: 50px;
+
+}
+
+.button-center {
+  display: flex;
+  justify-content: center;
+}
+
+.text-countdown-info
+{
+  text-align: center !important;
+  font-weight: 500;
+  font-size: 50px; 
+  margin-bottom: -50px;
+  color: #A3716E;
+
+
+}
+
+.text-countdown-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 75px;
+  margin-bottom: -10px;
+  color: #F38783;
+
+}
