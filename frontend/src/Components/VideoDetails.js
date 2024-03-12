@@ -3,6 +3,27 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import './VideoDetails.css';
 import { getToken, getUser } from '../utils/helpers'; // Import user-related functions
+import { toast, ToastContainer } from 'react-toastify';
+import './PostDetails.css';
+
+const offensiveWords = (comment) => {
+  const englishOffensiveWords = [
+    'asshole', 'bitch', 'stupid', 'bastard', 'jerk', 'moron', 'gay', 'nigga',
+    'faggot', 'retard', 'asswipe', 'motherfucker', 'fuck you', 'son of a bitch',
+    'slut', 'cock', 'dick'
+  ];
+  const tagalogOffensiveWords = [
+    'bobo', 'tangina', 'tang ina', 'tanga', 'gago', 'inutil', 'pokpok', 'malandi',
+    'maldita', 'gaga', 'bobita', 'tangina', 'engot', 'pakyu', 'pakyo', 'pota',
+    'potangina', 'potang ina', 'ulol', 'olol', 'bobita', 'ampota', 'boboo', 'tnga'
+  ];
+  const englishMatch = englishOffensiveWords.some(word => 
+    comment.toLowerCase().includes(word.toLowerCase()));
+  const tagalogMatch = tagalogOffensiveWords.some(word =>
+    comment.toLowerCase().includes(word.toLowerCase()));
+
+  return englishMatch || tagalogMatch;
+};
 
 const generateThumbnailUrl = (video) => {
   if (video.videos && video.videos.length > 0) {
@@ -87,6 +108,12 @@ const VideoDetails = () => {
 
   const handleAddComment = async () => {
     setLoading(true);
+    if (!isCommentValid(comment)) {
+      setLoading(false);
+      toast.error('Your comment contains offensive words. Your comment has been cleared.');
+      setComment('');
+      return;
+    }
     const config = {
       headers: {
         'Authorization': `Bearer ${getToken()}`,
@@ -146,6 +173,11 @@ const VideoDetails = () => {
   const handleEditSubmit = async () => {
     try {
       setLoading(true);
+      if (!isCommentValid(updatedComment)) {
+        setLoading(false);
+        toast.error('Your comment contains offensive words. Comment will remain unchanged');
+        return;
+      }
       const config = {
         headers: {
           'Authorization': `Bearer ${getToken()}`
@@ -169,6 +201,10 @@ const VideoDetails = () => {
     }
   };
 
+  const isCommentValid = (comment) => {
+    return !offensiveWords(comment);
+  };
+
   const handleEditComment = (commentId, currentComment) => {
     setUpdatedComment(currentComment);
     setCommentId(commentId);
@@ -185,6 +221,8 @@ const VideoDetails = () => {
 
   return (
     <div className="container-youth">
+            <ToastContainer className={'toast-container-offensive'} autoClose={3000} />
+
       <div className="main-content-youth">
         <div className="vlog-youth">
         {video ? (
