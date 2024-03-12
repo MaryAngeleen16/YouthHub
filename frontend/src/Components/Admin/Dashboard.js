@@ -9,6 +9,7 @@ import '../Layouts/dashcontent.css';
 import UserRegistrationChart from '../Charts/UserRegistrationChart';
 import TeenLocaChart from '../Charts/TeenLocaChart';
 import MostPopularCategory from '../Charts/MostPopularCategory';
+import TeenMomLocationsChart from '../Charts/MomLocaChart';
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -79,12 +80,10 @@ const Dashboard = () => {
                 return acc;
             }, {});
             setTeenMomLocations(teenMomLocationsCount);
-
         } catch (error) {
             console.error(error);
             // Handle the error as needed
         }
-
     };
 
     const getPosts = async () => {
@@ -94,7 +93,6 @@ const Dashboard = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-
             const { data } = await axios.get(`http://localhost:4001/api/posts`, config);
             setPosts(data.posts);
         } catch (error) {
@@ -110,7 +108,6 @@ const Dashboard = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-
             const { data } = await axios.get(`http://localhost:4001/api/categories`, config);
             setCategory(data.categories);
         } catch (error) {
@@ -126,7 +123,6 @@ const Dashboard = () => {
                     'Authorization': `Bearer ${getToken()}`
                 }
             };
-
             const { data } = await axios.get(`http://localhost:4001/api/events`, config);
             setEvents(data.events);
         } catch (error) {
@@ -185,35 +181,10 @@ const Dashboard = () => {
                         <TeenLocaChart />
                     </div>
                     <div className="unique-chart-loc">
-                        <div className="card-loc">
-                            <div className="card-loc-body d-flex flex-column align-items-center">
-                                <h5 className="card-title" style={{ color: "#b38269" }}>Teen Moms in Different Locations</h5>
-                                <Chart
-                                    options={{
-                                        chart: {
-                                            id: "teen-moms-locations-chart"
-                                        },
-                                        xaxis: {
-                                            categories: Object.keys(teenMomLocations)
-                                        }
-                                    }}
-                                    series={[
-                                        {
-                                            name: "teen-moms-locations",
-                                            data: Object.values(teenMomLocations)
-                                        }
-                                    ]}
-                                    type="line"
-                                    width="450"
-                                />
-                            </div>
-                        </div>
+                        <TeenMomLocationsChart />
                     </div>
-
                 </div>
-
                 <div className="charts-container d-flex justify-content-between">
-                    {/* Other charts */}
                     <div className="card">
                         <div className="card-inner">
                             <h5 style={{ color: "#b38269" }}>User Gender Distribution</h5>
@@ -224,7 +195,8 @@ const Dashboard = () => {
                                     labels: Object.keys(genderCounts),
                                     legend: {
                                         show: true
-                                    }
+                                    },
+                                colors: ['#F38783', '#95cbd1', '#b2b2b2'] 
                                 }}
                                 series={Object.values(genderCounts)}
                                 type="donut"
@@ -233,8 +205,6 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="charts-container d-flex justify-content-between">
-                        {/* Your existing JSX code */}
-                        {/* Pie chart for teen moms vs teenagers */}
                         <div className="card">
                             <div className="card-inner">
                                 <h5 style={{ color: "#b38269" }}>Teen Moms vs Teenagers</h5>
@@ -245,26 +215,19 @@ const Dashboard = () => {
                                         labels: ['Teen Moms', 'Teenagers'],
                                         legend: {
                                             show: true
-                                        }
+                                        },
+                                        colors: ['#F38783', '#95cbd1', '#b2b2b2'] 
                                     }}
                                     series={[teenMomCount, teenagersCount]}
                                     type="donut"
                                     width="760"
                                 />
                             </div>
-
-
                         </div>
-                        {/* Your existing JSX code */}
-
-
-
                     </div>
-
                 </div>
                 <div className="most-popular-category-container">
                     <MostPopularCategory />
-
                 </div>
             </main>
 

@@ -70,7 +70,8 @@ const TeenLocaChart = () => {
                        },
                        xaxis: {
                            categories: Object.keys(femaleTeenagersLocations)
-                       }
+                       },
+                       colors:['#F38783'] 
                    }}
                    series={[
                        {

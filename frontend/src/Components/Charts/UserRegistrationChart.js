@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 import axios from 'axios';
 import { getToken } from '../../utils/helpers';
 
+
 const UserRegistrationChart = () => {
     const [userRegistrationDates, setUserRegistrationDates] = useState({});
 
@@ -37,7 +38,7 @@ const UserRegistrationChart = () => {
 
     return (
         <div className="card-user">
-            <div className="card-user-body d-flex flex-column align-items-center">
+            <div className="card-user-body d-flex flex-column align-items-center user-register-chart">
                 <h5 className="card-title" style={{ color: "#b38269" }}>User Registration by Day</h5>
                 <Chart
                     options={{
@@ -46,7 +47,8 @@ const UserRegistrationChart = () => {
                         },
                         xaxis: {
                             categories: Object.keys(userRegistrationDates)
-                        }
+                        },
+                        colors:['#95cbd1'] // Setting global colors
                     }}
                     series={[
                         {
