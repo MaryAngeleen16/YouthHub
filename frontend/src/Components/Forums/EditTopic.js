@@ -95,7 +95,7 @@ const EditTopic = () => {
                 image: ''
             });
             setSeletedCategory(data.forumTopic.category)
-            setimgPreview(data.forumTopic.image.url);
+            setimgPreview(data.forumTopic?.image?.url);
 
         } catch (err) {
             setLoading(false)

@@ -5,7 +5,7 @@ const forumController = require('../controllers/forumController');
 const { isAuthenticatedUser } = require('../middleware/auth');
 
 router.post('/forum/create-topic', upload.single('image'), isAuthenticatedUser, forumController.createTopic)
-router.get('/forum/all-topics', isAuthenticatedUser, forumController.getForums);
+router.get('/forum/all-topics', forumController.getForums);
 router.get('/forum/single-topic/:id', isAuthenticatedUser, forumController.getSingleTopic);
 router.put('/forum/edit-forum/:id', isAuthenticatedUser, upload.single('image'), forumController.editForumTopic);
 router.get('/forums/categorize/', isAuthenticatedUser, forumController.categorizeTopics)
