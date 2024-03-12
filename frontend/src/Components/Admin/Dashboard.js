@@ -6,7 +6,6 @@ import axios from 'axios';
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
 import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
-import FemaleTeenagersChart from './FemaleTeenLoc';
 import MostPopularCategory from '../Charts/MostPopularCategory';
 import UserRegistrationChart from '../Charts/UserRegistrationChart';
 
