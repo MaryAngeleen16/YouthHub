@@ -7,6 +7,7 @@ import { MDBDataTable } from 'mdbreact';
 import 'mdbreact/dist/css/mdb.css';
 import Sidebar from '../../Components/Admin/Sidebar';
 import BackDropLoading from '../Layouts/BackDropLoading';
+import './venues.css';
 
 const VenueList = () => {
   const [venues, setVenues] = useState([]);

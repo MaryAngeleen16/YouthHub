@@ -120,9 +120,9 @@ function Sidebar() {
                             <li className="sidebar-item">
                                 <a href="/admin/users" className="sidebar-link">Users List</a>
                             </li>
-                            <li className="sidebar-item">
+                            {/* <li className="sidebar-item">
                                 <a href="#" className="sidebar-link">Create New User</a>
-                            </li>
+                            </li> */}
                         </ul>
                     </li>
                 </ul>
