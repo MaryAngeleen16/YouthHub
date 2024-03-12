@@ -1,11 +1,5 @@
 const mongoose = require('mongoose');
 
-// const eventInfoSchema = new mongoose.Schema({
-//   eventName: String,
-//   type: String,
-//   fee: Number
-// });
-
 const eventSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -15,23 +9,23 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  schedule: {
-    type: Date,
-    required: true
-  },
+    schedule: {
+      type: Date,
+      required: true
+    },
+    timeStarts: {
+      type: String,
+      required: true
+    },
+    timeEnds: {
+      type: String,
+      required: true
+    },
   venue_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Venue',
     required: true
   },
-  // type: {
-  //   // eventName: String,
-  //   typename: {
-  //     type: String, 
-  //     default: '0'
-  //   },
-  //   fee: Number
-  // }, // Corrected to use the nested schema directly
   payment_status: {
     type: String,
     required: true
@@ -74,6 +68,14 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
       }
+    }
+  ],
+
+  // Add a field to store the IDs of users who have joined the event
+  joined_users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
     }
   ]
 }, { timestamps: true });

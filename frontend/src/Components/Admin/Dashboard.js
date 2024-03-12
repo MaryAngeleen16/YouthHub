@@ -8,10 +8,12 @@ import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
 import FemaleTeenagersChart from './FemaleTeenLoc';
 import MostPopularCategory from './MostPopularCategory';
+
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
     const [posts, setPosts] = useState([]);
     const [category, setCategory] = useState([]);
+    const [events, setEvents] = useState([]);
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
     const [userRegistrationDates, setUserRegistrationDates] = useState({});
     const [genderCounts, setGenderCounts] = useState({});
@@ -116,11 +118,27 @@ const Dashboard = () => {
         }
     };
 
+    const getEvents = async () => {
+        try {
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+
+            const { data } = await axios.get(`http://localhost:4001/api/events`, config);
+            setEvents(data.events);
+        } catch (error) {
+            console.error(error);
+            // Handle the error as needed
+        }
+    };
 
     useEffect(() => {
         getUsers();
         getPosts();
         getCategories();
+        getEvents();
     }, [selectedCategory]);
 
     return (
@@ -152,10 +170,10 @@ const Dashboard = () => {
                     </div>
                     <div className='card'>
                         <div className='card-inner'>
-                            <h3 style={{ color: 'white' }}>ALERTS</h3>
+                            <h3 style={{ color: 'white' }}>EVENTS</h3>
                             <BsFillBellFill className='card_icon' />
                         </div>
-                        <h1 style={{ color: 'white' }}>0</h1>
+                        <h1 style={{ color: 'white' }}>{events.length}</h1>
                     </div>
                 </div>
                 <div className="charts-container d-flex justify-content-between">

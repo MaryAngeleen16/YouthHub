@@ -78,8 +78,8 @@ const AllEvents = () => {
         venue: event.venue_id.name,
         event_info: (
           <div>
-            <div>{event.title}</div>
-            <div>{event.amount === 0 ? 'Free':event.amount}</div>
+            <div><b>Title:</b> {event.title}</div>
+            <div><b>Fee:</b> {event.amount === 0 ? 'Free':event.amount}</div>
           </div>
         ),
         description: event.description,

@@ -84,3 +84,30 @@
     text-decoration: none; /* Remove underline */
     font-weight: 400;
 }
+
+.go-back-button {
+  margin-top: 50px;
+  color: #F38783;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Arial;
+  line-height: 18px;
+  word-wrap: break-word;
+  padding: 10px 20px;
+  display: inline-block;
+  border: 3px solid #F38783;
+  border-radius: 50px;
+  text-decoration: none; /* Assuming you want this button to look like a link */
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+.go-back-button:hover {
+  background-color: #F38783;
+  color: white;
+  border-color: #F38783; /* Highlight border on hover */
+}
+
+.go-back-button:active {
+  background-color: #d63c3c;
+  border-color: #d63c3c; /* Highlight border on click */
+}

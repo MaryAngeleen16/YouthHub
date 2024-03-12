@@ -1,67 +1,67 @@
  .WomanReadingWithBaby {
-    width: 496px;
-    height: 400px;
-    justify-content: left;
-    align-items: left;
-    display: inline-flex;
-}
+   width: 496px;
+   height: 400px;
+   justify-content: left;
+   align-items: left;
+   display: inline-flex;
+ }
 
-.WomanReadingWithBaby img {
-    width: 1200px;
-    height: 800px;
-    margin-left: 800px; 
-}
+ .WomanReadingWithBaby img {
+   width: 1200px;
+   height: 800px;
+   margin-left: 800px;
+ }
 
-.Frame21 {
-    width: 612px;
-    height: 284px;
-    padding: 8px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 8px;
-    display: inline-flex;
-    position: relative;
-    top: 50px; 
-    right: 250px; 
-}
+ .Frame21 {
+   width: 612px;
+   height: 284px;
+   padding: 8px;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   gap: 8px;
+   display: inline-flex;
+   position: relative;
+   top: 50px;
+   right: 250px;
+ }
 
 
-.banner-para {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 30px;
-    display: flex;
-    margin-top: 150px;
-    margin-left: -100px;
-}
+ .banner-para {
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   gap: 30px;
+   display: flex;
+   margin-top: 150px;
+   margin-left: -100px;
+ }
 
-.YouthEmpowerment {
-    color: #FF9999;
-    font-size: 100px;
-    font-family: Arial;
-    font-weight: 700;
-    line-height: 76.80px;
-    word-wrap: break-word;
-}
+ .YouthEmpowerment {
+   color: #FF9999;
+   font-size: 100px;
+   font-family: Arial;
+   font-weight: 700;
+   line-height: 76.80px;
+   word-wrap: break-word;
+ }
 
-.banner-paragraph {
-  color: #A3716E;
-  font-size: 16px;
-  font-family: Metropolis;
-  font-weight: 400;
-  line-height: 29px;
-}
+ .banner-paragraph {
+   color: #A3716E;
+   font-size: 16px;
+   font-family: Metropolis;
+   font-weight: 400;
+   line-height: 29px;
+ }
 
-.Frame8 {
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 20px;
-    display: inline-flex;
-}
+ .Frame8 {
+   justify-content: flex-start;
+   align-items: flex-start;
+   gap: 20px;
+   display: inline-flex;
+ }
 
-/* .Frame1 {
+ /* .Frame1 {
     width: 200px;
     height: 55px;
     background: #FF9999;
@@ -71,7 +71,7 @@
     display: flex;
 } */
 
-/* .Frame6 {
+ /* .Frame6 {
     width: 200px;
     height: 55px;
     border-radius: 50px;
@@ -81,168 +81,283 @@
     display: flex;
 } */
 
-.Button-banner {
-    color: #F38783;
-    font-size: 15px;
-    font-weight: bold;
-    font-family: Arial;
-    line-height: 18px;
-    word-wrap: break-word;
-    padding: 10px 20px;
-    display: inline-block;
-    border: 3px solid #F38783;
-    border-radius: 50px;
-    text-decoration: none; /* Assuming you want this button to look like a link */
-    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
-}
+ .Button-banner {
+   color: #F38783;
+   font-size: 15px;
+   font-weight: bold;
+   font-family: Arial;
+   line-height: 18px;
+   word-wrap: break-word;
+   padding: 10px 20px;
+   display: inline-block;
+   border: 3px solid #F38783;
+   border-radius: 50px;
+   text-decoration: none;
+   /* Assuming you want this button to look like a link */
+   transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+ }
 
-.Button-banner:hover {
-    background-color: #F38783;
-    color: white;
-    border-color: #F38783; /* Highlight border on hover */
-}
+ .Button-banner:hover {
+   background-color: #F38783;
+   color: white;
+   border-color: #F38783;
+   /* Highlight border on hover */
+ }
 
-.Button-banner:active {
-    background-color: #d63c3c;
-    border-color: #d63c3c; /* Highlight border on click */
-}
+ .Button-banner:active {
+   background-color: #d63c3c;
+   border-color: #d63c3c;
+   /* Highlight border on click */
+ }
 
-.container-banner {
-    display: flex;
-    flex-direction: row;
-}
+ .container-banner {
+   display: flex;
+   flex-direction: row;
+ }
 
-.row-banner {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+ .row-banner {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+ }
 
-.col-banner {
-    flex: 1;
-}
+ .col-banner {
+   flex: 1;
+ }
 
-/* New Content */
+ /* New Content */
 
-   .Content {
-    width: 1440px;
-    height: 610px;
-    position: relative;
-    margin-top: 50px;
-  }
-  
-  .Base {
-    width: 800px;
-    height: 610px;
-    left: 0px;
-    top: 0px;
-    position: absolute;
-    background: #FFF7F7;
-  }
-  
-  .Picture {
-    width: 1018px;
-    height: 610px;
-    left: 0px;
-    top: 0px;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    display: inline-flex;
-  }
-  
-  .Image {
-    width: 618px;
-    height: 610px;
-  }
-  
-  .Frame26 {
-    left: 1000px;
-    top: 80px;
-    position: absolute;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 44px;
-    display: inline-flex;
-  }
-  
-  .Frame19 {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 20px;
-    display: flex;
-    color: #A3716E;
-  }
-  
-  .ThereAreManyReaso {
-    width: 352px;
-    color: #F38783;
-    font-size: 32px;
-    font-family: Metropolis;
-    font-weight: 700;
-    line-height: 38px;
-    word-wrap: break-word;
-  }
-  
-  .AlthoughThisIsWel {
-    width: 460px;
-    color: #A3716E;
-    font-size: 16px;
-    font-family: Metropolis;
-    font-weight: 400;
-    line-height: 29px;
-    word-wrap: break-word;
-  }
-  
-  .Frame25 {
-    justify-content: flex-start;
-    align-items: center;
-    gap: 7.25px;
-    display: inline-flex;
-  }
-  
-  .ReadMore {
-    width: 101.50px;
-    height: 26.58px;
-    color: #ED017F;
-    font-size: 19.33px;
-    font-family: Metropolis;
-    font-weight: 400;
-    line-height: 26.58px;
-    /* word-wrap: break-word; */
-  }
-  
-  .RightArrow {
-    width: 29px;
-    height: 29px;
-    padding-top: 7.24px;
-    padding-bottom: 7.24px;
-    padding-left: 7.25px;
-    padding-right: 7.26px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  
-  .Vector {
-    width: 14.49px;
-    height: 14.51px;
-    background: #ED017F;
-  }
+ .Content {
+   width: 1440px;
+   height: 610px;
+   position: relative;
+   margin-top: 50px;
+ }
 
-  /* Recent Post */
+ .Base {
+   width: 800px;
+   height: 610px;
+   left: 0px;
+   top: 0px;
+   position: absolute;
+   background: #FFF7F7;
+ }
 
-  .recent-posts-section {
-    background-color: #F38783;
-  }
-  
-  .posts-maincontainer {
-    padding-top: 5px;
-    padding-bottom: 50px;
-  }
+ .Picture {
+   width: 1018px;
+   height: 610px;
+   left: 0px;
+   top: 0px;
+   position: absolute;
+   justify-content: center;
+   align-items: center;
+   display: inline-flex;
+ }
 
-  .posts-header {
-    color: white;
-  }
+ .Image {
+   width: 618px;
+   height: 610px;
+ }
+
+ .Frame26 {
+   left: 1000px;
+   top: 80px;
+   position: absolute;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   gap: 44px;
+   display: inline-flex;
+ }
+
+ .Frame19 {
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   gap: 20px;
+   display: flex;
+   color: #A3716E;
+ }
+
+ .ThereAreManyReaso {
+   width: 352px;
+   color: #F38783;
+   font-size: 32px;
+   font-family: Metropolis;
+   font-weight: 700;
+   line-height: 38px;
+   word-wrap: break-word;
+ }
+
+ .AlthoughThisIsWel {
+   width: 460px;
+   color: #A3716E;
+   font-size: 16px;
+   font-family: Metropolis;
+   font-weight: 400;
+   line-height: 29px;
+   word-wrap: break-word;
+ }
+
+ .Frame25 {
+   justify-content: flex-start;
+   align-items: center;
+   gap: 7.25px;
+   display: inline-flex;
+ }
+
+ .ReadMore {
+   width: 101.50px;
+   height: 26.58px;
+   color: #ED017F;
+   font-size: 19.33px;
+   font-family: Metropolis;
+   font-weight: 400;
+   line-height: 26.58px;
+   /* word-wrap: break-word; */
+ }
+
+ .RightArrow {
+   width: 29px;
+   height: 29px;
+   padding-top: 7.24px;
+   padding-bottom: 7.24px;
+   padding-left: 7.25px;
+   padding-right: 7.26px;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+ }
+
+ .Vector {
+   width: 14.49px;
+   height: 14.51px;
+   background: #ED017F;
+ }
+
+ /* Recent Post */
+
+ .recent-posts-section {
+   background-color: #F38783;
+   height: 3200px;
+ }
+
+ .posts-maincontainer {
+   padding-top: 5px;
+   padding-bottom: 50px;
+ }
+
+ .posts-header {
+   color: white;
+ }
+
+ /* countdown section */
+
+ .countdown-container {
+   display: flex;
+   justify-content: space-between;
+   background-color: #d05f5b;
+   height: 300px;
+ }
+
+ .text-countdown-info {
+   text-align: left !important;
+   font-weight: 500;
+   font-size: 50px;
+   padding-left: 150px;
+   margin-top: 80px;
+   margin-bottom: -90px;
+   color: #fad5d5;
+ }
+
+ .text-countdown-title {
+   text-align: left !important;
+   font-weight: 800;
+   font-size: 75px;
+   color: #ffffff;
+   padding-left: 150px;
+   text-transform: uppercase;
+ }
+
+ /* .text-countdown-title p{
+  margin-bottom: -80px;
+} */
+
+ .text-countdown {
+   font-weight: 700;
+   background: linear-gradient(90deg, #F38783 0%, #F8D4BC 57%, #FACCCC 100%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   text-align: center;
+   margin-top: 40px;
+ }
+
+ .text-countdown span {
+   display: inline-block;
+   margin-right: 15px;
+   font-size: 65px;
+ }
+
+ .countdown-color-container {
+   display: inline-block;
+   background-color: #ffffff;
+   color: #000000;
+   border-radius: 5px;
+   padding: 5px 10px;
+   margin-right: 5px;
+   /* Adjust spacing between cubes */
+ }
+
+ .countdown-number-container {
+   color: #b64040;
+   border-radius: 5px;
+   padding: 5px 10px;
+   margin-right: 5px;
+   /* Adjust spacing between cubes */
+ }
+
+ .countdown-color-container {
+   /* background: linear-gradient(90deg, #F38783 0%, #F8D4BC 57%, #FACCCC 100%); */
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   z-index: 0;
+   /* Ensure color container is below number container */
+ }
+
+ .countown-button {
+   background-color: #F38783;
+   font-weight: 600;
+   border: none;
+   font-size: 15px;
+   padding: 20px;
+   color: #FFF7F7;
+   font-size: 20px;
+   border-radius: 30px;
+   margin-top: -30px;
+   width: 400px;
+   margin-bottom: 50px;
+   letter-spacing: 10px;
+   text-decoration: none;
+   /* Assuming you want this button to look like a link */
+   transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+ }
+
+ .button-center {
+   display: flex;
+   justify-content: center;
+ }
+
+ .countown-button:hover {
+   background-color: #f7e0e0;
+   color: #F38783;
+   border-color: #F38783;
+   /* Highlight border on hover */
+ }
+
+ .countown-button:active {
+   background-color: #d63c3c;
+   border-color: #d63c3c;
+   /* Highlight border on click */
+ }

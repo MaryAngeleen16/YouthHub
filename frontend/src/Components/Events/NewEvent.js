@@ -21,13 +21,13 @@ const CreateEvent = () => {
     audience_capacity: '',
     banner: null,
     additionalImages: [],
+    timeStarts: '', // Added timeStarts
+    timeEnds: '' // Added timeEnds
   });
 
   const [venues, setVenues] = useState([]);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState({});
-  // const [paymentStatus, setPaymentStatus] = useState('1');
-  // const [setAmount] = useState('');
 
   const onChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -77,8 +77,6 @@ const CreateEvent = () => {
     }
   };
 
-
-
   const {
     title,
     description,
@@ -110,7 +108,7 @@ const CreateEvent = () => {
       "Content-Type": "multipart/form-data",
       'Authorization': `Bearer ${getToken()}`
     }
-  }
+  };
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -125,6 +123,8 @@ const CreateEvent = () => {
     formData.append('title', title);
     formData.append('description', description);
     formData.append('schedule', schedule);
+    formData.append('timeStarts', event.timeStarts); // Append timeStarts
+    formData.append('timeEnds', event.timeEnds); // Append timeEnds
     formData.append('venue_id', venue_id);
     formData.append('type', type);
     formData.append('payment_status', payment_status);
@@ -134,19 +134,6 @@ const CreateEvent = () => {
     if (additionalImages.length > 0) {
       additionalImages.forEach((image) => formData.append('additionalImages', image));
     }
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-    //   try {
-    //     const response = await axios.post('http://localhost:4001/api/events/new', formData, {
-    //       headers: { 'Content-Type': 'multipart/form-data' },
-    //     });
-    //     toast.success('Event created successfully');
-    //     navigate('/events/list');
-    //   } catch (error) {
-    //     toast.error('Failed to create event');
-    //   }
-    // };
 
     axios
       .post('http://localhost:4001/api/events/new', formData, configs)
@@ -163,11 +150,13 @@ const CreateEvent = () => {
           amount: '',
           audience_capacity: '',
           banner: '',
-          additionalImages: ''
+          additionalImages: '',
+          timeEnds: '',
+          timeStarts: '',
         });
       })
       .catch((err) => {
-        toast.error('Failed to create'); // Use toast for error message
+        toast.error('Failed to create');
       });
   };
 
@@ -181,7 +170,7 @@ const CreateEvent = () => {
     };
   }, []);
 
-  //BOOTSTRAP CSS
+  // BOOTSTRAP CSS
   useEffect(() => {
     const bootstrapStyles = `
       @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
@@ -197,7 +186,6 @@ const CreateEvent = () => {
     };
   }, []);
 
-
   return (
     <div className="container mt-6">
       <div className="row">
@@ -207,7 +195,6 @@ const CreateEvent = () => {
         <div className="col-md-9 text-crud" style={{ paddingBottom: '50px', marginTop: '50px' }}>
           <h2 className="title-crud">Create Event</h2>
           <form id="manage-event" encType="multipart/form-data" onSubmit={submitForm}>
-            {/* <input type="hidden" name="id" value={id} /> */}
             <div className="form-group row">
               <div className="col-md-5">
                 <label htmlFor="title" className="control-label">
@@ -239,23 +226,29 @@ const CreateEvent = () => {
               </div>
             </div>
 
-            {/* <div className="form-group row">
+            <div className="form-group row">
               <div className="col-md-5">
-                <label htmlFor="venue_id" className="control-label">
-                  Venue
-                </label>
-                <select
-                  name="venue_id"
-                  id="venue_id"
-                  className="custom-select select2"
-                  value={venue_id}
-                  onChange={onChange}
-                  required
-                >
-                  <option value=""></option>
-                </select>
+                <label htmlFor="startTime">Start Time:</label>
+                <input
+                  type="time"
+                  id="startTime"
+                  value={event.timeStarts}
+                  onChange={(e) => setEvent({ ...event, timeStarts: e.target.value })}
+                />
               </div>
-            </div> */}
+            </div>
+
+            <div className="form-group row">
+              <div className="col-md-5">
+                <label htmlFor="endTime">End Time:</label>
+                <input
+                  type="time"
+                  id="endTime"
+                  value={event.timeEnds}
+                  onChange={(e) => setEvent({ ...event, timeEnds: e.target.value })}
+                />
+              </div>
+            </div>
 
             <div className="mb-3">
               <label htmlFor="venue" className="form-label">
@@ -264,12 +257,12 @@ const CreateEvent = () => {
               <select
                 className="form-control"
                 id="venue"
-                name="venue_id" // Corrected name to venue_id
+                name="venue_id"
                 required
-                value={venue_id} // Corrected to venue_id
+                value={venue_id}
                 onChange={handleChange}
               >
-                <option value="">Select Venue</option> {/* New option added */}
+                <option value="">Select Venue</option>
                 {venues.map((venue) => (
                   <option key={venue._id} value={venue._id}>
                     {venue.name}
@@ -295,7 +288,6 @@ const CreateEvent = () => {
                 ></textarea>
               </div>
             </div>
-
 
             <div className="form-group row">
               <div className="col-md-5">
@@ -334,8 +326,6 @@ const CreateEvent = () => {
               </div>
             </div>
 
-
-
             <div className="form-group row">
               <div className="col-md-5">
                 <label htmlFor="audience_capacity" className="control-label">
@@ -354,7 +344,6 @@ const CreateEvent = () => {
                 />
               </div>
             </div>
-
 
             <div className="row form-group">
               <div className="col-md-5">
@@ -376,25 +365,6 @@ const CreateEvent = () => {
               </div>
             </div>
 
-            {/* <div className="form-group">
-              <label htmlFor="additionalImages" className="control-label">
-                Additional Images
-              </label>
-              <input
-                type="file"
-                id="additionalImages"
-                multiple
-                onChange={onChange}
-                accept="image/*"
-                style={{ display: 'none' }}
-              />
-              <label htmlFor="additionalImages" style={{ cursor: 'pointer' }}>
-                <strong>Choose File</strong>
-              </label>
-              <div id="drop">
-              </div>
-              <div id="list"></div>
-            </div> */}
             <div className="row">
               <div className="col-md-12">
                 <button type="submit" className="btn btn-sm btn-block btn-primary col-sm-2">

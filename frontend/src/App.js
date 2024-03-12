@@ -53,6 +53,8 @@ import VideoDetails from './Components/VideoDetails.js';
 import VentForm from './Components/VentForm.js';
 import VentList from './Components/Counselor/VentList.js';
 import VentFormByUser from './Components/VentFormByUser.js';
+
+import CountdownTimer from './CountdownTimer.js';
 function App() {
   return (
     
@@ -100,6 +102,7 @@ function App() {
           <Route path="/vent/list" element={<VentList/>} exact />
           <Route path="/events/:id" element={<EventDetails />} exact />
 
+          <Route path="/countdowntimer" element={<CountdownTimer />} exact />
 
           <Route path="/dashboard" element
           ={

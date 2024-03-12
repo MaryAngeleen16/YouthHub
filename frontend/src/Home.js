@@ -42,6 +42,69 @@ const Home = () => {
         fetchData();
     }, []);
 
+    const [events, setEvents] = useState([]);
+    const [earliestEvent, setEarliestEvent] = useState(null);
+    const [timeRemaining, setTimeRemaining] = useState(null);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const response = await axios.get('http://localhost:4001/api/events');
+                setEvents(response.data.events); // Corrected to extract the events array
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
+        };
+
+        fetchEvents();
+    }, []);
+
+
+    useEffect(() => {
+        if (events.length > 0) {
+            // Find the event with the latest start time
+            const latestEvent = events.reduce((prev, current) => {
+                const prevTime = new Date(prev.schedule || prev.timeStarts);
+                const currentTime = new Date(current.schedule || current.timeStarts);
+                return prevTime > currentTime ? prev : current;
+            });
+
+            setEarliestEvent(latestEvent);
+        }
+    }, [events]);
+
+
+    useEffect(() => {
+        if (earliestEvent) {
+            const intervalId = setInterval(() => {
+                const now = new Date();
+                const eventTime = new Date(earliestEvent.schedule || earliestEvent.timeStarts);
+                const timeDiff = eventTime.getTime() - now.getTime();
+                setTimeRemaining(Math.max(0, timeDiff));
+            }, 1000);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [earliestEvent]);
+
+    const formatTime = (time) => {
+        const pad = (num) => {
+            return num < 10 ? '0' + num : num;
+        };
+
+        const days = Math.floor(time / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((time % (1000 * 60)) / 1000);
+
+        return {
+            days: pad(days),
+            hours: pad(hours),
+            minutes: pad(minutes),
+            seconds: pad(seconds)
+        };
+    };
+
     return (
         <div>
             <BackDropLoading open={loading} />
@@ -76,6 +139,78 @@ const Home = () => {
                 </div>
             </div>
 
+            {/* <div classname="countdown-container">
+                {earliestEvent && (
+                    <div>
+
+                        <p className='text-countdown-info'>{new Date(earliestEvent.schedule || earliestEvent.timeStarts).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</p>
+
+                        <p className='text-countdown-title'>{earliestEvent.title}</p>
+
+                        <p className='text-countdown'>
+                            <span>{formatTime(timeRemaining).days}</span>
+                            <span>D:
+                            </span>
+                            <span>{formatTime(timeRemaining).hours}</span>
+                            <span>HRS: </span>
+
+                            <span>{formatTime(timeRemaining).minutes}</span>
+                            <span>MINS: </span>
+
+                            <span>{formatTime(timeRemaining).seconds}</span>
+                            <span>SECS</span>
+                        </p>
+
+                    </div>
+                )}
+            </div> */}
+
+            <div className="countdown-container">
+                {earliestEvent && (
+                    <div className="countdown-info">
+                        <p className="text-countdown-info">{new Date(earliestEvent.schedule || earliestEvent.timeStarts).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</p>
+                        < div className="text-countdown-title">
+                            <p>{earliestEvent.title}</p>
+                        </div>
+                    </div>
+                )}
+
+                {earliestEvent && (
+                    <div className="countdown-timer">
+                        <p className="text-countdown">
+                            <span className="countdown-number-container">{formatTime(timeRemaining).days}D</span>
+                            <span className="countdown-label"> : </span>
+                            <span className="countdown-number-container">{formatTime(timeRemaining).hours}HRS</span>
+                            <span className="countdown-label"> : </span>
+                            <span className="countdown-number-container">{formatTime(timeRemaining).minutes}MINS</span>
+                            <span className="countdown-label"> : </span>
+                            <span className="countdown-number-container">{formatTime(timeRemaining).seconds}SECS</span>
+                            <span className="countdown-label"></span>
+                        </p>
+                    </div>
+                )}
+            </div>
+
+            <div className="button-center">
+                <button
+                    className="btn-event countown-button"
+                    onClick={() => {
+                        window.location.href = `/events/${earliestEvent._id}`;
+                    }}
+                >
+                    JOIN NOW
+                </button>
+
+            </div>
+
 
             <div class="Content">
                 <div class="Base"></div>
@@ -92,12 +227,79 @@ const Home = () => {
                             with confidence. Start your journey toward informed choices today.</div>
                     </div>
                     <div class="Frame25">
-                    <div class="ReadMore"><a href="/PostsPage" style={{color: "#ff9900"}}>Read Post</a></div>                        <div class="RightArrow">
+                        <div class="ReadMore"><a href="/PostsPage" style={{ color: "#ff9900" }}>Read Post</a></div>                        <div class="RightArrow">
                             <div class="Vector"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div className="edu" style={{ width: '1440px', height: '820px', position: 'relative' }}>
+                <div className="edu-sec" style={{ width: '1230px', right: '-150px', top: '220px', position: 'absolute', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex' }}>
+                    <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                        <div className="CircleLayer" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                            <div className="Vector" style={{ width: '21.40px', height: '21.40px', left: '12.52px', top: '3.08px', position: 'absolute', background: '#FCE0EF' }}></div>
+                            <div className="Vector" style={{ width: '15.42px', height: '15.42px', left: '3.08px', top: '18.50px', position: 'absolute', background: '#ED017F' }}></div>
+                            <div className="Vector" style={{ width: '18.45px', height: '18.45px', left: '7.75px', top: '10.79px', position: 'absolute', background: '#F899CC' }}></div>
+                        </div>
+                        <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Community<br />Collaboration</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Fostering teamwork and cooperation among users</div>
+                        </div>
+                    </div>
+                    <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                        <div className="Rocket" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                            <div className="Vector" style={{ width: '26.91px', height: '26.98px', left: '1.59px', top: '8.50px', position: 'absolute', background: '#ED017F' }}></div>
+                            <div className="Vector" style={{ width: '28.73px', height: '28.87px', left: '6.68px', top: '1.52px', position: 'absolute', background: '#F899CC' }}></div>
+                        </div>
+                        <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Teen <br /> Counseling</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Providing a supportive space for adolescent counseling</div>
+                        </div>
+                    </div>
+                    <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                        <div className="Bag" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                            <div className="Vector" style={{ width: '30.83px', height: '12.33px', left: '3.08px', top: '9.25px', position: 'absolute', background: '#F899CC' }}></div>
+                            <div className="Vector" style={{ width: '30.83px', height: '27.75px', left: '3.08px', top: '4.62px', position: 'absolute', background: '#ED017F' }}></div>
+                        </div>
+                        <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Online <br /> Forum</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Sharing thoughts and experiences, as well as realtime conversation</div>
+                        </div>
+                    </div>
+                    {/* Add more Feature components here */}
+                </div>
+
+                <div className="edu" style={{ width: '1440px', height: '820px', position: 'relative', bottom: '30px' }}>
+                    <div className="edu-sec" style={{ width: '1230px', right: '-150px', bottom: '30px', position: 'absolute', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex' }}>
+                        <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                            <div className="CircleLayer" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                                <div className="Vector" style={{ width: '21.40px', height: '21.40px', left: '12.52px', top: '3.08px', position: 'absolute', background: '#FCE0EF' }}></div>
+                                <div className="Vector" style={{ width: '15.42px', height: '15.42px', left: '3.08px', top: '18.50px', position: 'absolute', background: '#ED017F' }}></div>
+                                <div className="Vector" style={{ width: '18.45px', height: '18.45px', left: '7.75px', top: '10.79px', position: 'absolute', background: '#F899CC' }}></div>
+                            </div>
+                            <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Event <br /> Tracking</div>
+                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Monitoring and engaging teens in activities</div>
+                            </div>
+                        </div>
+                        <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                            <div className="Rocket" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                                <div className="Vector" style={{ width: '26.91px', height: '26.98px', left: '1.59px', top: '8.50px', position: 'absolute', background: '#ED017F' }}></div>
+                                <div className="Vector" style={{ width: '28.73px', height: '28.87px', left: '6.68px', top: '1.52px', position: 'absolute', background: '#F899CC' }}></div>
+                            </div>
+                            <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Adolescent <br />Education Hub</div>
+                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Empowering teens through educational resources</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="edu-info" style={{ width: '660px', right: '150px', top: '163px', position: 'absolute', textAlign: 'center', color: '#ED017F', fontSize: '16px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '22px', wordWrap: 'break-word' }}>These are what the sites offer that you can explore!</div>
+                <div className="edu-title" style={{ right: '50px', top: '100px', position: 'absolute', textAlign: 'center', color: '#F38783', fontSize: '36px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '43px', wordWrap: 'break-word' }}>Creating Extraordinary Adolescent Experience</div>
+            </div >
 
 
             <div className="recent-posts-section">
@@ -149,7 +351,7 @@ const Home = () => {
                 </div>
             </div>
 
-        </div>
+        </div >
     );
 };
 

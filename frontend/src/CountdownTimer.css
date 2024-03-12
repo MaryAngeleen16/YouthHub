@@ -1,0 +1,14 @@
+.text-countdown {
+
+font-weight: 700;
+font-size: 128px;
+line-height: 155px;
+/* identical to box height */
+
+background: linear-gradient(90deg, #F38783 0%, #F8D4BC 57%, #FACCCC 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
