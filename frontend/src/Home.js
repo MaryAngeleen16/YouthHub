@@ -45,65 +45,65 @@ const Home = () => {
     const [events, setEvents] = useState([]);
     const [earliestEvent, setEarliestEvent] = useState(null);
     const [timeRemaining, setTimeRemaining] = useState(null);
-  
+
     useEffect(() => {
-      const fetchEvents = async () => {
-          try {
-            const response = await axios.get('http://localhost:4001/api/events');
-            setEvents(response.data.events); // Corrected to extract the events array
-          } catch (error) {
-            console.error('Error fetching events:', error);
-          }
+        const fetchEvents = async () => {
+            try {
+                const response = await axios.get('http://localhost:4001/api/events');
+                setEvents(response.data.events); // Corrected to extract the events array
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
         };
-        
-      fetchEvents();
+
+        fetchEvents();
     }, []);
 
 
     useEffect(() => {
         if (events.length > 0) {
-          // Find the event with the latest start time
-          const latestEvent = events.reduce((prev, current) => {
-            const prevTime = new Date(prev.schedule || prev.timeStarts);
-            const currentTime = new Date(current.schedule || current.timeStarts);
-            return prevTime > currentTime ? prev : current;
-          });
-      
-          setEarliestEvent(latestEvent);
+            // Find the event with the latest start time
+            const latestEvent = events.reduce((prev, current) => {
+                const prevTime = new Date(prev.schedule || prev.timeStarts);
+                const currentTime = new Date(current.schedule || current.timeStarts);
+                return prevTime > currentTime ? prev : current;
+            });
+
+            setEarliestEvent(latestEvent);
         }
-      }, [events]);
+    }, [events]);
 
 
-      useEffect(() => {
+    useEffect(() => {
         if (earliestEvent) {
-          const intervalId = setInterval(() => {
-            const now = new Date();
-            const eventTime = new Date(earliestEvent.schedule || earliestEvent.timeStarts);
-            const timeDiff = eventTime.getTime() - now.getTime();
-            setTimeRemaining(Math.max(0, timeDiff));
-          }, 1000);
-    
-          return () => clearInterval(intervalId);
-        }
-      }, [earliestEvent]);
+            const intervalId = setInterval(() => {
+                const now = new Date();
+                const eventTime = new Date(earliestEvent.schedule || earliestEvent.timeStarts);
+                const timeDiff = eventTime.getTime() - now.getTime();
+                setTimeRemaining(Math.max(0, timeDiff));
+            }, 1000);
 
-      const formatTime = (time) => {
+            return () => clearInterval(intervalId);
+        }
+    }, [earliestEvent]);
+
+    const formatTime = (time) => {
         const pad = (num) => {
-          return num < 10 ? '0' + num : num;
+            return num < 10 ? '0' + num : num;
         };
-    
+
         const days = Math.floor(time / (1000 * 60 * 60 * 24));
         const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((time % (1000 * 60)) / 1000);
-    
+
         return {
-          days: pad(days),
-          hours: pad(hours),
-          minutes: pad(minutes),
-          seconds: pad(seconds)
+            days: pad(days),
+            hours: pad(hours),
+            minutes: pad(minutes),
+            seconds: pad(seconds)
         };
-      };
+    };
 
     return (
         <div>
@@ -139,67 +139,49 @@ const Home = () => {
                 </div>
             </div>
 
+            <div>
+                {earliestEvent && (
+                    <div>
 
-            {/* <div>
-            {earliestEvent && (
-        <div>
-          <h2>Countdown Timer for Earliest Event</h2>
-          <p>Event Name: {earliestEvent.title}</p>
-          <p>Date: {earliestEvent.schedule}</p>
-          <p className='text-countdown'>
-            <span>{formatTime(timeRemaining).days}DAYS</span>{' '}
-            <span>{formatTime(timeRemaining).hours}HOURS</span>{' '}
-            <span>{formatTime(timeRemaining).minutes}MINUTES</span>{' '}
-            <span>{formatTime(timeRemaining).seconds}SECONDS</span>
-          </p>
-        </div>
-      )}
-    </div> */}
+                        <p className='text-countdown-info'>{new Date(earliestEvent.schedule || earliestEvent.timeStarts).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</p>
+
+                        <p className='text-countdown-title'>{earliestEvent.title}</p>
+
+                        <p className='text-countdown'>
+                            <span>{formatTime(timeRemaining).days}</span>
+                            <span>D:
+                            </span>
+                            <span>{formatTime(timeRemaining).hours}</span>
+                            <span>HRS: </span>
+
+                            <span>{formatTime(timeRemaining).minutes}</span>
+                            <span>MINS: </span>
+
+                            <span>{formatTime(timeRemaining).seconds}</span>
+                            <span>SECS</span>
+                        </p>
+
+                    </div>
+                )}
+            </div>
 
 
-<div>
-            {earliestEvent && (
-        <div>
-          
-        <p className='text-countdown-info'>{new Date(earliestEvent.schedule || earliestEvent.timeStarts).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-                })}</p>   
+            <div className="button-center">
+                <button
+                    className="btn-event countown-button"
+                    onClick={() => {
+                        window.location.href = `/events/${earliestEvent._id}`;
+                    }}
+                >
+                    JOIN NOW
+                </button>
 
-          <p className='text-countdown-title'>{earliestEvent.title}</p>
-                    
-                <p className='text-countdown'>
-                    <span>{formatTime(timeRemaining).days}</span>
-                    <span>D:
-                    </span>
-                    <span>{formatTime(timeRemaining).hours}</span>
-                    <span>HRS: </span>
+            </div>
 
-                    <span>{formatTime(timeRemaining).minutes}</span>
-                    <span>MINS: </span>
-
-                    <span>{formatTime(timeRemaining).seconds}</span>
-                    <span>SECS</span>
-        </p>
-
-        </div>
-      )}
-    </div>
-
-                        
-    <div className="button-center">
-    <button 
-                                className="btn-event countown-button"
-                                onClick={() => {
-                                    window.location.href = `/events/${earliestEvent._id}`;
-                                }}
-                            >
-                                JOIN NOW
-                            </button>
-                    
-</div>
-                          
 
             <div class="Content">
                 <div class="Base"></div>
@@ -242,7 +224,7 @@ const Home = () => {
                             <div className="Vector" style={{ width: '28.73px', height: '28.87px', left: '6.68px', top: '1.52px', position: 'absolute', background: '#F899CC' }}></div>
                         </div>
                         <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
-                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Teen <br/> Counseling</div>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Teen <br /> Counseling</div>
                             <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Harnessing the power of Technology to deliver better customer experience</div>
                         </div>
                     </div>
@@ -252,7 +234,7 @@ const Home = () => {
                             <div className="Vector" style={{ width: '30.83px', height: '27.75px', left: '3.08px', top: '4.62px', position: 'absolute', background: '#ED017F' }}></div>
                         </div>
                         <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
-                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Online <br/> Forum</div>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Online <br /> Forum</div>
                             <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Setting the standard for the best Corporate Citizenship in the communities we work</div>
                         </div>
                     </div>
@@ -268,7 +250,7 @@ const Home = () => {
                                 <div className="Vector" style={{ width: '18.45px', height: '18.45px', left: '7.75px', top: '10.79px', position: 'absolute', background: '#F899CC' }}></div>
                             </div>
                             <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
-                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Event <br/> Tracking</div>
+                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Event <br /> Tracking</div>
                                 <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Displaying the highest level of Integrity in the way we conduct our business</div>
                             </div>
                         </div>
@@ -278,7 +260,7 @@ const Home = () => {
                                 <div className="Vector" style={{ width: '28.73px', height: '28.87px', left: '6.68px', top: '1.52px', position: 'absolute', background: '#F899CC' }}></div>
                             </div>
                             <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
-                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Adolescent <br/>Education Hub</div>
+                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Adolescent <br />Education Hub</div>
                                 <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Harnessing the power of Technology to deliver better customer experience</div>
                             </div>
                         </div>
