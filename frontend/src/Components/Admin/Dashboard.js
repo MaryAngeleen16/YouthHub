@@ -7,7 +7,8 @@ import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
 import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
 import FemaleTeenagersChart from './FemaleTeenLoc';
-import MostPopularCategory from './MostPopularCategory';
+import MostPopularCategory from '../Charts/MostPopularCategory';
+import UserRegistrationChart from '../Charts/UserRegistrationChart';
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -178,29 +179,7 @@ const Dashboard = () => {
                 </div>
                 <div className="charts-container d-flex justify-content-between">
                     <div className="unique-chart-container">
-                        <div className="card-user">
-                            <div className="card-user-body d-flex flex-column align-items-center">
-                                <h5 className="card-title" style={{ color: "#b38269" }}>User Registration by Day</h5>
-                                <Chart
-                                    options={{
-                                        chart: {
-                                            id: "user-registration-chart"
-                                        },
-                                        xaxis: {
-                                            categories: Object.keys(userRegistrationDates)
-                                        }
-                                    }}
-                                    series={[
-                                        {
-                                            name: "users-registered",
-                                            data: Object.values(userRegistrationDates)
-                                        }
-                                    ]}
-                                    type="bar"
-                                    width="500"
-                                />
-                            </div>
-                        </div>
+                        <UserRegistrationChart />
                     </div>
                     <div className="unique-chart-loc">
                         <div className="card-loc">
@@ -227,14 +206,6 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="unique-chart-loc">
-                        <div className="card-loc">
-                            <div className="card-loc-body d-flex flex-column align-items-center">
-                                <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
-                                <FemaleTeenagersChart />
-                            </div>
-                        </div>
-                    </div> */}
                     <div className="unique-chart-loc">
                         <div className="card-loc">
                             <div className="card-loc-body d-flex flex-column align-items-center">

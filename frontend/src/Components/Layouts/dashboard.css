@@ -219,19 +219,19 @@ a.sidebar-link:hover {
 }
 
 .unique-card-container .card:first-child {
-  background-color: #2962ff;
+  background-color: #95cbd1;
 }
 
 .unique-card-container .card:nth-child(2) {
-  background-color: #ff6d00;
+  background-color: #F38783;
 }
 
 .unique-card-container .card:nth-child(3) {
-  background-color: #2e7d32;
+  background-color: #95cbd1;
 }
 
 .unique-card-container .card:nth-child(4) {
-  background-color: #d50000;
+  background-color: #F38783;
 }
 
 .unique-card-container .card-inner {
