@@ -44,7 +44,7 @@ const Header = () => {
     setTimeout(() => {
       navigate('/'); // Navigate to the home page after logout
     }, 10); // 10ms delay
-  };  
+  };
 
   const onChange = (e) => {
     const reader = new FileReader();
@@ -62,7 +62,8 @@ const Header = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const settings = ['Profile', 'Settings'];
+  const profile = ['Profile'];
+  const settings = ['Settings'];
 
   // Define the paths where you don't want the Header to appear
   const excludedPaths = [
@@ -78,7 +79,7 @@ const Header = () => {
     '/video/list',
     '/video/create',
     '/admin/users'
-];
+  ];
 
   // Check if the current location is one of the excluded paths
   const shouldRenderHeader = !excludedPaths.includes(location.pathname);
@@ -131,9 +132,17 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              {profile.map((setting, index) => (
+                <MenuItem key={index} onClick={handleCloseUserMenu}>
+                  <Link to={`/me`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </Link>
+                </MenuItem>
+              ))}
+
               {settings.map((setting, index) => (
                 <MenuItem key={index} onClick={handleCloseUserMenu}>
-                  <Link to="/me" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Link to="/me/info" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Typography textAlign="center">{setting}</Typography>
                   </Link>
                 </MenuItem>
