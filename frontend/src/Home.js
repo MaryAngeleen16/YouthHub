@@ -92,12 +92,79 @@ const Home = () => {
                             with confidence. Start your journey toward informed choices today.</div>
                     </div>
                     <div class="Frame25">
-                    <div class="ReadMore"><a href="/PostsPage" style={{color: "#ff9900"}}>Read Post</a></div>                        <div class="RightArrow">
+                        <div class="ReadMore"><a href="/PostsPage" style={{ color: "#ff9900" }}>Read Post</a></div>                        <div class="RightArrow">
                             <div class="Vector"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div className="edu" style={{ width: '1440px', height: '820px', position: 'relative' }}>
+                <div className="edu-sec" style={{ width: '1230px', right: '-150px', top: '220px', position: 'absolute', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex' }}>
+                    <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                        <div className="CircleLayer" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                            <div className="Vector" style={{ width: '21.40px', height: '21.40px', left: '12.52px', top: '3.08px', position: 'absolute', background: '#FCE0EF' }}></div>
+                            <div className="Vector" style={{ width: '15.42px', height: '15.42px', left: '3.08px', top: '18.50px', position: 'absolute', background: '#ED017F' }}></div>
+                            <div className="Vector" style={{ width: '18.45px', height: '18.45px', left: '7.75px', top: '10.79px', position: 'absolute', background: '#F899CC' }}></div>
+                        </div>
+                        <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Collaboration</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Displaying the highest level of Integrity in the way we conduct our business</div>
+                        </div>
+                    </div>
+                    <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                        <div className="Rocket" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                            <div className="Vector" style={{ width: '26.91px', height: '26.98px', left: '1.59px', top: '8.50px', position: 'absolute', background: '#ED017F' }}></div>
+                            <div className="Vector" style={{ width: '28.73px', height: '28.87px', left: '6.68px', top: '1.52px', position: 'absolute', background: '#F899CC' }}></div>
+                        </div>
+                        <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Technology</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Harnessing the power of Technology to deliver better customer experience</div>
+                        </div>
+                    </div>
+                    <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                        <div className="Bag" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                            <div className="Vector" style={{ width: '30.83px', height: '12.33px', left: '3.08px', top: '9.25px', position: 'absolute', background: '#F899CC' }}></div>
+                            <div className="Vector" style={{ width: '30.83px', height: '27.75px', left: '3.08px', top: '4.62px', position: 'absolute', background: '#ED017F' }}></div>
+                        </div>
+                        <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                            <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Corporate</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Setting the standard for the best Corporate Citizenship in the communities we work</div>
+                        </div>
+                    </div>
+                    {/* Add more Feature components here */}
+                </div>
+
+                <div className="edu" style={{ width: '1440px', height: '820px', position: 'relative', bottom: '50px' }}>
+                    <div className="edu-sec" style={{ width: '1230px', right: '-150px', bottom: '30px', position: 'absolute', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex' }}>
+                        <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                            <div className="CircleLayer" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                                <div className="Vector" style={{ width: '21.40px', height: '21.40px', left: '12.52px', top: '3.08px', position: 'absolute', background: '#FCE0EF' }}></div>
+                                <div className="Vector" style={{ width: '15.42px', height: '15.42px', left: '3.08px', top: '18.50px', position: 'absolute', background: '#ED017F' }}></div>
+                                <div className="Vector" style={{ width: '18.45px', height: '18.45px', left: '7.75px', top: '10.79px', position: 'absolute', background: '#F899CC' }}></div>
+                            </div>
+                            <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Collaboration</div>
+                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Displaying the highest level of Integrity in the way we conduct our business</div>
+                            </div>
+                        </div>
+                        <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+                            <div className="Rocket" style={{ width: '37px', height: '37px', position: 'relative' }}>
+                                <div className="Vector" style={{ width: '26.91px', height: '26.98px', left: '1.59px', top: '8.50px', position: 'absolute', background: '#ED017F' }}></div>
+                                <div className="Vector" style={{ width: '28.73px', height: '28.87px', left: '6.68px', top: '1.52px', position: 'absolute', background: '#F899CC' }}></div>
+                            </div>
+                            <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
+                                <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Technology</div>
+                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Harnessing the power of Technology to deliver better customer experience</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="edu-info" style={{ width: '660px', right: '150px', top: '163px', position: 'absolute', textAlign: 'center', color: '#ED017F', fontSize: '16px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '22px', wordWrap: 'break-word' }}>These are what the sites offer that you can explore!</div>
+                <div className="edu-title" style={{ right: '50px', top: '100px', position: 'absolute', textAlign: 'center', color: '#F38783', fontSize: '36px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '43px', wordWrap: 'break-word' }}>Creating Extraordinary Adolescent Experience</div>
+            </div >
 
 
             <div className="recent-posts-section">
@@ -149,7 +216,7 @@ const Home = () => {
                 </div>
             </div>
 
-        </div>
+        </div >
     );
 };
 
