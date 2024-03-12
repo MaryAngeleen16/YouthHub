@@ -247,27 +247,78 @@
     color: white;
   }
 
-  /* information section */
+  /* countdown section */
 
-  
+  .countdown-container {
+    display: flex;
+    justify-content: space-between; 
+    background-color: #d05f5b;
+    height: 300px;
+}
 
+.text-countdown-info
+{
+  text-align: left !important;
+  font-weight: 500;
+  font-size: 50px;
+  padding-left: 150px; 
+  margin-top: 80px;
+  margin-bottom: -90px;
+  color: #fad5d5;
+}
+
+.text-countdown-title {
+  text-align: left !important;
+  font-weight: 800;
+  font-size: 75px;
+  color: #ffffff;
+  padding-left: 150px; 
+  text-transform: uppercase;
+}
+
+/* .text-countdown-title p{
+  margin-bottom: -80px;
+} */
 
   .text-countdown {
-    font-weight: 500;
-    font-size: 50px; /* Adjust font size as needed */
+    font-weight: 700;
     background: linear-gradient(90deg, #F38783 0%, #F8D4BC 57%, #FACCCC 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-align: center;
+    margin-top:40px; 
   }
   
   .text-countdown span {
-    display: inline-block; /* Display spans as inline-block elements */
-    margin-right: 15px; /* Add some space between elements */
+    display: inline-block;
+    margin-right: 15px; 
+    font-size: 65px;
   }
   
+  .countdown-color-container {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px; /* Adjust spacing between cubes */
+}
 
+.countdown-number-container {
+  color: #b64040;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px; /* Adjust spacing between cubes */
+}
+
+.countdown-color-container {
+  /* background: linear-gradient(90deg, #F38783 0%, #F8D4BC 57%, #FACCCC 100%); */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 0; /* Ensure color container is below number container */
+}
 
   .countown-button {
     background-color: #F38783;
@@ -278,10 +329,10 @@
     color: #FFF7F7;
     font-size: 20px;
     border-radius: 30px;
-    margin-top: -40px;
+    margin-top: -30px;
     width: 400px;
     margin-bottom: 50px;
-
+    letter-spacing: 10px;
 }
 
 .button-center {
@@ -289,22 +340,4 @@
   justify-content: center;
 }
 
-.text-countdown-info
-{
-  text-align: center !important;
-  font-weight: 500;
-  font-size: 50px; 
-  margin-bottom: -50px;
-  color: #A3716E;
 
-
-}
-
-.text-countdown-title {
-  text-align: center;
-  font-weight: 800;
-  font-size: 75px;
-  margin-bottom: -10px;
-  color: #F38783;
-
-}

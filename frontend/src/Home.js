@@ -139,7 +139,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div>
+            {/* <div classname="countdown-container">
                 {earliestEvent && (
                     <div>
 
@@ -167,8 +167,37 @@ const Home = () => {
 
                     </div>
                 )}
-            </div>
+            </div> */}
 
+            <div className="countdown-container">
+                {earliestEvent && (
+                    <div className="countdown-info">
+                        <p className="text-countdown-info">{new Date(earliestEvent.schedule || earliestEvent.timeStarts).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</p>
+                        < div className="text-countdown-title">
+                            <p>{earliestEvent.title}</p>
+                        </div>
+                    </div>
+                )}
+
+                {earliestEvent && (
+                    <div className="countdown-timer">
+                        <p className="text-countdown">
+                            <span className="countdown-number-container">{formatTime(timeRemaining).days}D</span>
+                            <span className="countdown-label"> : </span>
+                            <span className="countdown-number-container">{formatTime(timeRemaining).hours}HRS</span>
+                            <span className="countdown-label"> : </span>
+                            <span className="countdown-number-container">{formatTime(timeRemaining).minutes}MINS</span>
+                            <span className="countdown-label"> : </span>
+                            <span className="countdown-number-container">{formatTime(timeRemaining).seconds}SECS</span>
+                            <span className="countdown-label"></span>
+                        </p>
+                    </div>
+                )}
+            </div>
 
             <div className="button-center">
                 <button
