@@ -453,6 +453,7 @@ exports.joinEvent = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user._id;
+    console.log(id)
 
     const existingEvent = await Event.findById(id);
 

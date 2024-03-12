@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import './PostDetails.css';
@@ -25,7 +25,7 @@ const offensiveWords = (comment) => {
     'potangina', 'potang ina', 'ulol', 'olol', 'bobita', 'ampota', 'boboo', 'tnga'
   ];
 
-  const englishMatch = englishOffensiveWords.some(word => 
+  const englishMatch = englishOffensiveWords.some(word =>
     comment.toLowerCase().includes(word.toLowerCase()));
   const tagalogMatch = tagalogOffensiveWords.some(word =>
     comment.toLowerCase().includes(word.toLowerCase()));
@@ -49,19 +49,20 @@ const EventDetails = () => {
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [joinStatus, setJoinStatus] = useState(false);
   const [isUserJoined, setIsUserJoined] = useState(false);
-  
+
   useEffect(() => {
     const fetchEvent = async () => {
       try {
         const response = await axios.get(`http://localhost:4001/api/event/${id}`);
         setEvent(response.data);
+        console.log(response.data)
         // Calculate audience capacity after setting the event
         setAudienceCapacity(response.data.audience_capacity - response.data.joined_users.length);
       } catch (error) {
         console.error('Error fetching event:', error);
       }
     };
-  
+
     const fetchVenues = async () => {
       try {
         const response = await axios.get('http://localhost:4001/api/venues');
@@ -70,7 +71,7 @@ const EventDetails = () => {
         console.error('Error fetching venues:', error);
       }
     };
-  
+
     const fetchRecentEvents = async () => {
       try {
         const response = await axios.get('http://localhost:4001/api/events');
@@ -80,7 +81,7 @@ const EventDetails = () => {
         console.error('Error fetching other events:', error);
       }
     };
-  
+
     const fetchUsers = async () => {
       try {
         const token = getToken();
@@ -89,7 +90,7 @@ const EventDetails = () => {
             'Authorization': `Bearer ${token}`
           }
         };
-  
+
         const response = await axios.get('http://localhost:4001/api/public/users', config);
         const users = response.data.users;
         const usersMap = {};
@@ -101,17 +102,17 @@ const EventDetails = () => {
         console.error('Error fetching users:', error);
       }
     };
-  
+
     if (event && loggedInUserId) {
       setIsUserJoined(event.joined_users.includes(loggedInUserId._id)); // Change here
     }
-  
+
     fetchEvent();
     fetchVenues();
     fetchRecentEvents();
     fetchUsers();
-  }, [id, event, loggedInUserId]);
-  
+  }, []);
+
 
   const getVenueName = (venueId) => {
     if (!venues || venues.length === 0) {
@@ -248,7 +249,7 @@ const EventDetails = () => {
   const isLoggedIn = () => {
     return true; // Placeholder, replace with actual logic
   };
-  
+
   // const handleAudienceCapacityUpdate = async (action) => {
   //   setLoading(true);
   //   try {
@@ -256,16 +257,16 @@ const EventDetails = () => {
   //       toast.error('You need to be logged in to join/unjoin the event.');
   //       return;
   //     }
-  
+
   //     // Ensure event is defined and contains _id
   //     if (!event || !event._id) {
   //       console.error('Event or event id is undefined.');
   //       return;
   //     }
-  
+
   //     // Check if the user is already joined
   //     const isUserJoined = event.joined_users.includes(loggedInUserId._id); // Corrected here
-  
+
   //     if (action === 'join') {
   //       if (isUserJoined) {
   //         toast.warn('You have already joined this event.');
@@ -283,13 +284,13 @@ const EventDetails = () => {
   //       const updatedEvent = { ...event, joined_users: event.joined_users.filter(userId => userId !== loggedInUserId._id) }; // Corrected here
   //       setEvent(updatedEvent);
   //     }
-  
+
   //     const config = {
   //       headers: {
   //         'Authorization': `Bearer ${getToken()}`
   //       }
   //     };
-  
+
   //     const response = await axios.patch(`http://localhost:4001/api/event/${event._id}`, { action, joined_users: event.joined_users }, config);
   //     setEvent(response.data);
   //     toast.success(action === 'join' ? 'You have successfully joined the event.' : 'You have successfully unjoined the event.');
@@ -311,6 +312,7 @@ const EventDetails = () => {
         }
       });
       const updatedEvent = response.data;
+      console.log(updatedEvent)
       // Update audience capacity based on the updated event
       setEvent(updatedEvent); // Update the entire event object
       toast.success('You have successfully joined the event.');
@@ -321,9 +323,9 @@ const EventDetails = () => {
       setLoading(false);
     }
   };
-  
-  
-  
+
+
+
   const handleUnjoinEvent = async () => {
     setLoading(true);
     try {
@@ -331,15 +333,17 @@ const EventDetails = () => {
         toast.error('You need to be logged in to unjoin the event.');
         return;
       }
-  
+
       const response = await axios.patch(`http://localhost:4001/api/event/${event._id}/unjoin`, null, {
         headers: {
           'Authorization': `Bearer ${getToken()}`
         }
       });
       const updatedEvent = response.data;
+      console.log(updatedEvent)
       // Update audience capacity based on the updated event
       setAudienceCapacity(updatedEvent.audience_capacity);
+      setEvent(updatedEvent);
       toast.success('You have successfully unjoined the event.');
     } catch (error) {
       console.error('Error unjoining event:', error);
@@ -348,16 +352,16 @@ const EventDetails = () => {
       setLoading(false);
     }
   };
-  
-  
-const handleAudienceCapacityUpdate = (action) => {
-  if (action === 'join') {
-    handleJoinEvent();
-  } else if (action === 'unjoin') {
-    handleUnjoinEvent();
-  }
-};
-  
+
+
+  const handleAudienceCapacityUpdate = (action) => {
+    if (action === 'join') {
+      handleJoinEvent();
+    } else if (action === 'unjoin') {
+      handleUnjoinEvent();
+    }
+  };
+
 
 
   return (
@@ -372,19 +376,26 @@ const handleAudienceCapacityUpdate = (action) => {
             )}
             <p>Last Updated Date: {new Date(event.updatedAt).toLocaleString()}</p>
             <p className='post-title-information'>{event.description}</p>
-            <p>Schedule: {new Date(event.schedule).toLocaleString()}</p> 
+            <p>Schedule: {new Date(event.schedule).toLocaleString()}</p>
             <p>Time: {event.timeStarts} - {event.timeEnds}</p>
-            <p>Venue: {getVenueName(event.venue_id)}</p> 
-            <p>Registration Fee: {event.amount}</p> 
-             <p>Slots Left: {audienceCapacity}</p>
-             <button onClick={() => handleAudienceCapacityUpdate('join')} className='joinButton' disabled={loading || isUserJoined}>Join</button>
-            <button onClick={() => handleAudienceCapacityUpdate('unjoin')} className='unjoinButton' disabled={loading || !isUserJoined}>Unjoin</button>
+            <p>Venue: {getVenueName(event.venue_id)}</p>
+            <p>Registration Fee: {event.amount}</p>
+            <p>Slots Left: {event.audience_capacity}</p>
+            {event.joined_users.includes(getUser()._id) ?
+              <button onClick={() => handleAudienceCapacityUpdate('unjoin')} className='unjoinButton'
+              // disabled={loading || !isUserJoined}
+              >Unjoin</button>
+              :
+              <button onClick={() => handleAudienceCapacityUpdate('join')} className='joinButton'
+              // disabled={loading || isUserJoined}
+              >Join</button>
+            }
 
-              <div>
+            <div>
               {/* "Go Back" button */}
-            <Link to="/YouthEvents" className="go-back-button">Go Back</Link>
-              </div>
-            
+              <Link to="/YouthEvents" className="go-back-button">Go Back</Link>
+            </div>
+
             <h2 className='comment-h1'>Comments</h2>
             <hr className="rounded divider-comments" />
 
