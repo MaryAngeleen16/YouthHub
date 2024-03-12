@@ -18,7 +18,7 @@ function Sidebar() {
 
     const handleLogout = () => {
         logout();
-        // Add logic to redirect to logout route or homepage
+        window.location.href = '/login'; // Change '/logout' to your actual logout route
     };
 
     return (
@@ -110,21 +110,6 @@ function Sidebar() {
                             </li>
                         </ul>
                     </li>
-                    {/* <li className="sidebar-item">
-                        <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                            data-bs-target="#video" aria-expanded="false" aria-controls="video">
-                            <box-icon name='carousel' ></box-icon>
-                            <span>Sliders</span>
-                        </a>
-                        <ul id="auth" className="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li className="sidebar-item">
-                                <a href="#" className="sidebar-link">Slider List</a>
-                            </li>
-                            <li className="sidebar-item">
-                                <a href="#" className="sidebar-link">Create Slider</a>
-                            </li>
-                        </ul>
-                    </li> */}
                     <li className="sidebar-item">
                         <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#video" aria-expanded="false" aria-controls="video">
@@ -145,7 +130,7 @@ function Sidebar() {
                     <a href="/me" className="sidebar-link" onClick={handleClickUser}>
                         <span>Welcome, {user.name}</span>!
                     </a>
-                    <a href="#" className="sidebar-link">
+                    <a href="#" className="sidebar-link" onClick={handleLogout}>
                         <box-icon name='exit' ></box-icon>
                         <span>Logout</span>
                     </a>
