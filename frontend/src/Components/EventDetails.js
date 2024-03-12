@@ -380,6 +380,11 @@ const handleAudienceCapacityUpdate = (action) => {
              <button onClick={() => handleAudienceCapacityUpdate('join')} className='joinButton' disabled={loading || isUserJoined}>Join</button>
             <button onClick={() => handleAudienceCapacityUpdate('unjoin')} className='unjoinButton' disabled={loading || !isUserJoined}>Unjoin</button>
 
+              <div>
+              {/* "Go Back" button */}
+            <Link to="/YouthEvents" className="go-back-button">Go Back</Link>
+              </div>
+            
             <h2 className='comment-h1'>Comments</h2>
             <hr className="rounded divider-comments" />
 
