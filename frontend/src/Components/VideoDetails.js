@@ -206,6 +206,9 @@ const VideoDetails = () => {
             )}
         </div>
         
+        {/* "Go Back" button */}
+        <Link to="/VideosPage" className="go-back-button">Go Back</Link>
+
         <h2 className='comment-h1'>Comments</h2>
             <hr className="rounded divider-comments"/>
                     <div className="add-comment-form">
