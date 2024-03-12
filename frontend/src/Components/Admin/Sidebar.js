@@ -110,7 +110,7 @@ function Sidebar() {
                             </li>
                         </ul>
                     </li>
-                    <li className="sidebar-item">
+                    {/* <li className="sidebar-item">
                         <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#video" aria-expanded="false" aria-controls="video">
                             <box-icon name='carousel' ></box-icon>
@@ -124,7 +124,7 @@ function Sidebar() {
                                 <a href="#" className="sidebar-link">Create Slider</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> */}
                     <li className="sidebar-item">
                         <a href="#" className="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#video" aria-expanded="false" aria-controls="video">
