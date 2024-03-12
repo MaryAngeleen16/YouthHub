@@ -6,8 +6,9 @@ import axios from 'axios';
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
 import Chart from "react-apexcharts";
 import '../Layouts/dashcontent.css';
-import MostPopularCategory from '../Charts/MostPopularCategory';
 import UserRegistrationChart from '../Charts/UserRegistrationChart';
+import TeenLocaChart from '../Charts/TeenLocaChart';
+import MostPopularCategory from '../Charts/MostPopularCategory';
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -181,29 +182,7 @@ const Dashboard = () => {
                         <UserRegistrationChart />
                     </div>
                     <div className="unique-chart-loc">
-                        <div className="card-loc">
-                            <div className="card-loc-body d-flex flex-column align-items-center">
-                                <h5 className="card-title" style={{ color: "#b38269" }}>Female Teenagers in Different Locations</h5>
-                                <Chart
-                                    options={{
-                                        chart: {
-                                            id: "female-teenagers-locations-chart"
-                                        },
-                                        xaxis: {
-                                            categories: Object.keys(femaleTeenagersLocations)
-                                        }
-                                    }}
-                                    series={[
-                                        {
-                                            name: "female-teenagers-locations",
-                                            data: Object.values(femaleTeenagersLocations)
-                                        }
-                                    ]}
-                                    type="line"
-                                    width="500"
-                                />
-                            </div>
-                        </div>
+                        <TeenLocaChart />
                     </div>
                     <div className="unique-chart-loc">
                         <div className="card-loc">
