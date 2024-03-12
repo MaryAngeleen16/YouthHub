@@ -244,7 +244,7 @@ const Home = () => {
                         </div>
                         <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
                             <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Community<br />Collaboration</div>
-                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Displaying the highest level of Integrity in the way we conduct our business</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Fostering teamwork and cooperation among users</div>
                         </div>
                     </div>
                     <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
@@ -254,7 +254,7 @@ const Home = () => {
                         </div>
                         <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
                             <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Teen <br /> Counseling</div>
-                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Harnessing the power of Technology to deliver better customer experience</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Providing a supportive space for adolescent counseling</div>
                         </div>
                     </div>
                     <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
@@ -264,7 +264,7 @@ const Home = () => {
                         </div>
                         <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
                             <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Online <br /> Forum</div>
-                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Setting the standard for the best Corporate Citizenship in the communities we work</div>
+                            <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Sharing thoughts and experiences, as well as realtime conversation</div>
                         </div>
                     </div>
                     {/* Add more Feature components here */}
@@ -280,7 +280,7 @@ const Home = () => {
                             </div>
                             <div className="Frameedu" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
                                 <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Event <br /> Tracking</div>
-                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Displaying the highest level of Integrity in the way we conduct our business</div>
+                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Monitoring and engaging teens in activities</div>
                             </div>
                         </div>
                         <div className="Feature" style={{ width: '259px', padding: '24px', boxShadow: '0px 18px 58px 16px rgba(0, 0, 0, 0.06)', borderRadius: '8px', overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
@@ -290,7 +290,7 @@ const Home = () => {
                             </div>
                             <div className="Frame17" style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
                                 <div className="TheFirst" style={{ color: '#363940', fontSize: '22px', fontFamily: 'Metropolis', fontWeight: '700', lineHeight: '22px', wordWrap: 'break-word' }}>Adolescent <br />Education Hub</div>
-                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Harnessing the power of Technology to deliver better customer experience</div>
+                                <div className="MicrosoftPatchMana" style={{ width: '160px', color: '#999999', fontSize: '14px', fontFamily: 'Metropolis', fontWeight: '400', lineHeight: '24px', wordWrap: 'break-word' }}>Empowering teens through educational resources</div>
                             </div>
                         </div>
                     </div>
