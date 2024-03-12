@@ -8,9 +8,9 @@ import Sidebar from '../../Components/Admin/Sidebar';
 import '../../Components/Admin/crud.css';
 
 const UpdateEvent = () => {
-    const navigate = useNavigate();
-  const { id } = useParams(); // Get eventId from URL params
-  
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const [event, setEvent] = useState({
     title: '',
     description: '',
@@ -91,6 +91,8 @@ const UpdateEvent = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
+    console.log("Event before validation:", event);
+
     // Validation
     if (!event.title || !event.description || !event.schedule || !event.venue_id) {
       toast.error('Please fill out all required fields');
@@ -109,7 +111,8 @@ const UpdateEvent = () => {
     formData.append('amount', event.amount);
     formData.append('audience_capacity', event.audience_capacity);
     formData.append('banner', event.banner);
-    if (event.additionalImages.length > 0) {
+    // if (event.additionalImages.length > 0) {
+    if (event.additionalImages && event.additionalImages.length > 0) {
       event.additionalImages.forEach((image) => formData.append('additionalImages', image));
     }
 
