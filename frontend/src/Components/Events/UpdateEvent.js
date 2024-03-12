@@ -65,7 +65,7 @@ const UpdateEvent = () => {
         reader.readAsDataURL(file);
       });
 
-      setEvent({ ...event, images: Array.from(files) });
+      setEvent({ ...event, additionalImages: Array.from(files) });
     } else {
       if (name === 'venues_id') {
         setEvent({ ...event, venues_id: value });
@@ -195,7 +195,7 @@ const UpdateEvent = () => {
                   className="form-control"
                   name="title"
                   value={title}
-                  onChange={title}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -210,7 +210,7 @@ const UpdateEvent = () => {
                   className="form-control datetimepicker"
                   name="schedule"
                   value={schedule ? formatDate(new Date(schedule)) : ''}
-                  onChange={schedule}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -273,7 +273,7 @@ const UpdateEvent = () => {
                   cols="30"
                   rows="5"
                   value={description}
-                  onChange={description}
+                  onChange={handleChange}
                   required
                 ></textarea>
               </div>
@@ -289,7 +289,7 @@ const UpdateEvent = () => {
                     id="payment_status"
                     name="payment_status"
                     checked={payment_status === '1'}
-                    onChange={payment_status}
+                    onChange={handleChange}
                   />
                   <label className="form-check-label" htmlFor="payment_status">
                     Free For All
@@ -307,7 +307,7 @@ const UpdateEvent = () => {
                       name="amount"
                       id="amount"
                       value={amount}
-                      onChange={amount}
+                      onChange={handleChange}
                       required={!payment_status}
                       autoComplete="off"
                     />
@@ -328,7 +328,7 @@ const UpdateEvent = () => {
                   name="audience_capacity"
                   id="audience_capacity"
                   value={audience_capacity}
-                  onChange={audience_capacity}
+                  onChange={handleChange}
                   required
                   autoComplete="off"
                 />
@@ -344,7 +344,7 @@ const UpdateEvent = () => {
                   type="file"
                   className="form-control"
                   name="banner"
-                  onChange={banner}
+                  onChange={handleChange}
                   accept="image/*"
                 />
               </div>
