@@ -39,10 +39,15 @@ const UserManagement = () => {
             toast.error('Failed to update role');
         }
     };
-
     const handleDeleteUser = async (userId) => {
         try {
-            await axios.delete(`http://localhost:4001/api/deleteUser/${userId}`);
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            };
+    
+            await axios.delete(`http://localhost:4001/api/deleteUser/${userId}`, config);
             // Refresh the user list after deleting the user
             fetchUsers();
             toast.success('User deleted successfully');
@@ -51,6 +56,7 @@ const UserManagement = () => {
             toast.error('Failed to delete user');
         }
     };
+    
 
     //BOOTSTRAP CSS
   useEffect(() => {
